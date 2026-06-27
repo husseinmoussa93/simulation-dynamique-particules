@@ -4,7 +4,7 @@
 
 ### Interprétation Physique détaillée
 
-### Figure 1 : Distribution angulaire $P(\theta)$ dans le volume pour un cisaillement linéaire
+
 
 La **Figure 1** représente la distribution angulaire $P(\theta)$ d’un bâtonnet brownien dans le volume, défini ici par la condition $\xi > 0.5$, pour un cisaillement linéaire et pour trois valeurs du paramètre adimensionnel $\alpha$ : $\alpha = 0.5$, $\alpha = 2$ et $\alpha = 5$.
 
