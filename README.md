@@ -310,7 +310,6 @@ $$\theta_{\max} \approx 36.5^\circ \quad \text{pour le cisaillement parabolique}
 ### 3-2. Comparaison de $P(\theta)$ près de la surface entre cisaillement linéaire et parabolique pour $\alpha = 5$
 
 ![Figure 10](Fig10.png)
-*Figure 10 : Comparaison de $P(\theta)$ près de la surface ($\xi \leq 0.5$) entre cisaillement linéaire et parabolique pour $\alpha = 5$*
 
 La Figure 10 compare la distribution angulaire $P(\theta)$ du bâtonnet près de la surface, définie par $\xi \leq 0.5$, pour deux profils d’écoulement : le cisaillement linéaire et le cisaillement parabolique, à la même valeur du paramètre $\alpha = 5$.
 
