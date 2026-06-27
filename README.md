@@ -218,7 +218,6 @@ Maintenant, nous passons aux distributions angulaires pour le cisaillement parab
 ### 2-1. Distribution angulaire $P(\theta)$ dans le volume ($\xi > 0.5$) pour un cisaillement parabolique à fortes valeurs de $\alpha$
 
 ![Figure 7](Fig7.png)
-*Figure 7 : Distribution angulaire $P(\theta)$ dans le volume ($\xi > 0.5$) pour un cisaillement parabolique à fortes valeurs de $\alpha$*
 
 La **Figure 7** représente la distribution angulaire $P(\theta)$ du bâtonnet dans le volume, défini par $\xi > 0.5$, pour un cisaillement parabolique et pour des valeurs élevées du paramètre de Peclet rotationnel : $\alpha = 1$, $\alpha = 5$, $\alpha = 10$ et $\alpha = 100$.
 
