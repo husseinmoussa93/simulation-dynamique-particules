@@ -1,4 +1,4 @@
-## 1. Distribution Angulaire sous Écoulement Linéaire (Volume)
+## 1-1. Distribution Angulaire sous Écoulement Linéaire (Volume)
 
 ![Distribution Angulaire](Fig1.png)
 
@@ -24,7 +24,7 @@ Le paramètre $\alpha$ mesure l’importance relative du cisaillement hydrodynam
 > En conclusion, cette figure met en évidence la transition progressive entre un régime dominé par le mouvement brownien rotationnel, pour faible $\alpha$, et un régime dominé par le cisaillement hydrodynamique, pour des valeurs plus grandes de $\alpha$. 
 > Les maxima physiquement significatifs sont observés autour de $\theta_{\max} \approx 32.5^\circ$ pour $\alpha = 2$ et $\theta_{\max} \approx 25.5^\circ$ pour $\alpha = 5$. Pour $\alpha = 0.5$, la distribution reste quasi uniforme et ne présente pas de maximum physique bien défini.
 >
-> ## 2. Distribution angulaire près de la surface pour un cisaillement linéaire
+> ## 1-2. Distribution angulaire près de la surface pour un cisaillement linéaire
 
 ![Distribution angulaire près de la surface](Fig2.png)
 
@@ -49,7 +49,7 @@ Les faibles probabilités observées près de $\theta = \pm 90^\circ$ sont cohé
 > 
 > En conclusion, près de la surface, l’orientation du bâtonnet est contrôlée conjointement par le confinement géométrique et par le cisaillement hydrodynamique. À faible $\alpha$, la paroi impose principalement un alignement quasi parallèle à la surface. Lorsque $\alpha$ augmente, le cisaillement déplace progressivement l’orientation préférentielle vers des angles positifs. Les positions des maxima physiques sont approximativement $\theta_{\max} \approx 0^\circ$ pour $\alpha = 0.5$, $\theta_{\max} \approx 5.5^\circ$ pour $\alpha = 2$, et $\theta_{\max} \approx 11.5^\circ$ pour $\alpha = 5$.
 >
-> ## 3. Comparaison et Synthèse Physique : Volume vs Région Proche de la Surface
+> ## 1-3. Comparaison et Synthèse Physique : Volume vs Région Proche de la Surface
 
 Les **Figures 1 et 2** permettent de comparer la distribution angulaire $P(\theta)$ du bâtonnet dans deux régions physiquement distinctes : le volume, défini par $\xi > 0.5$, et la région proche de la surface, définie par $\xi \leq 0.5$. Cette comparaison met en évidence le rôle fondamental de la paroi dans la dynamique d’orientation du bâtonnet.
 
@@ -62,7 +62,7 @@ Cette comparaison démontre que le volume et la surface correspondent à deux r�
 
 Le confinement près de la surface joue donc un rôle aussi important que le cisaillement dans la dynamique d’orientation. Le paramètre $\alpha$ contrôle l’intensité relative du cisaillement, mais la position du bâtonnet dans le pore, représentée par $\xi$, détermine également la forme de la distribution angulaire. Il est donc indispensable de séparer les statistiques en volume et près de la surface pour interpréter correctement la physique du système.
 
-## 3. Distribution angulaire dans le volume à forts cisaillements ($\alpha$ élevés)
+## 2-1. Distribution angulaire dans le volume à forts cisaillements ($\alpha$ élevés)
 
 ![Distribution angulaire à forts alpha](Fig3.png)
 
