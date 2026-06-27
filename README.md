@@ -289,6 +289,29 @@ Cette comparaison montre donc que le cisaillement parabolique oriente progressiv
 
 ## 3. Étude comparative entre le cisaillement linéaire et le cisaillement parabolique
 
+### 3-1.1. Comparaison de $P(\theta)$ dans le volume entre cisaillement linéaire et parabolique pour $\alpha = 0.5$
+
+![Figure 9](Fig9.png)
+*Figure 9 : Comparaison de $P(\theta)$ dans le volume ($\xi > 0.5$) entre cisaillement linéaire et parabolique pour $\alpha = 0.5$*
+
+La Figure 9 compare la distribution angulaire $P(\theta)$ du bâtonnet dans le volume, défini par $\xi > 0.5$, pour deux profils de cisaillement : un cisaillement linéaire et un cisaillement parabolique, à la même valeur du paramètre $\alpha = 0.5$.
+
+Pour cette faible valeur de $\alpha$, les deux distributions restent proches d’un régime quasi uniforme. Cela signifie que la diffusion rotationnelle brownienne domine largement la dynamique d’orientation du bâtonnet. Le cisaillement hydrodynamique, qu’il soit linéaire ou parabolique, reste trop faible pour imposer une orientation préférentielle bien définie.
+
+Dans le cas du cisaillement linéaire, on observe une légère modulation de la distribution, avec un maximum numérique autour de $\theta_{\max} \approx 32.5^\circ$. Cependant, ce maximum doit être interprété avec prudence, car la distribution reste large et faiblement contrastée. Il ne s’agit pas d’un pic physique fortement significatif, mais plutôt d’une faible anisotropie superposée aux fluctuations statistiques.
+
+Dans le cas du cisaillement parabolique, la distribution est encore plus proche d’un profil uniforme. Le maximum numérique apparaît autour de $\theta_{\max} \approx 60.5^\circ$, mais la différence entre les valeurs maximales et minimales reste faible. Ce maximum ne doit donc pas être considéré comme une orientation préférentielle réelle. Il reflète surtout le caractère faiblement orienté du système lorsque le cisaillement effectif est faible.
+
+Les valeurs numériques extraites des fichiers de simulation sont approximativement :
+
+$$\theta_{\max} \approx 32.5^\circ \quad \text{pour le cisaillement linéaire}$$
+
+$$\theta_{\max} \approx 60.5^\circ \quad \text{pour le cisaillement parabolique}$$
+
+Cependant, pour $\alpha = 0.5$, ces maxima numériques ne sont pas physiquement très significatifs, car les distributions sont presque plates. La comparaison doit donc être interprétée principalement en termes de quasi-isotropie brownienne.
+
+En conclusion, la Figure 9 montre que, dans le volume et pour $\alpha = 0.5$, le profil du cisaillement a peu d’effet sur l’orientation du bâtonnet. Le système reste dominé par le mouvement brownien rotationnel, et aucune orientation préférentielle nette ne peut être attribuée au cisaillement linéaire ou parabolique.
+
 ### 3-2.1 Comparaison de $P(\theta)$ dans le volume entre cisaillement linéaire et parabolique pour $\alpha = 1$
 
 ![Figure 11](Fig11.png)
