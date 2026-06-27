@@ -242,7 +242,6 @@ En conclusion, la Figure 7 montre que, dans le volume, le cisaillement paraboliq
 
 ![Figure 8](Fig8.png)
 
-*Figure 8 : Distribution angulaire $P(\theta)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement parabolique à fortes valeurs de $\alpha$*
 
 La Figure 8 représente la distribution angulaire $P(\theta)$ du bâtonnet près de la surface, définie par la condition $\xi \leq 0.5$, pour un cisaillement parabolique et pour des valeurs élevées du paramètre de Peclet rotationnel : $\alpha = 1$, $\alpha = 5$, $\alpha = 10$ et $\alpha = 100$.
 
