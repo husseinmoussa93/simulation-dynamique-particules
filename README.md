@@ -330,7 +330,7 @@ $$\theta_{\max} \approx 3.5^\circ \quad \text{pour le cisaillement parabolique}$
 
 En conclusion, pour $\alpha = 1$ près de la surface, les distributions angulaires obtenues avec les deux profils d’écoulement sont presque superposées. Cela montre que le confinement stérique domine la dynamique d’orientation, tandis que la différence entre cisaillement linéaire et parabolique reste faible dans ce régime.
 
-### 3-1.3. Comparaison entre les Figures 11 et 12 : effet de la surface pour $\alpha = 1$
+### 3-2.3. Comparaison entre les Figures 11 et 12 : effet de la surface pour $\alpha = 1$
 
 Les Figures 11 et 12 comparent l’effet du profil de cisaillement, linéaire ou parabolique, sur la distribution angulaire $P(\theta)$ pour une même valeur du paramètre $\alpha = 1$. La Figure 11 correspond au volume ($\xi > 0.5$), tandis que la Figure 12 correspond à la région proche de la surface ($\xi \leq 0.5$).
 
