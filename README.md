@@ -310,6 +310,27 @@ $$\theta_{\max} \approx 31.5^\circ \quad \text{pour le cisaillement parabolique}
 **En conclusion**, pour $\alpha = 1$ dans le volume, les deux profils de cisaillement produisent encore des distributions larges, proches d’un régime dominé par le mouvement brownien. Le cisaillement linéaire introduit une anisotropie légèrement plus marquée, tandis que le cisaillement parabolique donne une réponse plus diffuse en raison de la variation spatiale du cisaillement local.
 
 
+### 3-1.2. Comparaison de $P(\theta)$ près de la surface entre cisaillement linéaire et parabolique pour $\alpha = 1$
+
+![Figure 12](Fig12.png)
+*Figure 12 : Comparaison de $P(\theta)$ près de la surface ($\xi \leq 0.5$) entre cisaillement linéaire et parabolique pour $\alpha = 1$*
+
+La Figure 12 compare la distribution angulaire $P(\theta)$ du bâtonnet près de la surface, définie par $\xi \leq 0.5$, pour deux profils de cisaillement : le cisaillement linéaire et le cisaillement parabolique, à la même valeur du paramètre $\alpha = 1$.
+
+Pour cette valeur de $\alpha$, les deux distributions sont très proches. Elles présentent toutes les deux un maximum au voisinage de $\theta \approx 0^\circ$ et une forte diminution de la probabilité aux grands angles. Cela montre que, près de la surface, la dynamique angulaire est principalement contrôlée par le confinement géométrique imposé par la paroi.
+
+Dans le cas du cisaillement linéaire, le maximum numérique est situé autour de $\theta_{\max} \approx 1.5^\circ$, avec une distribution centrée sur de faibles angles. Dans le cas du cisaillement parabolique, le maximum numérique se situe autour de $\theta_{\max} \approx 3.5^\circ$. Cependant, la différence entre ces deux positions reste faible et ne doit pas être surinterprétée, car les deux courbes ont une forme globale très similaire.
+
+La proximité des deux distributions indique que, pour $\alpha = 1$, le profil précis du cisaillement joue un rôle secondaire près de la surface. L’effet dominant est celui de la paroi, qui limite les orientations accessibles et favorise une orientation presque parallèle à la surface. Le cisaillement hydrodynamique reste suffisamment faible pour ne pas créer une différence marquée entre les cas linéaire et parabolique.
+
+Les maxima numériques sont approximativement :
+
+$$\theta_{\max} \approx 1.5^\circ \quad \text{pour le cisaillement linéaire}$$
+
+$$\theta_{\max} \approx 3.5^\circ \quad \text{pour le cisaillement parabolique}$$
+
+En conclusion, pour $\alpha = 1$ près de la surface, les distributions angulaires obtenues avec les deux profils d’écoulement sont presque superposées. Cela montre que le confinement stérique domine la dynamique d’orientation, tandis que la différence entre cisaillement linéaire et parabolique reste faible dans ce régime.
+
 ### 3-2.1 Comparaison de $P(\theta)$ dans le volume entre cisaillement linéaire et parabolique pour $\alpha = 5$
 
 ![Figure 11](Fig11.png)
@@ -358,5 +379,5 @@ Près de la surface, les deux distributions sont plus proches l’une de l’aut
 
 Cette comparaison montre que l’effet du profil de cisaillement dépend fortement de la position du bâtonnet dans le pore. Dans le volume, où la contrainte de surface est faible, la différence entre les deux profils d’écoulement apparaît surtout dans la largeur et la hauteur du pic. Près de la surface, la paroi domine la forme générale de la distribution, mais le type de cisaillement continue à influencer la position de l’orientation préférentielle.
 
-**En conclusion**, les Figures 9 et 10 montrent que la dynamique angulaire ne dépend pas uniquement de la valeur de $\alpha$, mais aussi du profil spatial du cisaillement et de la position du bâtonnet par rapport à la surface. Le cisaillement linéaire tend à produire une orientation plus nette et plus décalée vers les angles positifs, tandis que le cisaillement parabolique donne une réponse plus diffuse dans le volume et plus proche de l’alignement parallèle à la surface près de la paroi.
+**En conclusion**, les Figures 11 et 12 montrent que la dynamique angulaire ne dépend pas uniquement de la valeur de $\alpha$, mais aussi du profil spatial du cisaillement et de la position du bâtonnet par rapport à la surface. Le cisaillement linéaire tend à produire une orientation plus nette et plus décalée vers les angles positifs, tandis que le cisaillement parabolique donne une réponse plus diffuse dans le volume et plus proche de l’alignement parallèle à la surface près de la paroi.
 
