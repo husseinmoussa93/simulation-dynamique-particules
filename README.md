@@ -287,23 +287,3 @@ Cette comparaison montre donc que le cisaillement parabolique oriente progressiv
 
 **En conclusion**, les Figures 7 et 8 montrent que, pour un cisaillement parabolique à fortes valeurs de $\alpha$, l’orientation du bâtonnet devient de plus en plus marquée, mais selon des mécanismes différents dans le volume et près de la surface. Dans le volume, la dépendance spatiale du cisaillement élargit encore la distribution. Près de la surface, le confinement stérique renforce la sélection angulaire et conduit à une distribution plus fortement localisée autour de faibles angles.
 
-## 3. Étude comparative entre le cisaillement linéaire et le cisaillement parabolique
-
-### 2-4. Comparaison de $P(\theta)$ dans le volume entre cisaillement linéaire et parabolique pour $\alpha = 5$
-
-![Figure 9](Fig9.png)
-*Figure 9 : Comparaison de $P(\theta)$ dans le volume ($\xi > 0.5$) entre cisaillement linéaire et parabolique pour $\alpha = 5$*
-
-La **Figure 9** compare la distribution angulaire $P(\theta)$ du bâtonnet dans le volume, défini par $\xi > 0.5$, pour deux profils de cisaillement : un cisaillement linéaire et un cisaillement parabolique, à la même valeur du paramètre $\alpha = 5$.
-
-Dans le cas du cisaillement linéaire, le bâtonnet subit un taux de cisaillement constant. L’effet hydrodynamique agit donc de manière plus homogène sur la dynamique rotationnelle. La distribution présente un pic plus élevé et plus marqué, avec un maximum situé autour de $\theta_{\max} \approx 25.5^\circ$. Cela indique que le cisaillement linéaire impose une orientation préférentielle plus nette au bâtonnet.
-
-Dans le cas du cisaillement parabolique, le cisaillement local dépend de la position transverse du bâtonnet. Dans la simulation utilisée ici, cette dépendance est décrite par $\alpha_{\text{local}} = \alpha(1-\xi)$. Le bâtonnet ne ressent donc pas une intensité de cisaillement constante dans le volume. La distribution obtenue est plus large et moins élevée, avec un maximum autour de $\theta_{\max} \approx 36.5^\circ$. Cela signifie que l’orientation préférentielle est moins fortement sélectionnée que dans le cas linéaire.
-
-La différence entre les deux courbes montre que le profil spatial du cisaillement influence directement l’orientation du bâtonnet. Le cisaillement linéaire concentre davantage la probabilité autour d’un domaine angulaire restreint, tandis que le cisaillement parabolique produit une distribution plus diffuse. Cette diffusion provient du fait que les bâtonnets situés à différentes positions ressentent des intensités locales de cisaillement différentes.
-
-Les maxima numériques sont approximativement :
-$$\theta_{\max} \approx 25.5^\circ \quad \text{pour le cisaillement linéaire}$$
-$$\theta_{\max} \approx 36.5^\circ \quad \text{pour le cisaillement parabolique}$$
-
-**En conclusion**, pour $\alpha = 5$ dans le volume, le cisaillement linéaire produit une orientation plus forte et plus concentrée du bâtonnet, tandis que le cisaillement parabolique conduit à une distribution plus large en raison de la variation spatiale du cisaillement local. Cette comparaison montre que la forme du profil d’écoulement joue un rôle essentiel dans la dynamique d’orientation.
