@@ -143,3 +143,29 @@ Une différence importante concerne la position du maximum. Dans le volume, lors
 Ainsi, les Figures 3 et 4 montrent que l’augmentation de $\alpha$ favorise l’orientation du bâtonnet dans les deux régions, mais selon des mécanismes légèrement différents. Dans le volume, l’effet dominant est hydrodynamique. Près de la surface, l’orientation est gouvernée par une combinaison entre hydrodynamique et confinement géométrique.
 
 En conclusion, cette comparaison confirme qu’il est nécessaire de séparer les statistiques en deux domaines, $\xi > 0.5$ et $\xi \leq 0.5$. Sans cette séparation, l’effet propre de la surface serait mélangé avec le comportement du volume, ce qui rendrait l’interprétation physique de $P(\theta)$ moins précise.
+
+# Écoulement Parabolique
+
+## 1-1. Distribution angulaire $P(\theta)$ dans le volume ($\xi > 0.5$) pour un cisaillement parabolique
+
+La **Figure 5** présente la distribution angulaire $P(\theta)$ du bâtonnet dans la région du volume, définie par $\xi > 0.5$, pour un cisaillement parabolique et pour trois valeurs du paramètre $\alpha$ : $\alpha = 0.5$, $\alpha = 2$ et $\alpha = 5$.
+
+Dans cette simulation, le cisaillement parabolique est introduit à travers un taux de cisaillement local dépendant de la position transverse du bâtonnet. Contrairement au cisaillement linéaire, où $\alpha$ reste constant, le cisaillement effectif varie avec $\xi$. Dans le code utilisé ici, cette dépendance est de la forme :
+$$\alpha_{\text{local}} = \alpha(1-\xi)$$
+
+Ainsi, dans la région du volume ($\xi > 0.5$), le bâtonnet ressent un cisaillement effectif plus faible et spatialement variable.
+
+* **Pour $\alpha = 0.5$ :** La distribution reste presque uniforme. Le mouvement brownien rotationnel domine largement la dynamique d’orientation, et le cisaillement effectif est trop faible pour imposer une orientation préférentielle nette. Les faibles variations observées doivent donc être interprétées avec prudence, car elles sont principalement liées aux fluctuations statistiques de la simulation.
+* **Pour $\alpha = 2$ :** Une anisotropie commence à apparaître. La distribution devient légèrement asymétrique, avec une augmentation de la probabilité dans la région des angles positifs et une diminution relative dans certaines régions d’angles négatifs. Cela traduit le début de l’influence du couple hydrodynamique sur l’orientation du bâtonnet.
+* **Pour $\alpha = 5$ :** L’effet du cisaillement devient plus visible. La distribution présente un maximum plus marqué autour de $\theta_{\max} \approx 36.5^\circ$. Cette évolution montre que le cisaillement parabolique commence à orienter préférentiellement le bâtonnet, même si la distribution reste moins concentrée que dans le cas du cisaillement linéaire.
+
+Cette différence avec le cisaillement linéaire est importante. Dans le cas linéaire, le bâtonnet subit un taux de cisaillement constant, ce qui conduit à une orientation plus nette lorsque $\alpha$ augmente. Dans le cas parabolique, le cisaillement ressenti dépend de la position du bâtonnet. La distribution finale $P(\theta)$ résulte donc d’une moyenne sur plusieurs valeurs locales du cisaillement, ce qui élargit le profil angulaire et rend les pics moins marqués.
+
+Les maxima numériques obtenus sont approximativement :
+$$\theta_{\max} \approx 60.5^\circ \quad \text{pour } \alpha = 0.5$$
+$$\theta_{\max} \approx 57.5^\circ \quad \text{pour } \alpha = 2$$
+$$\theta_{\max} \approx 36.5^\circ \quad \text{pour } \alpha = 5$$
+
+Cependant, pour $\alpha = 0.5$ et $\alpha = 2$, les distributions restent faiblement contrastées. Les maxima numériques ne doivent donc pas être considérés comme des orientations physiques fortement définies. Le maximum observé pour $\alpha = 5$ est plus significatif, car l’anisotropie de la distribution devient plus visible.
+
+En conclusion, la Figure 5 montre que le cisaillement parabolique induit progressivement une anisotropie de la distribution angulaire dans le volume lorsque $\alpha$ augmente. Toutefois, cette anisotropie reste moins marquée que dans le cas du cisaillement linéaire, car le cisaillement local ressenti par le bâtonnet dépend de sa position. Cette figure met donc en évidence l’importance de la dépendance spatiale du cisaillement dans la dynamique d’orientation.
