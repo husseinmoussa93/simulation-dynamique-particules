@@ -210,3 +210,31 @@ Une différence importante concerne la position du maximum. Dans le volume, les 
 Cette comparaison montre que le cisaillement parabolique n’agit pas de la même manière dans les deux régions. Dans le volume, son effet dépend fortement de la position du bâtonnet et conduit à une anisotropie plus diffuse. Près de la surface, la paroi réduit fortement l’espace angulaire accessible, ce qui domine la forme générale de la distribution.
 
 En conclusion, les Figures 5 et 6 montrent que, pour un cisaillement parabolique, l’orientation du bâtonnet résulte d’un équilibre entre trois effets : la diffusion rotationnelle brownienne, le cisaillement hydrodynamique local et le confinement géométrique. Dans le volume, la diffusion brownienne et la variation spatiale du cisaillement élargissent la distribution. Près de la surface, le confinement stérique impose une orientation proche de $\theta = 0^\circ$, tandis que l’augmentation de $\alpha$ introduit seulement un biais modéré vers les angles positifs.
+
+## 2. Distributions angulaires à fortes valeurs de $\alpha$ ($\alpha = 1, 5, 10, 100$)
+
+Maintenant, nous passons aux distributions angulaires pour le cisaillement parabolique à fortes valeurs de $\alpha$ : $\alpha = 1, 5, 10$ et $100$.
+
+### 2-1. Distribution angulaire $P(\theta)$ dans le volume ($\xi > 0.5$) pour un cisaillement parabolique à fortes valeurs de $\alpha$
+
+![Figure 7](Fig7.png)
+*Figure 7 : Distribution angulaire $P(\theta)$ dans le volume ($\xi > 0.5$) pour un cisaillement parabolique à fortes valeurs de $\alpha$*
+
+La **Figure 7** représente la distribution angulaire $P(\theta)$ du bâtonnet dans le volume, défini par $\xi > 0.5$, pour un cisaillement parabolique et pour des valeurs élevées du paramètre de Peclet rotationnel : $\alpha = 1$, $\alpha = 5$, $\alpha = 10$ et $\alpha = 100$.
+
+Dans le cas du cisaillement parabolique utilisé dans cette simulation, le cisaillement local dépend de la position transverse du bâtonnet selon la loi $\alpha_{\text{local}} = \alpha(1-\xi)$. Ainsi, contrairement au cisaillement linéaire, le bâtonnet ne subit pas une intensité de cisaillement constante. Dans le volume, la distribution $P(\theta)$ résulte d’une moyenne sur différentes valeurs locales du cisaillement, ce qui tend à élargir les profils angulaires par rapport au cas linéaire.
+
+* **Pour $\alpha = 1$ :** La distribution reste presque uniforme. Cela indique que la diffusion rotationnelle brownienne domine encore largement la dynamique d’orientation. Le cisaillement effectif ressenti par le bâtonnet dans le volume reste trop faible pour imposer une orientation préférentielle marquée.
+* **Pour $\alpha = 5$ :** Une anisotropie devient plus visible. La distribution présente une augmentation de probabilité dans la région des angles positifs et une diminution relative dans la région des angles négatifs. Cela traduit le début d’un alignement préférentiel induit par le couplage hydrodynamique.
+* **Pour $\alpha = 10$ :** Le pic devient plus marqué, avec un maximum autour de $\theta_{\max} \approx 34.5^\circ$. Le couple hydrodynamique prend ici une importance croissante face à l’agitation thermique. Toutefois, la distribution demeure étalée en raison de la dépendance spatiale du taux de cisaillement.
+* **Pour $\alpha = 100$ :** La distribution change clairement de régime : elle devient plus concentrée, plus étroite et présente un maximum élevé au voisinage de $\theta_{\max} \approx 14.5^\circ$. Ce comportement traduit une domination très marquée du couplage hydrodynamique, correspondant à un régime de grand Peclet rotationnel. Le déplacement du pic vers des angles plus faibles montre une tendance forte à l’alignement avec l’écoulement.
+
+Les maxima numériques obtenus à partir des fichiers de simulation sont approximativement :
+$$\theta_{\max} \approx 31.5^\circ \quad \text{pour } \alpha = 1$$
+$$\theta_{\max} \approx 36.5^\circ \quad \text{pour } \alpha = 5$$
+$$\theta_{\max} \approx 34.5^\circ \quad \text{pour } \alpha = 10$$
+$$\theta_{\max} \approx 14.5^\circ \quad \text{pour } \alpha = 100$$
+
+Il faut cependant interpréter les maxima pour $\alpha = 1$ et $\alpha = 5$ avec prudence, car les distributions restent larges et faiblement contrastées. Le maximum devient beaucoup plus significatif pour $\alpha = 10$ et surtout pour $\alpha = 100$, où l’anisotropie est clairement marquée.
+
+En conclusion, la Figure 7 montre que, dans le volume, le cisaillement parabolique NY produit une orientation progressive du bâtonnet lorsque $\alpha$ augmente. Cependant, en raison de la dépendance spatiale du cisaillement local, l’orientation reste plus diffuse que dans le cas du cisaillement linéaire. À très grand $\alpha$, le couplage hydrodynamique devient dominant et la distribution se resserre autour d’un angle plus proche de la direction de l’écoulement.
