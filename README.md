@@ -237,3 +237,35 @@ $$\theta_{\max} \approx 14.5^\circ \quad \text{pour } \alpha = 100$$
 Il faut cependant interpréter les maxima pour $\alpha = 1$ et $\alpha = 5$ avec prudence, car les distributions restent larges et faiblement contrastées. Le maximum devient beaucoup plus significatif pour $\alpha = 10$ et surtout pour $\alpha = 100$, où l’anisotropie est clairement marquée.
 
 En conclusion, la Figure 7 montre que, dans le volume, le cisaillement parabolique NY produit une orientation progressive du bâtonnet lorsque $\alpha$ augmente. Cependant, en raison de la dépendance spatiale du cisaillement local, l’orientation reste plus diffuse que dans le cas du cisaillement linéaire. À très grand $\alpha$, le couplage hydrodynamique devient dominant et la distribution se resserre autour d’un angle plus proche de la direction de l’écoulement.
+
+### 2-2. Distribution angulaire $P(\theta)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement parabolique à fortes valeurs de $\alpha$
+
+![Figure 8](Fig8.png)
+
+*Figure 8 : Distribution angulaire $P(\theta)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement parabolique à fortes valeurs de $\alpha$*
+
+La Figure 8 représente la distribution angulaire $P(\theta)$ du bâtonnet près de la surface, définie par la condition $\xi \leq 0.5$, pour un cisaillement parabolique et pour des valeurs élevées du paramètre de Peclet rotationnel : $\alpha = 1$, $\alpha = 5$, $\alpha = 10$ et $\alpha = 100$.
+
+Dans cette région proche de la paroi, la distribution angulaire est fortement influencée par le confinement géométrique. La surface limite fortement les orientations accessibles, en particulier les grandes inclinaisons proches de $\pm 90^\circ$, car celles-ci augmenteraient le risque de contact stérique avec la paroi. Ainsi, même dans le cas d’un cisaillement parabolique intense, les distributions restent centrées autour de faibles angles, proches d’une orientation parallèle à la surface.
+
+Pour $\alpha = 1$, la distribution est encore relativement large et présente un maximum autour de $\theta_{\max} \approx 3.5^\circ$. Cela indique que le mouvement brownien rotationnel conserve une influence importante, tandis que la paroi impose déjà une sélection géométrique des orientations accessibles.
+
+Pour $\alpha = 5$, la forme générale de la distribution reste proche de celle observée pour $\alpha = 1$, avec un maximum également situé autour de $\theta_{\max} \approx 3.5^\circ$. Cependant, le centre moyen de la distribution commence à se décaler plus nettement vers les angles positifs, ce qui montre que le couplage hydrodynamique commence à influencer l’orientation globale du bâtonnet.
+
+Pour $\alpha = 10$, le maximum se déplace vers $\theta_{\max} \approx 9.5^\circ$ et le pic devient plus marqué. Cette évolution montre que le couplage hydrodynamique devient plus important par rapport aux fluctuations browniennes, tout en restant modulé par la contrainte géométrique de la surface.
+
+Pour $\alpha = 100$, la distribution change nettement de régime : elle devient beaucoup plus étroite et présente un maximum élevé proche de $0.027$ au voisinage de $\theta_{\max} \approx 10.5^\circ$. Ce comportement traduit une domination hydrodynamique très marquée, correspondant à un régime de grand Peclet rotationnel. Le bâtonnet passe alors une grande partie de son temps dans un domaine angulaire restreint, ce qui démontre une orientation préférentielle forte sous l’effet combiné du cisaillement intense et du confinement pariétal.
+
+Les maxima numériques obtenus à partir des fichiers de simulation sont approximativement :
+
+$$\theta_{\max} \approx 3.5^\circ \quad \text{pour } \alpha = 1$$
+
+$$\theta_{\max} \approx 3.5^\circ \quad \text{pour } \alpha = 5$$
+
+$$\theta_{\max} \approx 9.5^\circ \quad \text{pour } \alpha = 10$$
+
+$$\theta_{\max} \approx 10.5^\circ \quad \text{pour } \alpha = 100$$
+
+Il faut noter que, pour $\alpha = 1$ et $\alpha = 5$, les distributions restent larges et les positions exactes des maxima doivent être interprétées avec prudence. En revanche, pour $\alpha = 10$ et surtout pour $\alpha = 100$, la concentration du profil rend le maximum beaucoup plus significatif d’un point de vue physique.
+
+En conclusion, la Figure 8 montre que près de la surface, le cisaillement parabolique renforce progressivement l’orientation préférentielle du bâtonnet lorsque $\alpha$ augmente. Toutefois, la paroi conserve un rôle essentiel : elle réduit les fortes inclinaisons et maintient la distribution dans une région de faibles angles. À très grand $\alpha$, l’effet hydrodynamique devient dominant et la distribution se resserre fortement autour d’une orientation proche de la direction de l’écoulement, tout en restant guidée par le confinement stérique.
