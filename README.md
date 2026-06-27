@@ -338,3 +338,24 @@ Près de la surface, les deux distributions sont plus proches l’une de l’aut
 Cette comparaison montre que l’effet du profil de cisaillement dépend fortement de la position du bâtonnet dans le pore. Dans le volume, où la contrainte de surface est faible, la différence entre les deux profils d’écoulement apparaît surtout dans la largeur et la hauteur du pic. Près de la surface, la paroi domine la forme générale de la distribution, mais le type de cisaillement continue à influencer la position de l’orientation préférentielle.
 
 **En conclusion**, les Figures 9 et 10 montrent que la dynamique angulaire ne dépend pas uniquement de la valeur de $\alpha$, mais aussi du profil spatial du cisaillement et de la position du bâtonnet par rapport à la surface. Le cisaillement linéaire tend à produire une orientation plus nette et plus décalée vers les angles positifs, tandis que le cisaillement parabolique donne une réponse plus diffuse dans le volume et plus proche de l’alignement parallèle à la surface près de la paroi.
+
+### 3-1. Comparaison de $P(\theta)$ dans le volume entre cisaillement linéaire et parabolique pour $\alpha = 1$
+
+![Figure 11](Fig11.png)
+*Figure 11 : Comparaison de $P(\theta)$ dans le volume ($\xi > 0.5$) entre cisaillement linéaire et parabolique pour $\alpha = 1$*
+
+La **Figure 11** compare la distribution angulaire $P(\theta)$ du bâtonnet dans le volume, défini par $\xi > 0.5$, pour deux profils de cisaillement : un cisaillement linéaire et un cisaillement parabolique, à la même valeur du paramètre $\alpha = 1$.
+
+Pour cette valeur modérée de $\alpha$, la diffusion rotationnelle brownienne joue encore un rôle dominant dans la dynamique d’orientation. Les deux distributions restent donc relativement larges et faiblement contrastées. Cela signifie que le bâtonnet continue à explorer un grand domaine d’angles sous l’effet des fluctuations browniennes.
+
+Dans le cas du cisaillement linéaire, la distribution présente une anisotropie légèrement plus visible. Le maximum numérique se situe autour de $\theta_{\max} \approx 36.5^\circ$, avec une probabilité maximale d’environ $P_{\max} \approx 0.0069$. Cette légère structuration indique que le cisaillement constant commence à influencer l’orientation du bâtonnet, mais sans imposer encore une orientation fortement définie.
+
+Dans le cas du cisaillement parabolique, la distribution est plus proche d’un profil uniforme. Le maximum numérique est plus faible, autour de $P_{\max} \approx 0.0060$, et se situe vers $\theta_{\max} \approx 31.5^\circ$. Cependant, comme le contraste de la courbe reste faible, ce maximum doit être interprété avec prudence. Il traduit davantage une anisotropie faible qu’une orientation préférentielle fortement établie.
+
+La différence entre les deux profils d’écoulement vient du fait que, dans le cas linéaire, le bâtonnet ressent un cisaillement constant, tandis que dans le cas parabolique le cisaillement local dépend de la position selon $\alpha_{\text{local}} = \alpha(1-\xi)$. Dans le volume, cette dépendance spatiale réduit l’effet moyen du cisaillement par rapport au cas linéaire et conduit à une distribution plus diffuse.
+
+Les maxima numériques sont approximativement :
+$$\theta_{\max} \approx 36.5^\circ \quad \text{pour le cisaillement linéaire}$$
+$$\theta_{\max} \approx 31.5^\circ \quad \text{pour le cisaillement parabolique}$$
+
+**En conclusion**, pour $\alpha = 1$ dans le volume, les deux profils de cisaillement produisent encore des distributions larges, proches d’un régime dominé par le mouvement brownien. Le cisaillement linéaire introduit une anisotropie légèrement plus marquée, tandis que le cisaillement parabolique donne une réponse plus diffuse en raison de la variation spatiale du cisaillement local.
