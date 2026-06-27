@@ -148,6 +148,8 @@ En conclusion, cette comparaison confirme qu’il est nécessaire de séparer le
 
 ## 1-1. Distribution angulaire $P(\theta)$ dans le volume ($\xi > 0.5$) pour un cisaillement parabolique
 
+![Distribution angulaire près de la surface à forts alpha](Fig5.png)
+
 La **Figure 5** présente la distribution angulaire $P(\theta)$ du bâtonnet dans la région du volume, définie par $\xi > 0.5$, pour un cisaillement parabolique et pour trois valeurs du paramètre $\alpha$ : $\alpha = 0.5$, $\alpha = 2$ et $\alpha = 5$.
 
 Dans cette simulation, le cisaillement parabolique est introduit à travers un taux de cisaillement local dépendant de la position transverse du bâtonnet. Contrairement au cisaillement linéaire, où $\alpha$ reste constant, le cisaillement effectif varie avec $\xi$. Dans le code utilisé ici, cette dépendance est de la forme :
