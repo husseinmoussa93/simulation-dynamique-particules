@@ -292,7 +292,6 @@ Cette comparaison montre donc que le cisaillement parabolique oriente progressiv
 ### 3-1. Comparaison de $P(\theta)$ dans le volume entre cisaillement linéaire et parabolique pour $\alpha = 5$
 
 ![Figure 9](Fig9.png)
-*Figure 9 : Comparaison de $P(\theta)$ dans le volume ($\xi > 0.5$) entre cisaillement linéaire et parabolique pour $\alpha = 5$*
 
 La **Figure 9** compare la distribution angulaire $P(\theta)$ du bâtonnet dans le volume, défini par $\xi > 0.5$, pour deux profils de cisaillement : un cisaillement linéaire et un cisaillement parabolique, à la même valeur du paramètre $\alpha = 5$.
 
