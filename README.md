@@ -312,10 +312,9 @@ $$\theta_{\max} \approx 31.5^\circ \quad \text{pour le cisaillement parabolique}
 
 ### 3-1.2. Comparaison de $P(\theta)$ près de la surface entre cisaillement linéaire et parabolique pour $\alpha = 1$
 
-![Figure 12](Fig12.png)
-*Figure 12 : Comparaison de $P(\theta)$ près de la surface ($\xi \leq 0.5$) entre cisaillement linéaire et parabolique pour $\alpha = 1$*
+![Figure 10](Fig10.png)
 
-La Figure 12 compare la distribution angulaire $P(\theta)$ du bâtonnet près de la surface, définie par $\xi \leq 0.5$, pour deux profils de cisaillement : le cisaillement linéaire et le cisaillement parabolique, à la même valeur du paramètre $\alpha = 1$.
+La Figure 10 compare la distribution angulaire $P(\theta)$ du bâtonnet près de la surface, définie par $\xi \leq 0.5$, pour deux profils de cisaillement : le cisaillement linéaire et le cisaillement parabolique, à la même valeur du paramètre $\alpha = 1$.
 
 Pour cette valeur de $\alpha$, les deux distributions sont très proches. Elles présentent toutes les deux un maximum au voisinage de $\theta \approx 0^\circ$ et une forte diminution de la probabilité aux grands angles. Cela montre que, près de la surface, la dynamique angulaire est principalement contrôlée par le confinement géométrique imposé par la paroi.
 
