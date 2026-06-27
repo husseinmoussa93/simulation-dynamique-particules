@@ -169,3 +169,5 @@ $$\theta_{\max} \approx 36.5^\circ \quad \text{pour } \alpha = 5$$
 Cependant, pour $\alpha = 0.5$ et $\alpha = 2$, les distributions restent faiblement contrastées. Les maxima numériques ne doivent donc pas être considérés comme des orientations physiques fortement définies. Le maximum observé pour $\alpha = 5$ est plus significatif, car l’anisotropie de la distribution devient plus visible.
 
 En conclusion, la Figure 5 montre que le cisaillement parabolique induit progressivement une anisotropie de la distribution angulaire dans le volume lorsque $\alpha$ augmente. Toutefois, cette anisotropie reste moins marquée que dans le cas du cisaillement linéaire, car le cisaillement local ressenti par le bâtonnet dépend de sa position. Cette figure met donc en évidence l’importance de la dépendance spatiale du cisaillement dans la dynamique d’orientation.
+
+
