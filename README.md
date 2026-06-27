@@ -92,7 +92,7 @@ Il faut cependant noter que, pour $\alpha = 1$, la distribution reste encore ass
 
 En conclusion, la Figure 3 met clairement en évidence le passage vers un régime fortement orienté par le cisaillement. Dans le volume, lorsque $\alpha$ augmente, le bâtonnet passe d’une dynamique largement brownienne à une dynamique dominée par le cisaillement hydrodynamique, ce qui se traduit par une distribution angulaire plus étroite, plus élevée et déplacée vers les faibles angles.
 
-## 4. Distribution angulaire près de la surface à fortes valeurs de $\alpha$
+## 2-2. Distribution angulaire près de la surface à fortes valeurs de $\alpha$
 
 ![Distribution angulaire près de la surface à forts alpha](Fig4.png)
 
