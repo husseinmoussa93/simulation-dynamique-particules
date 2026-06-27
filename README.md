@@ -173,3 +173,24 @@ Cependant, pour $\alpha = 0.5$ et $\alpha = 2$, les distributions restent faible
 En conclusion, la Figure 5 montre que le cisaillement parabolique induit progressivement une anisotropie de la distribution angulaire dans le volume lorsque $\alpha$ augmente. Toutefois, cette anisotropie reste moins marquée que dans le cas du cisaillement linéaire, car le cisaillement local ressenti par le bâtonnet dépend de sa position. Cette figure met donc en évidence l’importance de la dépendance spatiale du cisaillement dans la dynamique d’orientation.
 
 
+## 1-2. Distribution angulaire $P(\theta)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement parabolique
+
+![Figure 6](Fig6.png)
+*Figure 6 : Distribution angulaire $P(\theta)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement parabolique*
+
+La **Figure 6** représente la distribution angulaire $P(\theta)$ du bâtonnet près de la surface, définie par la condition $\xi \leq 0.5$, pour un cisaillement parabolique et pour trois valeurs du paramètre $\alpha$ : $\alpha = 0.5$, $\alpha = 2$ et $\alpha = 5$.
+
+Dans cette région proche de la paroi, l’orientation du bâtonnet est fortement influencée par le confinement géométrique. La surface limite drastiquement les orientations accessibles, en particulier les grandes inclinaisons proches de $\pm 90^\circ$, car celles-ci provoqueraient une intersection stérique interdite avec la paroi. Ainsi, même dans le cas d’un cisaillement parabolique, la distribution reste étroitement structurée et centrée autour de faibles angles, correspondant à une orientation préférentiellement parallèle à la surface.
+
+* **Pour $\alpha = 0.5$ :** La distribution présente déjà un maximum très net au voisinage de $\theta \approx 0^\circ$. Ce pic ne provient pas principalement du cisaillement, qui reste ici très faible, mais de l’effet stérique exclusif de la paroi. Le mouvement brownien permet encore une exploration thermique des orientations intermédiaires, mais les angles extrêmes sont totalement coupés par la présence de la surface.
+* **Pour $\alpha = 2$ :** La forme globale de la distribution reste très proche de celle observée à $\alpha = 0.5$, avec un maximum toujours situé près de $\theta = 0^\circ$. On observe cependant un très léger biais asymétrique vers les angles positifs, ce qui indique que le couple hydrodynamique du cisaillement parabolique commence à rivaliser avec le confinement, bien que l'effet de la paroi reste largement dominant.
+* **Pour $\alpha = 5$ :** Le déplacement vers les angles positifs devient un peu plus visible, traduisant l'action cumulative de l'écoulement. Le maximum numérique migrate légèrement vers $\theta_{\max} \approx 3.5^\circ$, tandis que la base de la distribution reste contrainte par la géométrie du canal. Cela montre que le cisaillement parabolique modifie l’orientation préférentielle sans pour autant détruire la symétrie imposée par le confinement stérique.
+
+Les maxima numériques obtenus à partir des données de simulation sont approximativement :
+$$\theta_{\max} \approx 1.5^\circ \quad \text{pour } \alpha = 0.5$$
+$$\theta_{\max} \approx 0.5^\circ \quad \text{pour } \alpha = 2$$
+$$\theta_{\max} \approx 3.5^\circ \quad \text{pour } \alpha = 5$$
+
+Les écarts entre ces positions étant extrêmement faibles, il convient d'interpréter ces profils comme une distribution globalement ancrée autour de $\theta \approx 0^\circ$. Les légères fluctuations au sommet du pic reflètent la largeur importante de la distribution et le bruit statistique inhérent à la méthode numérique.
+
+En conclusion, la Figure 6 confirme que près de la surface, le confinement géométrique joue un rôle de sélection dominant sous cisaillement parabolique. La paroi impose un alignement parallèlement aux frontières stériques, tandis que l’augmentation de $\alpha$ n'introduit qu'une perturbation modérée (un léger décalage vers les angles positifs). L'effet de l'écoulement parabolique est donc présent, mais sa signature reste secondaire par rapport à l'effet d'exclusion de la surface.
