@@ -330,6 +330,18 @@ $$\theta_{\max} \approx 3.5^\circ \quad \text{pour le cisaillement parabolique}$
 
 En conclusion, pour $\alpha = 1$ près de la surface, les distributions angulaires obtenues avec les deux profils d’écoulement sont presque superposées. Cela montre que le confinement stérique domine la dynamique d’orientation, tandis que la différence entre cisaillement linéaire et parabolique reste faible dans ce régime.
 
+### 3-1.3. Comparaison entre les Figures 11 et 12 : effet de la surface pour $\alpha = 1$
+
+Les Figures 11 et 12 comparent l’effet du profil de cisaillement, linéaire ou parabolique, sur la distribution angulaire $P(\theta)$ pour une même valeur du paramètre $\alpha = 1$. La Figure 11 correspond au volume ($\xi > 0.5$), tandis que la Figure 12 correspond à la région proche de la surface ($\xi \leq 0.5$).
+
+Dans le volume, les distributions restent larges et faiblement contrastées. Cela indique que, pour $\alpha = 1$, la diffusion rotationnelle brownienne conserve une influence importante sur l’orientation du bâtonnet. La différence entre le cisaillement linéaire et le cisaillement parabolique est visible, mais elle reste modérée. Le cisaillement linéaire produit une anisotropie légèrement plus marquée, avec un maximum numérique autour de $\theta_{\max} \approx 36.5^\circ$, tandis que le cisaillement parabolique présente un maximum plus faible autour de $\theta_{\max} \approx 31.5^\circ$. Ces maxima doivent cependant être interprétés avec prudence, car les deux courbes restent proches d’un régime faiblement orienté.
+
+Près de la surface, la situation change nettement. Les deux distributions, linéaire et parabolique, deviennent presque superposées et présentent un maximum au voisinage de $\theta \approx 0^\circ$. Cela montre que la paroi domine la dynamique angulaire dans cette région. Le confinement stérique limite fortement les grandes inclinaisons et favorise les orientations presque parallèles à la surface. Ainsi, pour $\alpha = 1$, le profil exact du cisaillement joue un rôle secondaire près de la paroi.
+
+Cette comparaison montre que la position du bâtonnet dans le pore modifie fortement la sensibilité au profil d’écoulement. Dans le volume, où l’effet de la paroi est faible, la différence entre cisaillement linéaire et parabolique reste observable. Près de la surface, cette différence est largement masquée par la contrainte géométrique imposée par la paroi.
+
+En conclusion, les Figures 11 et 12 montrent que, pour $\alpha = 1$, le système reste globalement dominé par la diffusion brownienne dans le volume, tandis que près de la surface il est dominé par le confinement géométrique. Le cisaillement commence seulement à influencer l’orientation, mais son effet reste faible par rapport à celui de la paroi dans la région $\xi \leq 0.5$.
+
 ### 3-3.1 Comparaison de $P(\theta)$ dans le volume entre cisaillement linéaire et parabolique pour $\alpha = 5$
 
 ![Figure 13](Fig13.png)
