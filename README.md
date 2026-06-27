@@ -127,3 +127,19 @@ $$\theta_{\max} \approx 11.5^\circ \quad \text{pour } \alpha = 10$$
 $$\theta_{\max} \approx 7.5^\circ \quad \text{pour } \alpha = 100$$
 
 En conclusion, la Figure 4 montre que près de la surface, la dynamique angulaire ést gouvernée par deux mécanismes complémentaires : le confinement stérique imposé par la paroi et le couple hydrodynamique induit par le cisaillement linéaire. Lorsque $\alpha$ augmente, la distribution devient globalement plus étroite et plus élevée, ce qui indique une orientation de plus en plus forte du bâtonnet. À très grand $\alpha$, le système atteint un régime fortement orienté, où le bâtonnet reste confiné dans un domaine angulaire réduit proche de la direction de l’écoulement.
+
+## 2-3. Comparaison entre la distribution dans le volume et près de la surface à fortes valeurs de $\alpha$
+
+Les **Figures 3 et 4** permettent de comparer l’effet du cisaillement linéaire sur l’orientation du bâtonnet dans deux régions distinctes : le volume, défini par $\xi > 0.5$, et la région proche de la surface, définie par $\xi \leq 0.5$. Cette comparaison est essentielle, car elle met en évidence le rôle spécifique de la paroi dans la dynamique d’orientation.
+
+Dans le volume, le bâtonnet n’est pas directement soumis à la contrainte géométrique de la paroi. Son orientation résulte principalement de la compétition entre la diffusion rotationnelle brownienne et le couple hydrodynamique dû au cisaillement. Lorsque $\alpha$ augmente, la distribution $P(\theta)$ devient progressivement plus étroite et plus élevée, ce qui traduit une orientation de plus en plus marquée par l’écoulement.
+
+Près de la surface, la situation est différente. La paroi limite fortement les orientations accessibles, en particulier les grandes inclinaisons proches de $\pm 90^\circ$. Même lorsque le cisaillement n’est pas très fort, la distribution est déjà structurée autour de faibles angles. Ainsi, la surface introduit une sélection géométrique supplémentaire qui s’ajoute à l’effet du cisaillement.
+
+Pour les grandes valeurs de $\alpha$, les deux régions montrent une concentration progressive de la distribution angulaire autour d’un domaine restreint. Cependant, cette concentration est plus fortement contrainte près de la surface, car le bâtonnet ne peut pas explorer librement les grandes orientations. Dans le volume, l’alignement est principalement imposé par le cisaillement ; près de la surface, il résulte de l’effet combiné du cisaillement et du confinement stérique.
+
+Une différence importante concerne la position du maximum. Dans le volume, lorsque $\alpha$ augmente fortement, le maximum se déplace progressivement vers des angles plus faibles, traduisant une tendance à l’alignement avec l’écoulement. Près de la surface, le maximum reste également situé dans une région de faibles angles, mais son évolution n’est pas strictement monotone. Cela indique que la paroi modifie la réponse angulaire du bâtonnet au cisaillement.
+
+Ainsi, les Figures 3 et 4 montrent que l’augmentation de $\alpha$ favorise l’orientation du bâtonnet dans les deux régions, mais selon des mécanismes légèrement différents. Dans le volume, l’effet dominant est hydrodynamique. Près de la surface, l’orientation est gouvernée par une combinaison entre hydrodynamique et confinement géométrique.
+
+En conclusion, cette comparaison confirme qu’il est nécessaire de séparer les statistiques en deux domaines, $\xi > 0.5$ et $\xi \leq 0.5$. Sans cette séparation, l’effet propre de la surface serait mélangé avec le comportement du volume, ce qui rendrait l’interprétation physique de $P(\theta)$ moins précise.
