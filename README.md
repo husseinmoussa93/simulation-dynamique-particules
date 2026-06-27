@@ -452,3 +452,78 @@ Cette comparaison montre que l’effet du profil de cisaillement dépend forteme
 
 **En conclusion**, les Figures 13 et 14 montrent que la dynamique angulaire ne dépend pas uniquement de la valeur de $\alpha$, mais aussi du profil spatial du cisaillement et de la position du bâtonnet par rapport à la surface. Le cisaillement linéaire tend à produire une orientation plus nette et plus décalée vers les angles positifs, tandis que le cisaillement parabolique donne une réponse plus diffuse dans le volume et plus proche de l’alignement parallèle à la surface près de la paroi.
 
+## 4. Distribution spatiale $P(\xi)$ près de la surface
+
+Les Figures 15 à 18 présentent la distribution spatiale $P(\xi)$ du centre du bâtonnet dans la région proche de la surface, définie par $\xi \leq 0.5$. Cette distribution permet d’étudier la probabilité de présence du bâtonnet en fonction de sa distance normalisée à la paroi.
+
+Il est important de noter que $P(\xi)$ est ici une distribution conditionnée à la région proche de la surface. Elle décrit donc comment les positions sont réparties à l’intérieur de la zone $\xi \leq 0.5$, et non pas la probabilité totale d’être près de la surface par rapport au volume.
+
+---
+
+### 4-1. Figure 15 : Distribution spatiale $P(\xi)$ près de la surface pour un cisaillement linéaire
+
+![Figure 15](Fig15.png)
+*Figure 15 : Distribution spatiale $P(\xi)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement linéaire*
+
+La Figure 15 représente la distribution spatiale $P(\xi)$ près de la surface pour un cisaillement linéaire, pour $\alpha = 0.5$, $\alpha = 2$ et $\alpha = 5$.
+
+Pour les trois valeurs de $\alpha$, la distribution augmente progressivement lorsque $\xi$ se rapproche de $0.5$. Cela signifie que le centre du bâtonnet est moins probable très près de la paroi, c’est-à-dire pour $\xi \approx 0$, et devient plus probable lorsque le bâtonnet s’éloigne légèrement de la surface.
+
+Ce comportement est principalement dû à un effet géométrique. Très près de la paroi, le bâtonnet ne peut pas adopter toutes les orientations possibles, car certaines orientations conduiraient à une intersection avec la surface. Le nombre de configurations accessibles est donc réduit. Lorsque $\xi$ augmente, le centre du bâtonnet s’éloigne de la paroi et davantage d’orientations deviennent possibles, ce qui augmente la probabilité $P(\xi)$.
+
+L’effet de $\alpha$ reste modéré pour ces valeurs. Les courbes gardent une forme globale similaire, ce qui montre que, pour $\alpha = 0.5$, $2$ et $5$, la structure de $P(\xi)$ est dominée par le confinement géométrique plutôt que par le cisaillement.
+
+---
+
+### 4-2. Figure 16 : Distribution spatiale $P(\xi)$ près de la surface pour un cisaillement linéaire à fortes valeurs de $\alpha$
+
+![Figure 16](Fig16.png)
+*Figure 16 : Distribution spatiale $P(\xi)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement linéaire à fortes valeurs de $\alpha$*
+
+La Figure 16 présente $P(\xi)$ près de la surface pour un cisaillement linéaire à fortes valeurs de $\alpha$ : $\alpha = 1$, $5$, $10$ et $100$.
+
+Comme dans la Figure 15, la probabilité augmente fortement lorsque $\xi$ se rapproche de $0.5$. Cela confirme que la région immédiatement proche de la paroi est moins accessible au centre du bâtonnet, en raison de l’exclusion stérique imposée par la surface.
+
+Pour $\alpha = 100$, la courbe présente une augmentation plus marquée et des oscillations plus visibles. Physiquement, cela traduit le fait que le fort cisaillement modifie la dynamique du bâtonnet près de la paroi et favorise certaines trajectoires ou configurations. Cependant, les oscillations fines doivent être interprétées avec prudence, car elles peuvent aussi provenir de la discrétisation numérique, du binning de $\xi$, et du nombre fini d’échantillons.
+
+En conclusion, même à fort cisaillement, la forme générale de $P(\xi)$ reste dominée par la géométrie de confinement : le bâtonnet est moins présent très près de la paroi et plus probable vers la limite $\xi = 0.5$.
+
+---
+
+### 4-3. Figure 17 : Distribution spatiale $P(\xi)$ près de la surface pour un cisaillement parabolique
+
+![Figure 17](Fig17.png)
+*Figure 17 : Distribution spatiale $P(\xi)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement parabolique*
+
+La Figure 17 représente la distribution spatiale $P(\xi)$ près de la surface pour un cisaillement parabolique, pour $\alpha = 0.5$, $2$ et $5$.
+
+Les courbes montrent la même tendance générale que dans le cas linéaire : $P(\xi)$ augmente lorsque $\xi$ se rapproche de $0.5$. Cela indique que l’effet principal reste l’exclusion géométrique près de la paroi. À faible distance de la surface, le bâtonnet dispose de moins de configurations angulaires accessibles ; lorsqu’il s’éloigne de la paroi, le nombre de configurations possibles augmente.
+
+Dans le cas parabolique, le cisaillement local dépend de la position. Dans le modèle utilisé ici, le cisaillement effectif varie selon $\alpha_{\text{local}} = \alpha(1-\xi)$. Cette dépendance spatiale modifie légèrement la distribution, mais pour $\alpha = 0.5$, $2$ et $5$, l’effet reste secondaire devant la contrainte géométrique imposée par la paroi.
+
+Ainsi, la Figure 17 montre que, près de la surface, la distribution spatiale est principalement contrôlée par le confinement, tandis que le profil parabolique du cisaillement apporte seulement des modifications modérées.
+
+---
+
+### 4-4. Figure 18 : Distribution spatiale $P(\xi)$ près de la surface pour un cisaillement parabolique à fortes valeurs de $\alpha$
+
+![Figure 18](Fig18.png)
+*Figure 18 : Distribution spatiale $P(\xi)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement parabolique à fortes valeurs de $\alpha$*
+
+La Figure 18 présente $P(\xi)$ près de la surface pour un cisaillement parabolique à fortes valeurs de $\alpha$ : $\alpha = 1$, $5$, $10$ et $100$.
+
+La distribution reste croissante avec $\xi$, ce qui confirme que le bâtonnet est moins susceptible d’avoir son centre très près de la paroi et plus probable lorsqu’il se rapproche de la limite $\xi = 0.5$. Ce résultat est cohérent avec le rôle de la paroi, qui réduit fortement l’espace des configurations accessibles près de $\xi = 0$.
+
+Pour $\alpha = 100$, la courbe devient mais plus structurée et présente des oscillations plus prononcées. Cela indique que le fort cisaillement influence davantage la dynamique spatiale du bâtonnet. Néanmoins, ces oscillations doivent être interprétées avec prudence : elles peuvent refléter à la fois une structuration dynamique réelle et des effets numériques liés à la discrétisation de la position et à l’échantillonnage statistique.
+
+En conclusion, la Figure 18 montre que le cisaillement parabolique intense modifie la distribution spatiale près de la surface, mais sans changer la tendance dominante : $P(\xi)$ augmente vers $\xi = 0.5$, principalement en raison du confinement géométrique.
+
+---
+
+### 4-5. Comparaison générale des distributions $P(\xi)$
+
+Les Figures 15 à 18 montrent que la distribution spatiale $P(\xi)$ près de la surface possède une structure robuste : elle augmente lorsque $\xi$ se rapproche de $0.5$. Cette tendance est observée pour les deux profils de cisaillement, linéaire et parabolique, et pour toutes les valeurs de $\alpha$.
+
+Le résultat physique principal est que la région très proche de la paroi est moins accessible au centre du bâtonnet. Cette diminution de probabilité près de $\xi = 0$ provient du confinement stérique : près de la surface, certaines orientations sont interdites ou fortement défavorisées. À mesure que le centre du bâtonnet s’éloigne de la paroi, davantage d’orientations deviennent possibles, ce qui augmente $P(\xi)$.
+
+L’effet de $\alpha$ devient surtout visible aux grandes valeurs, en particulier pour $\alpha = 100$, où les distributions présentent une structuration plus marquée. Toutefois, la tendance globale reste gouvernée par la géométrie de confinement. Ainsi, $P(\xi)$ met en évidence le rôle central de la paroi dans la distribution spatiale du bâtonnet, tandis que le cisaillement module cette distribution sans en changer la forme générale.
