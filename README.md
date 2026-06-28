@@ -64,7 +64,7 @@ Cette comparaison démontre que le volume et la surface correspondent à deux r�
 
 Le confinement près de la surface joue donc un rôle aussi important que le cisaillement dans la dynamique d’orientation. Le paramètre $\alpha$ contrôle l’intensité relative du cisaillement, mais la position du bâtonnet dans le pore, représentée par $\xi$, détermine également la forme de la distribution angulaire. Il est donc indispensable de séparer les statistiques en volume et près de la surface pour interpréter correctement la physique du système.
 
-## 2-1. Distribution angulaire dans le volume à forts cisaillements ($\alpha$ élevés)
+## 2-1. Distribution angulaire dans le volume à fortes cisaillements ($\alpha$ élevés)
 
 ![Distribution angulaire à forts alpha](Fig3.png)
 
