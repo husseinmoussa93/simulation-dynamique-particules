@@ -524,7 +524,7 @@ Le résultat physique principal est que la région très proche de la paroi est 
 
 L’effet de $\alpha$ devient surtout visible aux grandes valeurs, en particulier pour $\alpha = 100$, où les distributions présentent une structuration plus marquée. Toutefois, la tendance globale reste gouvernée par la géométrie de confinement. Ainsi, $P(\xi)$ met en évidence le rôle central de la paroi dans la distribution spatiale du bâtonnet, tandis que le cisaillement module cette distribution sans en changer la forme générale.
 
-### 3-2. Équation du cisaillement parabolique utilisée dans la simulation
+## 4. Équation du cisaillement parabolique utilisée dans la simulation
 
 Dans le programme numérique, le profil parabolique n’est pas introduit directement par la vitesse $u(z)$, mais par le taux de cisaillement local, qui est le seul responsable de la rotation hydrodynamique du bâtonnet.
 
