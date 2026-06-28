@@ -407,6 +407,8 @@ ou de la production d’entropie.
 
 Balakrishnan, V. (2021). *Elements of Nonequilibrium Statistical Mechanics*.
 Springer, Cham. DOI: 10.1007/978-3-030-62233-6.
+
+
 ## Ⅰ.Dérivation et justification du profil parabolique de cisaillement
 
 
