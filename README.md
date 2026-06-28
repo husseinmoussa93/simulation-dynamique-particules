@@ -524,40 +524,145 @@ Le résultat physique principal est que la région très proche de la paroi est 
 
 L’effet de $\alpha$ devient surtout visible aux grandes valeurs, en particulier pour $\alpha = 100$, où les distributions présentent une structuration plus marquée. Toutefois, la tendance globale reste gouvernée par la géométrie de confinement. Ainsi, $P(\xi)$ met en évidence le rôle central de la paroi dans la distribution spatiale du bâtonnet, tandis que le cisaillement module cette distribution sans en changer la forme générale.
 
-## 4. Équation du cisaillement parabolique utilisée dans la simulation
+## 5. Dérivation et justification du profil parabolique de cisaillement
 
-Dans le programme numérique, le profil parabolique n’est pas introduit directement par la vitesse $u(z)$, mais par le taux de cisaillement local, qui est le seul responsable de la rotation hydrodynamique du bâtonnet.
+### 5.1. Origine physique du profil
+On considère un écoulement stationnaire d’un fluide newtonien suivant la direction $x$, tandis que $z$ représente la direction transverse. Dans l’approximation de Poiseuille, l’équation de Navier-Stokes se réduit à :
 
-Le profil de vitesse de Poiseuille considéré (représentant une moitié de canal) s’écrit sous la forme :
+$$\eta \frac{d^2u}{dz^2} = \frac{dp}{dx}$$
 
-$$u(z) = U_{\max} \left[ 2\frac{z}{D} - \left(\frac{z}{D}\right)^2 \right]$$
+où $\eta$ est la viscosité dynamique et $dp/dx$ est le gradient de pression, supposé constant dans cette configuration. 
+Par conséquent, nous pouvons écrire :
 
-Le taux de cisaillement local, obtenu par la dérivée spatiale de la vitesse, est donc :
+$$\frac{d^2u}{dz^2} = \text{constante}$$
 
-$$\dot{\gamma}(z) = \frac{du}{dz} = \frac{2U_{\max}}{D} \left(1-\frac{z}{D}\right)$$
+L’intégration successive de cette équation différentielle montre que la vitesse est nécessairement une fonction quadratique de la position transverse $z$ :
 
-En définissant le taux de cisaillement maximal à la paroi, nous obtenons l'expression suivante :
+$$u(z) = az^2 + bz + c$$
 
-$$\dot{\gamma}_0 = \frac{2U_{\max}}{D}$$
+C’est précisément cette dépendance quadratique qui justifie physiquement l’appellation de **profil parabolique**.
 
-Ce qui nous permet d'écrire le taux de cisaillement local sous la forme :
+### 5.2. Choix de la géométrie et conditions aux limites
+La loi hydrodynamique implémentée dans le programme numérique correspond à la modélisation d'un demi-canal :
+* $z = 0$ représente la paroi solide (surface inférieure) ;
+* $z = D$ représente le plan de symétrie de l'écoulement, où la vitesse est maximale ;
+* $D$ représente donc la distance physique entre la paroi et le plan central du canal.
 
-$$\dot{\gamma}_{\mathrm{local}}(z) = \dot{\gamma}_0 \left(1-\frac{z}{D}\right)$$
+Les conditions aux limites associées à cette géométrie sont définies par :
 
-Par conséquent, le paramètre de Péclet rotationnel local, qui contrôle l'intensité relative du couplage hydrodynamique par rapport à la diffusion brownienne, devient :
+$$u(0) = 0$$
 
-$$\alpha_{\mathrm{local}}(z) = \alpha \left(1-\frac{z}{D}\right)$$
+$$u(D) = U_{\max}$$
 
-Dans notre simulation, la distance caractéristique *D* est fixée par la longueur du bâtonnet *L*<sub>*B*</sub> (*D* = *L*<sub>*B*</sub>). En introduisant la position adimensionnelle du centre du bâtonnet :
+$$\left.\frac{du}{dz}\right|_{z=D} = 0$$
 
-$$\xi = \frac{z_c}{L_B}$$
+La première condition correspond à l’hypothèse classique de non-glissement du fluide à la paroi solide. La troisième condition exprime la symétrie parfaite du profil au centre du canal, où la vitesse atteint son extrémum et où son gradient spatial s’annule.
 
-Cette relation fondamentale se réduit harmonieusement à :
+### 5.3. Détermination analytique des coefficients
+En repartant de la forme générale de la fonction quadratique :
 
-$$\boxed{\alpha_{\mathrm{local}}(\xi) = \alpha(1-\xi)}$$
+$$u(z) = az^2 + bz + c$$
 
-Cette variation linéaire de l'intensité du cisaillement local intervient directement dans l'étape d'actualisation angulaire du code (implémentée dans la fonction `DynRot`). L’incrément de rotation hydrodynamique appliqué à chaque pas de temps &Delta;<sub>*B*</sub> est donné par la formule :
+L'application de la condition de non-glissement $u(0) = 0$ donne immédiatement :
 
-$$\boxed{\Delta\theta_H = -\frac{\alpha(1-\xi)}{2} \sin^2\theta \, (\Delta_B)^2}$$
+$$c = 0$$
 
-Ainsi, contrairement au cas du cisaillement linéaire où le paramètre local reste rigoureusement constant dans tout le système, l’intensité du cisaillement parabolique dépend explicitement de la position spatiale du centre du bâtonnet. Elle est maximale à la paroi (&xi; = 0) et s'annule linéairement à la limite supérieure du domaine (&xi; = 1).
+La dérivée première de la vitesse par rapport à $z$ (représentant le taux de déformation) s'écrit :
+
+$$\frac{du}{dz} = 2az + b$$
+
+L'introduction de la condition de symétrie au centre du canal ($z = D$) conduit à :
+
+$$2aD + b = 0 \implies b = -2aD$$
+
+Enfin, en injectant la condition sur la vitesse maximale $u(D) = U_{\max}$, nous obtenons :
+
+$$aD^2 + bD = U_{\max}$$
+
+En substituant l'expression de $b = -2aD$ dans cette relation, il vient :
+
+$$aD^2 - 2aD^2 = U_{\max} \implies -aD^2 = U_{\max}$$
+
+D’où la détermination unique des coefficients couplés $a$ et $b$ :
+
+$$a = -\frac{U_{\max}}{D^2} \qquad \text{et} \qquad b = \frac{2U_{\max}}{D}$$
+
+Le profil de vitesse analytique de l'écoulement s’écrit donc sous sa forme finale explicite :
+
+$$\boxed{u(z) = U_{\max} \left[ 2\frac{z}{D} - \left(\frac{z}{D}\right)^2 \right]}$$
+
+Cette fonction mathématique confirme la nature parabolique de l'écoulement, caractérisée par une courbure négative et rigoureusement constante :
+
+$$\frac{d^2u}{dz^2} = -\frac{2U_{\max}}{D^2}$$
+
+### 5.4. Expression du taux de cisaillement local
+Dans le modèle numérique de simulation, le bâtonnet n’est pas directement mis en rotation par la valeur absolue de la vitesse locale $u(z)$, mais plutôt par son gradient spatial transverse, qui définit le taux de cisaillement local :
+
+$$\dot{\gamma}(z) = \frac{du}{dz}$$
+
+En dérivant analytiquement le profil parabolique obtenu au paragraphe précédent, nous trouvons :
+
+$$\dot{\gamma}(z) = \frac{2U_{\max}}{D} \left(1 - \frac{z}{D}\right)$$
+
+En introduisant le taux de cisaillement maximal, rigoureusement atteint au niveau de la paroi solide ($z = 0$), défini par $\dot{\gamma}_0 = \frac{2U_{\max}}{D}$, la relation se simplifie sous la forme :
+
+$$\boxed{\dot{\gamma}_{\mathrm{local}}(z) = \dot{\gamma}_0 \left(1 - \frac{z}{D}\right)}$$
+
+Ainsi, bien que le profil de vitesse fluide soit parabolique, le taux de cisaillement local associé varie de manière purement linéaire avec la position. Cette dérivation formelle lève toute ambiguïté : le cisaillement linéaire n'est que la dérivée directe du profil parabolique.
+
+### 5.5. Passage au paramètre adimensionnel $\alpha$
+Le paramètre de Péclet rotationnel, qui quantifie la compétition entre le couplage hydrodynamique directionnel et la diffusion brownienne rotationnelle, est défini à la paroi par :
+
+$$\alpha = \frac{\dot{\gamma}_0}{D_{\mathrm{rot}}}$$
+
+Localement, l'intensité de ce paramètre varie en fonction de la position transverse $z$ selon la relation :
+
+$$\alpha_{\mathrm{local}}(z) = \frac{\dot{\gamma}_{\mathrm{local}}(z)}{D_{\mathrm{rot}}} = \frac{\dot{\gamma}_0}{D_{\mathrm{rot}}} \left(1 - \frac{z}{D}\right)$$
+
+Ce qui nous permet d'écrire l'expression intermédiaire :
+
+$$\alpha_{\mathrm{local}}(z) = \alpha \left(1 - \frac{z}{D}\right)$$
+
+Étant donné que dans notre algorithme de simulation, la distance caractéristique du système est fixée par la longueur propre du bâtonnet ($D = L_B$) et que la position adimensionnelle du centre de la particule est définie par $\xi = \frac{z_c}{L_B}$, le rapport spatial se réduit à $\frac{z_c}{D} = \xi$. La loi programmée prend alors la forme adimensionnelle remarquable :
+
+$$\boxed{\alpha_{\mathrm{local}}(\xi) = \alpha(1 - \xi)}$$
+
+### 5.6. Conséquences sur la dynamique de rotation numérique
+L’équation hydrodynamique fondamentale régissant l'évolution angulaire de l'orientation du bâtonnet est donnée par :
+
+$$\frac{d\theta}{dt} = -\dot{\gamma}_{\mathrm{local}}(z_c) \sin^2\theta$$
+
+En introduisant le pas de temps brownien adimensionnel de la simulation, défini par la relation $(\Delta_B)^2 = 2D_{\mathrm{rot}}\Delta t$, l’incrément de rotation hydrodynamique appliqué à chaque itération temporelle devient :
+
+$$\boxed{\Delta\theta_H = -\frac{\alpha(1 - \xi)}{2} \sin^2\theta \, (\Delta_B)^2}$$
+
+Cette formulation mathématique correspond exactement à la loi physique implémentée de manière itérative au sein de la fonction `DynRot` du code de simulation.
+
+### 5.7. Justification physique du choix du modèle
+Cette formulation théorique avancée a été sélectionnée pour trois raisons majeures :
+1. **Cohérence géométrique :** Elle modélise le profil de Poiseuille le plus direct et le plus robuste compatible avec la condition de non-glissement à la surface ($\xi = 0$) et la symétrie centrale ($\xi = 1$).
+2. **Inhomogénéité spatiale du cisaillement :** Contrairement au cas du cisaillement linéaire où le paramètre reste uniformément constant dans tout l'espace ($\alpha_{\mathrm{local}} = \alpha$), ce modèle introduit un couplage hydrodynamique qui dépend explicitement de la position spatiale de la particule.
+3. **Consistance des points de repère :** Elle préserve la même valeur physique de référence $\alpha$ entre les différentes configurations de simulation. Dans le cas parabolique, $\alpha$ caractérise l'intensité maximale subie à la paroi.
+
+Nous pouvons aisément vérifier les limites physiques du modèle aux frontières du domaine :
+
+$$\alpha_{\mathrm{local}}(0) = \alpha \qquad \text{et} \qquad \alpha_{\mathrm{local}}(1) = 0$$
+
+Le cisaillement est donc maximal à proximité immédiate de la surface solide et s’annule de façon purement linéaire au plan de symétrie de l'écoulement.
+
+***
+
+### Remarque importante concernant la structure du code
+Pour maintenir une rigueur scientifique absolue avec l'implémentation algorithmique, il est indispensable de préciser dans le manuscrit qu'il s'agit d'un **demi-profil parabolique de Poiseuille**, où la variable $D$ désigne exclusivement la distance séparant la paroi du plan de symétrie (et non la largeur totale du canal).
+
+Si $D$ représentait la distance totale entre deux parois solides situées en $z = 0$ et $z = D$, le profil complet de l'écoulement prendrait la forme suivante :
+
+$$u(z) = 4U_{\max} \frac{z}{D} \left(1 - \frac{z}{D}\right)$$
+
+Ce qui générerait un taux de cisaillement associé égal à :
+
+$$\dot{\gamma}(z) = \frac{4U_{\max}}{D} \left(1 - \frac{2z}{D}\right)$$
+
+Cette dernière formulation n'est pas celle qui a été exploitée pour générer les fichiers de données `.txt` actuels. Les résultats numériques obtenus reposent fondamentalement sur la loi de réduction linéaire vérifiée dans le code :
+
+$$\boxed{\alpha_{\mathrm{local}} = \alpha(1 - \xi)}$$
