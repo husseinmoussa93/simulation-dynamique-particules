@@ -1,18 +1,4 @@
-<ol type="I">
-  <li>Dérivation et justification du profil parabolique
-    <ol type="i">
-      <li>Origine physique du profil</li>
-      <li>Choix de la géométrie et conditions aux limites</li>
-      <li>Détermination analytique des coefficients</li>
-    </ol>
-  </li> <li>Résultats de la simulation numérique
-    <ol type="i">
-      <li>Analyse des fichiers de données</li>
-      <li>Interprétation des graphiques</li>
-    </ol>
-  </li>
-</ol>
-
+<ul><b></b><ol type = "I">Dérivation et justification du profil parabolique de cisaillement</ul> 
 ## 1. Dérivation et justification du profil parabolique de cisaillement
 
 ### 1.1. Origine physique du profil
