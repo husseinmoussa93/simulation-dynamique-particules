@@ -1,7 +1,7 @@
 ## Ⅰ.Dérivation et justification du profil parabolique de cisaillement
 
 
-### Ⅰ.1. Origine physique du profil
+### Ⅰ.i. Origine physique du profil
 On considère un écoulement stationnaire d’un fluide newtonien suivant la direction $x$, tandis que $z$ représente la direction transverse. Dans l’approximation de Poiseuille, l’équation de Navier-Stokes se réduit à :
 
 $$\eta \frac{d^2u}{dz^2} = \frac{dp}{dx}$$
@@ -17,7 +17,7 @@ $$u(z) = az^2 + bz + c$$
 
 C’est précisément cette dépendance quadratique qui justifie physiquement l’appellation de **profil parabolique**.
 
-### Ⅰ.2. Choix de la géométrie et conditions aux limites
+### Ⅰ.ii. Choix de la géométrie et conditions aux limites
 La loi hydrodynamique implémentée dans le programme numérique correspond à la modélisation d'un demi-canal :
 * $z = 0$ représente la paroi solide (surface inférieure) ;
 * $z = D$ représente le plan de symétrie de l'écoulement, où la vitesse est maximale ;
@@ -33,7 +33,7 @@ $$\left.\frac{du}{dz}\right|_{z=D} = 0$$
 
 La première condition correspond à l’hypothèse classique de non-glissement du fluide à la paroi solide. La troisième condition exprime la symétrie parfaite du profil au centre du canal, où la vitesse atteint son extrémum et où son gradient spatial s’annule.
 
-### Ⅰ.3. Détermination analytique des coefficients
+### Ⅰ.i. Détermination analytique des coefficients
 En repartant de la forme générale de la fonction quadratique :
 
 $$u(z) = az^2 + bz + c$$
@@ -70,7 +70,7 @@ Cette fonction mathématique confirme la nature parabolique de l'écoulement, ca
 
 $$\frac{d^2u}{dz^2} = -\frac{2U_{\max}}{D^2}$$
 
-### Ⅰ.4. Expression du taux de cisaillement local
+### Ⅰ.iv. Expression du taux de cisaillement local
 Dans le modèle numérique de simulation, le bâtonnet n’est pas directement mis en rotation par la valeur absolue de la vitesse locale $u(z)$, mais plutôt par son gradient spatial transverse, qui définit le taux de cisaillement local :
 
 $$\dot{\gamma}(z) = \frac{du}{dz}$$
@@ -85,7 +85,7 @@ $$\boxed{\dot{\gamma}_{\mathrm{local}}(z) = \dot{\gamma}_0 \left(1 - \frac{z}{D}
 
 Ainsi, bien que le profil de vitesse fluide soit parabolique, le taux de cisaillement local associé varie de manière purement linéaire avec la position. Cette dérivation formelle lève toute ambiguïté : le cisaillement linéaire n'est que la dérivée directe du profil parabolique.
 
-### Ⅰ.5. Passage au paramètre adimensionnel $\alpha$
+### Ⅰ.v. Passage au paramètre adimensionnel $\alpha$
 Le paramètre de Péclet rotationnel, qui quantifie la compétition entre le couplage hydrodynamique directionnel et la diffusion brownienne rotationnelle, est défini à la paroi par :
 
 $$\alpha = \frac{\dot{\gamma}_0}{D_{\mathrm{rot}}}$$
@@ -102,7 +102,7 @@ $$\alpha_{\mathrm{local}}(z) = \alpha \left(1 - \frac{z}{D}\right)$$
 
 $$\boxed{\alpha_{\mathrm{local}}(\xi) = \alpha(1 - \xi)}$$
 
-### Ⅰ.6. Conséquences sur la dynamique de rotation numérique
+### Ⅰ.vi. Conséquences sur la dynamique de rotation numérique
 L’équation hydrodynamique fondamentale régissant l'évolution angulaire de l'orientation du bâtonnet est donnée par :
 
 $$\frac{d\theta}{dt} = -\dot{\gamma}_{\mathrm{local}}(z_c) \sin^2\theta$$
@@ -113,7 +113,7 @@ $$\boxed{\Delta\theta_H = -\frac{\alpha(1 - \xi)}{2} \sin^2\theta \, (\Delta_B)^
 
 Cette formulation mathématique correspond exactement à la loi physique implémentée de manière itérative au sein de la fonction `DynRot` du code de simulation.
 
-### Ⅰ.7. Justification physique du choix du modèle
+### Ⅰ.vii. Justification physique du choix du modèle
 Cette formulation théorique avancée a été sélectionnée pour trois raisons majeures :
 1. **Cohérence géométrique :** Elle modélise le profil de Poiseuille le plus direct et le plus robuste compatible avec la condition de non-glissement à la surface ($\xi = 0$) et la symétrie centrale ($\xi = 1$).
 2. **Inhomogénéité spatiale du cisaillement :** Contrairement au cas du cisaillement linéaire où le paramètre reste uniformément constant dans tout l'espace ($\alpha_{\mathrm{local}} = \alpha$), ce modèle introduit un couplage hydrodynamique qui dépend explicitement de la position spatiale de la particule.
