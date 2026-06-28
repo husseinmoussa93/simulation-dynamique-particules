@@ -75,7 +75,11 @@ grand nombre de petits pas indépendants.
 
 Le déplacement brownien transverse utilisé dans le programme est :
 
-$$\Delta z_B=\pm\frac{L_B}{3}\Delta_B.$$
+$$
+\Delta z_B
+=
+\pm\frac{L_B}{3}\Delta_B.
+$$
 
 Il vérifie :
 
