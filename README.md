@@ -523,3 +523,33 @@ Les Figures 15 à 18 montrent que la distribution spatiale $P(\xi)$ près de la 
 Le résultat physique principal est que la région très proche de la paroi est moins accessible au centre du bâtonnet. Cette diminution de probabilité près de $\xi = 0$ provient du confinement stérique : près de la surface, certaines orientations sont interdites ou fortement défavorisées. À mesure que le centre du bâtonnet s’éloigne de la paroi, davantage d’orientations deviennent possibles, ce qui augmente $P(\xi)$.
 
 L’effet de $\alpha$ devient surtout visible aux grandes valeurs, en particulier pour $\alpha = 100$, où les distributions présentent une structuration plus marquée. Toutefois, la tendance globale reste gouvernée par la géométrie de confinement. Ainsi, $P(\xi)$ met en évidence le rôle central de la paroi dans la distribution spatiale du bâtonnet, tandis que le cisaillement module cette distribution sans en changer la forme générale.
+
+## 4. Équation du cisaillement parabolique utilisée dans la simulation
+
+Dans le programme numérique, le profil parabolique n’est pas introduit directement par la vitesse $u(z)$, mais par le taux de cisaillement local, qui est le seul responsable de la rotation hydrodynamique du bâtonnet.
+
+Le profil de vitesse de Poiseuille considéré (représentant une moitié de canal) s’écrit sous la forme :
+
+$$u(z) = U_{\max} \left[ 2\frac{z}{D} - \left(\frac{z}{D}\right)^2 \right]$$
+
+Le taux de cisaillement local, obtenu par la dérivée spatiale de la vitesse, est donc :
+
+$$\dot{\gamma}(z) = \frac{du}{dz} = \frac{2U_{\max}}{D} \left(1-\frac{z}{D}\right)$$
+
+En définissant le taux de cisaillement maximal à la paroi par $\dot{\gamma}_0 = 2U_{\max}/D$, nous obtenons :
+
+$$\dot{\gamma}_{\mathrm{local}}(z) = \dot{\gamma}_0 \left(1-\frac{z}{D}\right)$$
+
+Par conséquent, le paramètre de Péclet rotationnel local, qui contrôle l'intensité relative du couplage hydrodynamique par rapport à la diffusion brownienne, devient :
+
+$$\alpha_{\mathrm{local}}(z) = \alpha \left(1-\frac{z}{D}\right)$$
+
+Étant donné que dans la simulation, la distance caractéristique est fixée par la longueur du bâtonnet ($D = L_B$) et que la position adimensionnelle est définie par $\xi = z_c/L_B$, cette relation fondamentale se réduit à :
+
+$$\boxed{\alpha_{\mathrm{local}}(\xi) = \alpha(1-\xi)}$$
+
+Cette variation linéaire de $\alpha_{\mathrm{local}}$ intervient directement dans l'étape d'actualisation angulaire du code (implémentée dans la fonction `DynRot`). L’incrément de rotation hydrodynamique appliqué à chaque pas de temps $\Delta_B$ est donné par :
+
+$$\boxed{\Delta\theta_H = -\frac{\alpha(1-\xi)}{2} \sin^2\theta \, (\Delta_B)^2}$$
+
+Ainsi, contrairement au cas du cisaillement linéaire où $\alpha_{\mathrm{local}} = \alpha$ reste rigoureusement constant dans tout le système, l’intensité du cisaillement parabolique dépend explicitement de la position spatiale du centre du bâtonnet. Elle est maximale à la paroi ($\xi = 0$) et s'annule linéairement à la limite supérieure du domaine ($\xi = 1$).
