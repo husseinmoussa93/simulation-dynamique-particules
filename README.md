@@ -1,5 +1,7 @@
-<ul><b></b><ol type = "I">Dérivation et justification du profil parabolique de cisaillement</ul> 
-## 1. Dérivation et justification du profil parabolique de cisaillement
+<ol type="I">
+
+
+<li>## 1. Dérivation et justification du profil parabolique de cisaillement</li></ol>
 
 ### 1.1. Origine physique du profil
 On considère un écoulement stationnaire d’un fluide newtonien suivant la direction $x$, tandis que $z$ représente la direction transverse. Dans l’approximation de Poiseuille, l’équation de Navier-Stokes se réduit à :
