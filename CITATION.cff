@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this simulation or its results, please cite this repository and the associated research report."
+title: "Simulation de la dynamique d'un bâtonnet brownien confiné"
+type: software
+authors:
+  - family-names: "Moussa"
+    given-names: "Hussein"
+repository-code: "https://github.com/husseinmoussa93/simulation-dynamique-particules"
+abstract: "Simulation C++ des distributions angulaires et spatiales d'un bâtonnet brownien confiné sous cisaillement uniforme et sous demi-profil parabolique de Poiseuille."
+keywords:
+  - Brownian dynamics
+  - rod-like particle
+  - rotational diffusion
+  - shear flow
+  - confinement
+  - nonequilibrium statistical mechanics

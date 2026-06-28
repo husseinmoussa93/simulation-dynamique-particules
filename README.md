@@ -1,6 +1,43 @@
-# Référence théorique : physique statistique hors équilibre
+# Simulation de la dynamique d'un bâtonnet brownien confiné
 
-## 1. Positionnement du problème
+Ce dépôt contient le code C++ et l'analyse des distributions d'orientation et de position d'un bâtonnet brownien confiné, soumis à un écoulement de cisaillement uniforme ou à un demi-profil parabolique de Poiseuille.
+
+## Organisation et paramètres numériques
+
+- `main.cpp` : simulation séquentielle des deux profils d'écoulement pour $\alpha=0.5$, $1$, $2$, $5$, $10$ et $100$.
+- `Fig1.png` à `Fig18.png` : distributions $P(\theta)$ dans le volume et près de la surface, comparaisons entre écoulements et distributions $P(\xi)$ près de la surface.
+- $L_B=D=880\,\mathrm{nm}$, $\Delta_B=0.03$ et $10^7$ itérations par cas.
+- Région proche de la surface : $\xi\leq0.5$ ; volume : $\xi>0.5$, avec $\xi=z_c/L_B$.
+
+Les histogrammes représentent des probabilités par classe, et non des densités continues : $\Delta\theta=1^\circ$ et $\Delta\xi=0.001$. Chaque histogramme est normalisé séparément dans la région considérée.
+
+## Compilation et exécution
+
+Dans Code::Blocks, créer un projet console C++, ajouter `main.cpp`, sélectionner une configuration optimisée puis lancer **Build and Run**. En ligne de commande, une compilation équivalente est :
+
+```bash
+g++ -O2 -std=c++11 main.cpp -o simulation
+```
+
+Le programme crée 36 fichiers dans le répertoire d'exécution. Les noms suivent les formes :
+
+```text
+teta_bulk_<profil>_alpha_<valeur>.txt
+teta_surface_<profil>_alpha_<valeur>.txt
+ksi_surface_<profil>_alpha_<valeur>.txt
+```
+
+où `<profil>` vaut `linear` ou `parabolic` et `<valeur>` vaut `0p5`, `1`, `2`, `5`, `10` ou `100`. Les graines pseudo-aléatoires sont fixes, de sorte que l'exécution est reproductible pour cette version du programme.
+
+## Portée et limites numériques
+
+Les résultats présentés correspondent exactement à la version publiée de `main.cpp`. Chaque cas repose sur une trajectoire de $10^7$ itérations, accumulée dès l'état initial, sans phase d'équilibration séparée. Le bruit brownien est représenté par des incréments dichotomiques $\pm\Delta_B$ ; cette marche aléatoire reproduit une diffusion continue dans la limite de petits pas et d'un grand nombre d'itérations.
+
+Les mêmes graines fixes sont réinitialisées pour chaque condition. Ce choix facilite la comparaison entre valeurs de $\alpha$, mais ne remplace pas une étude fondée sur plusieurs réalisations indépendantes. Aucune barre d'incertitude n'est calculée dans cette version. Les maxima extraits de distributions larges et faiblement contrastées, notamment à faible $\alpha$, sont donc rapportés comme maxima numériques et ne doivent pas être interprétés automatiquement comme des orientations physiques privilégiées.
+
+# I. Cadre théorique : physique statistique hors équilibre
+
+## I.1. Positionnement du problème
 
 Le système étudié appartient au domaine de la **physique statistique hors
 équilibre**. Il est constitué d’un bâtonnet rigide immergé dans un fluide,
@@ -18,7 +55,7 @@ extérieure. Il produit une rotation hydrodynamique déterministe, tandis que
 les collisions microscopiques avec le fluide engendrent des fluctuations
 browniennes aléatoires.
 
-## 2. Description stochastique de Langevin
+## I.2. Description stochastique de Langevin
 
 Balakrishnan décompose la force agissant sur une particule en une force
 dissipative, une force aléatoire et une éventuelle force extérieure :
@@ -41,7 +78,7 @@ Le second décrit la diffusion rotationnelle brownienne. Cette équation continu
 constitue une interprétation théorique de l’algorithme discret, et non une
 équation intégrée explicitement par le code.
 
-## 3. Fluctuations browniennes
+## I.3. Fluctuations browniennes
 
 Balakrishnan caractérise le bruit blanc par :
 
@@ -71,7 +108,7 @@ pages 269-273 , où le passage d’une marche aléatoire
 discrète à une équation de diffusion est démontré dans la limite d’un
 grand nombre de petits pas indépendants.
 
-## 4. Diffusion translationnelle
+## I.4. Diffusion translationnelle
 
 Le déplacement brownien transverse utilisé dans le programme est :
 
@@ -79,7 +116,7 @@ $$\Delta z_B=\pm\frac{L_B}{3}\Delta_B.$$
 
 Il vérifie :
 
-$$\langle\Deltaz_B\rangle=0,\qquad\left\langle(\Delta z_B)^2\right\rangle=\frac{L_B^2}{9}\Delta_B^2.$$
+$$\langle\Delta z_B\rangle=0,\qquad\left\langle(\Delta z_B)^2\right\rangle=\frac{L_B^2}{9}\Delta_B^2.$$
 
 Si l’on utilise $\Delta_B^2=2D_{\mathrm{rot}}\Delta t$, on peut définir
 un coefficient de diffusion translationnelle effectif :
@@ -91,7 +128,7 @@ la simulation. Elle ne doit pas être attribuée directement à Balakrishnan.
 De plus, le code ne calcule pas explicitement $D_{\mathrm{rot}}$ ni
 $\Delta t$, mais utilise le pas réduit $\Delta_B$.
 
-## 5. Rotation hydrodynamique et nombre de Péclet
+## I.5. Rotation hydrodynamique et nombre de Péclet
 
 Le mouvement déterministe de l’orientation est décrit par :
 
@@ -99,7 +136,7 @@ $$\frac{d\theta}{dt}=-\dot{\gamma}_{\mathrm{local}}(z_c)\sin^2\theta.$$
 
 Le paramètre sans dimension contrôlant la dynamique est :
 
-$\boxed{\alpha=\frac{\dot{\gamma}_0}{D_{\mathrm{rot}}}}$$
+$$\boxed{\alpha=\frac{\dot{\gamma}_0}{D_{\mathrm{rot}}}}$$
 
 Il joue le rôle d’un nombre de Péclet rotationnel. Il compare le temps
 caractéristique de diffusion rotationnelle au temps caractéristique du
@@ -118,7 +155,7 @@ L’équation hydrodynamique de rotation du bâtonnet ne provient pas directemen
 du livre de Balakrishnan. Elle doit être justifiée à partir des articles
 spécialisés sur la dynamique des particules anisotropes sous cisaillement.
 
-## 6. Cisaillement linéaire
+## I.6. Cisaillement uniforme
 
 Pour l’écoulement linéaire, le taux de cisaillement est uniforme :
 
@@ -131,7 +168,7 @@ $$\boxed{\alpha_{\mathrm{local}}=\alpha}$$
 Tous les bâtonnets subissent alors la même intensité de cisaillement,
 indépendamment de leur position transverse.
 
-## 7. Cisaillement parabolique
+## I.7. Demi-profil parabolique
 
 La simulation parabolique repose sur un demi-profil de Poiseuille :
 
@@ -168,7 +205,7 @@ les fichiers de résultats. Elle représente un demi-profil de Poiseuille,
 où $D$ est interprété comme la distance entre la paroi étudiée et le
 plan de symétrie de l’écoulement.
 
-## 8. Formulation de Fokker-Planck
+## I.8. Formulation de Fokker-Planck
 
 Balakrishnan établit la correspondance entre une équation différentielle
 stochastique et son équation de Fokker-Planck à la page 73,
@@ -192,7 +229,7 @@ $$J_\theta=-\dot{\gamma}_{\mathrm{local}}(z_c)\sin^2\theta\,P-D_{\mathrm{rot}}\f
 
 $$J_z=-D_{\mathrm{tr}}\frac{\partial P}{\partial z_c}.$$
 
-## 9. Confinement et parois réfléchissantes
+## I.9. Confinement et parois réfléchissantes
 
 Balakrishnan traite la diffusion dans une région finie avec des frontières
 réfléchissantes aux pages 97-98. Une frontière
@@ -208,7 +245,7 @@ Lorsque le centre du bâtonnet s’approche de la paroi, les grandes valeurs
 de $|\theta|$ deviennent géométriquement interdites. Le confinement crée
 donc une corrélation entre la position $z_c$ et l’orientation $\theta$.
 
-## 10. État stationnaire hors équilibre
+## I.10. État stationnaire hors équilibre
 
 Balakrishnan définit une distribution stationnaire à la page 56 par :
 
@@ -230,7 +267,7 @@ $$\mathbf{J}_{\mathrm{st}}\neq0.$$
 Il s’agit alors d’un état stationnaire hors équilibre et non d’un état
 d’équilibre thermodynamique.
 
-## 11. Signification statistique des résultats
+## I.11. Signification statistique des résultats
 
 Les histogrammes numériques correspondent à des distributions
 conditionnelles extraites de la distribution conjointe stationnaire :
@@ -250,16 +287,22 @@ seule, à démontrer l’équilibre. Une caractérisation plus complète du
 caractère hors équilibre nécessiterait l’étude des courants de probabilité
 ou de la production d’entropie.
 
-## Référence bibliographique
+## I.12. Référence bibliographique
 
 Balakrishnan, V. (2021). *Elements of Nonequilibrium Statistical Mechanics*.
 Springer, Cham. DOI: 10.1007/978-3-030-62233-6.
 
+Hijazi, A., & Khater, A. (2008). *Boëder PDF Brownian simulations for macromolecular rod-like particles near uneven solid surfaces*. European Polymer Journal. DOI: 10.1016/j.eurpolymj.2008.08.007.
 
-## Ⅰ.Dérivation et justification du profil parabolique de cisaillement
+Atwi, A., Khater, A., & Hijazi, A. (2013). *Three-dimensional simulations for the dynamics of dilute colloidal suspensions of ellipsoidal-like particles flowing in the bulk and near solid boundaries*. Polymer, 54, 1555-1566. DOI: 10.1016/j.polymer.2013.01.018.
+
+Atwi, A., Hijazi, A., & Khater, A. (2016). *Simulations of the PDF functions for dilute colloidal suspensions of molecular particles flowing in mesopores with rough surface boundaries*. Colloid Journal, 78(1), 15-29. DOI: 10.1134/S1061933X16010038.
 
 
-### Ⅰ.i. Origine physique du profil
+# II. Dérivation et justification du profil parabolique de cisaillement
+
+
+## II.1. Origine physique du profil
 On considère un écoulement stationnaire d’un fluide newtonien suivant la direction $x$, tandis que $z$ représente la direction transverse. Dans l’approximation de Poiseuille, l’équation de Navier-Stokes se réduit à :
 
 $$\eta \frac{d^2u}{dz^2} = \frac{dp}{dx}$$
@@ -275,7 +318,7 @@ $$u(z) = az^2 + bz + c$$
 
 C’est précisément cette dépendance quadratique qui justifie physiquement l’appellation de **profil parabolique**.
 
-### Ⅰ.ii. Choix de la géométrie et conditions aux limites
+## II.2. Choix de la géométrie et conditions aux limites
 La loi hydrodynamique implémentée dans le programme numérique correspond à la modélisation d'un demi-canal :
 * $z = 0$ représente la paroi solide (surface inférieure) ;
 * $z = D$ représente le plan de symétrie de l'écoulement, où la vitesse est maximale ;
@@ -291,7 +334,7 @@ $$\left.\frac{du}{dz}\right|_{z=D} = 0$$
 
 La première condition correspond à l’hypothèse classique de non-glissement du fluide à la paroi solide. La troisième condition exprime la symétrie parfaite du profil au centre du canal, où la vitesse atteint son extrémum et où son gradient spatial s’annule.
 
-### Ⅰ.i. Détermination analytique des coefficients
+## II.3. Détermination analytique des coefficients
 En repartant de la forme générale de la fonction quadratique :
 
 $$u(z) = az^2 + bz + c$$
@@ -328,7 +371,7 @@ Cette fonction mathématique confirme la nature parabolique de l'écoulement, ca
 
 $$\frac{d^2u}{dz^2} = -\frac{2U_{\max}}{D^2}$$
 
-### Ⅰ.iv. Expression du taux de cisaillement local
+## II.4. Expression du taux de cisaillement local
 Dans le modèle numérique de simulation, le bâtonnet n’est pas directement mis en rotation par la valeur absolue de la vitesse locale $u(z)$, mais plutôt par son gradient spatial transverse, qui définit le taux de cisaillement local :
 
 $$\dot{\gamma}(z) = \frac{du}{dz}$$
@@ -343,7 +386,7 @@ $$\boxed{\dot{\gamma}_{\mathrm{local}}(z) = \dot{\gamma}_0 \left(1 - \frac{z}{D}
 
 Ainsi, bien que le profil de vitesse fluide soit parabolique, le taux de cisaillement local associé varie de manière purement linéaire avec la position. Cette dérivation formelle lève toute ambiguïté : le cisaillement linéaire n'est que la dérivée directe du profil parabolique.
 
-### Ⅰ.v. Passage au paramètre adimensionnel $\alpha$
+## II.5. Passage au paramètre adimensionnel $\alpha$
 Le paramètre de Péclet rotationnel, qui quantifie la compétition entre le couplage hydrodynamique directionnel et la diffusion brownienne rotationnelle, est défini à la paroi par :
 
 $$\alpha = \frac{\dot{\gamma}_0}{D_{\mathrm{rot}}}$$
@@ -360,7 +403,7 @@ $$\alpha_{\mathrm{local}}(z) = \alpha \left(1 - \frac{z}{D}\right)$$
 
 $$\boxed{\alpha_{\mathrm{local}}(\xi) = \alpha(1 - \xi)}$$
 
-### Ⅰ.vi. Conséquences sur la dynamique de rotation numérique
+## II.6. Conséquences sur la dynamique de rotation numérique
 L’équation hydrodynamique fondamentale régissant l'évolution angulaire de l'orientation du bâtonnet est donnée par :
 
 $$\frac{d\theta}{dt} = -\dot{\gamma}_{\mathrm{local}}(z_c) \sin^2\theta$$
@@ -371,7 +414,7 @@ $$\boxed{\Delta\theta_H = -\frac{\alpha(1 - \xi)}{2} \sin^2\theta \, (\Delta_B)^
 
 Cette formulation mathématique correspond exactement à la loi physique implémentée de manière itérative au sein de la fonction `DynRot` du code de simulation.
 
-### Ⅰ.vii. Justification physique du choix du modèle
+## II.7. Justification physique du choix du modèle
 Cette formulation théorique avancée a été sélectionnée pour trois raisons majeures :
 1. **Cohérence géométrique :** Elle modélise le profil de Poiseuille le plus direct et le plus robuste compatible avec la condition de non-glissement à la surface ($\xi = 0$) et la symétrie centrale ($\xi = 1$).
 2. **Inhomogénéité spatiale du cisaillement :** Contrairement au cas du cisaillement linéaire où le paramètre reste uniformément constant dans tout l'espace ($\alpha_{\mathrm{local}} = \alpha$), ce modèle introduit un couplage hydrodynamique qui dépend explicitement de la position spatiale de la particule.
@@ -385,7 +428,7 @@ Le cisaillement est donc maximal à proximité immédiate de la surface solide e
 
 ***
 
-### Remarque importante concernant la structure du code
+## II.8. Remarque importante concernant la structure du code
 Pour maintenir une rigueur scientifique absolue avec l'implémentation algorithmique, il est indispensable de préciser dans le manuscrit qu'il s'agit d'un **demi-profil parabolique de Poiseuille**, où la variable $D$ désigne exclusivement la distance séparant la paroi du plan de symétrie (et non la largeur totale du canal).
 
 Si $D$ représentait la distance totale entre deux parois solides situées en $z = 0$ et $z = D$, le profil complet de l'écoulement prendrait la forme suivante :
@@ -401,9 +444,9 @@ Cette dernière formulation n'est pas celle qui a été exploitée pour génére
 $$\boxed{\alpha_{\mathrm{local}} = \alpha(1 - \xi)}$$
 
 
-# Ⅱ.Écoulement de Cisaillement Linéaire
+# III. Écoulement à profil de vitesse linéaire et cisaillement uniforme
 
-## Ⅱ.i.1. Distribution Angulaire sous Écoulement Linéaire (Volume)
+## III.1. Distribution angulaire sous écoulement linéaire dans le volume
 
 ![Distribution Angulaire](Fig1.png)
 
@@ -417,19 +460,19 @@ Le paramètre $\alpha$ mesure l’importance relative du cisaillement hydrodynam
 
 * **Pour $\alpha = 0.5$ :** La distribution angulaire est presque uniforme sur l’intervalle étudié. Cela signifie que le cisaillement est encore trop faible pour imposer une orientation préférentielle nette au bâtonnet. Dans ce régime, la diffusion rotationnelle brownienne domine la dynamique : le bâtonnet explore un large domaine d’angles sous l’effet des fluctuations thermiques. Les faibles ondulations visibles sur la courbe ne doivent pas être interprétées comme des maxima physiques significatifs, mais plutôt comme des fluctuations statistiques liées à la simulation numérique. Ainsi, pour $\alpha = 0.5$, aucun maximum physique bien défini ne peut être identifié.
 
-* **Pour $\alpha = 2$ :** Lorsque $\alpha$ augmente à $\alpha = 2$, la distribution devient clairement anisotrope. Un maximum plus marqué apparaît autour de $\theta \approx 32.5^\circ$. Cette apparition d’une orientation préférentielle traduit la compétition entre deux mechanisms physiques : d’une part, la diffusion rotationnelle brownienne, qui tend à désordonner l’orientation du bâtonnet, et d’autre part, le couple hydrodynamique induit par le cisaillement, qui favorise certaines orientations par rapport à l’écoulement. Le système n’est donc plus isotrope : le bâtonnet passe davantage de temps dans une zone angulaire privilégiée.
+* **Pour $\alpha = 2$ :** Lorsque $\alpha$ augmente à $\alpha = 2$, la distribution devient clairement anisotrope. Un maximum plus marqué apparaît autour de $\theta \approx 32.5^\circ$. Cette apparition d’une orientation préférentielle traduit la compétition entre deux mécanismes physiques : d’une part, la diffusion rotationnelle brownienne, qui tend à désordonner l’orientation du bâtonnet, et d’autre part, le couple hydrodynamique induit par le cisaillement, qui favorise certaines orientations par rapport à l’écoulement. Le système n’est donc plus isotrope : le bâtonnet passe davantage de temps dans une zone angulaire privilégiée.
 
-* **Pour $\alpha = 5$ :** Pour $\alpha = 5$, l’effet du cisaillement devient encore plus dominant. La distribution présente un pic plus élevé et plus étroit, avec un maximum situé autour de $\theta \approx 25.5^\circ$. La diminution de la largeur du pic montre que les orientations du bâtonnet sont davantage concentrations autour d’un domaine angulaire restreint. Physiquement, cela signifie que le cisaillement contrôle plus fortement la dynamique rotationnelle et réduit l’effet désordonnant de l’agitation brownienne. Le déplacement du maximum vers des angles plus proches de la direction de l’écoulement traduit une tendance progressive à l’alignement du bâtonnet sous l’action du cisaillement.
+* **Pour $\alpha = 5$ :** Pour $\alpha = 5$, l’effet du cisaillement devient encore plus dominant. La distribution présente un pic plus élevé et plus étroit, avec un maximum situé autour de $\theta \approx 25.5^\circ$. La diminution de la largeur du pic montre que les orientations du bâtonnet sont davantage concentrées autour d’un domaine angulaire restreint. Physiquement, cela signifie que le cisaillement contrôle plus fortement la dynamique rotationnelle et réduit l’effet désordonnant de l’agitation brownienne. Le déplacement du maximum vers des angles plus proches de la direction de l’écoulement traduit une tendance progressive à l’alignement du bâtonnet sous l’action du cisaillement.
 
 ---
 
-> 📌 **Analyse de l'Asymétrie et Conclusion :**
+> **Analyse de l'Asymétrie et Conclusion :**
 > On observe également que les probabilités associées aux angles négatifs diminuent lorsque $\alpha$ augmente. Cette asymétrie est cohérente avec la dynamique hydrodynamique du modèle : le cisaillement entraîne une rotation orientée du bâtonnet, de sorte que certaines orientations sont traversées rapidement tandis que d’autres sont occupées plus longtemps. La distribution $P(\theta)$ reflète donc le temps moyen passé par le bâtonnet dans chaque intervalle angulaire.
 >
 > En conclusion, cette figure met en évidence la transition progressive entre un régime dominé par le mouvement brownien rotationnel, pour faible $\alpha$, et un régime dominé par le cisaillement hydrodynamique, pour des valeurs plus grandes de $\alpha$. 
 > Les maxima physiquement significatifs sont observés autour de $\theta_{\max} \approx 32.5^\circ$ pour $\alpha = 2$ et $\theta_{\max} \approx 25.5^\circ$ pour $\alpha = 5$. Pour $\alpha = 0.5$, la distribution reste quasi uniforme et ne présente pas de maximum physique bien défini.
 >
-> ## Ⅱ.i.2. Distribution angulaire près de la surface pour un cisaillement linéaire
+## III.2. Distribution angulaire près de la surface pour un cisaillement linéaire
 
 ![Distribution angulaire près de la surface](Fig2.png)
 
@@ -439,7 +482,7 @@ La **Figure 2** représente la distribution angulaire $P(\theta)$ du bâtonnet p
 
 Contrairement au cas du volume ($\xi > 0.5$), la distribution angulaire près de la surface n’est pas uniforme, même pour une faible valeur de $\alpha = 0.5$. Cela montre que la présence de la paroi joue un rôle physique essentiel dans l’orientation du bâtonnet. Lorsque le centre du bâtonnet est proche de la surface, certaines orientations deviennent géométriquement défavorables, car une inclinaison trop grande pourrait conduire à une intersection du bâtonnet avec la paroi. La surface impose donc une contrainte stérique qui favorise les orientations presque parallèles à la paroi, c’est-à-dire des angles proches de $\theta = 0^\circ$.
 
-* **Pour $\alpha = 0.5$ :** La distribution presents déjà un maximum net au voisinage de $\theta \approx 0^\circ$. Ce maximum ne provient pas principalement du cisaillement, qui reste faible dans ce régime, mais de l’effet de confinement géométrique près de la surface. Le mouvement brownien permet encore au bâtonnet d’explorer un intervalle d’angles relativement large, mais les grandes inclinaisons, proches de $\pm 90^\circ$, sont fortement réduites par l’interaction stérique avec la paroi. Les très faibles différences entre les bins voisins autour de $\theta = 0^\circ$ ne doivent pas être interprétées comme un déplacement physique significatif du maximum, mais comme des fluctuations statistiques liées à l’échantillonnage numérique.
+* **Pour $\alpha = 0.5$ :** La distribution présente déjà un maximum net au voisinage de $\theta \approx 0^\circ$. Ce maximum ne provient pas principalement du cisaillement, qui reste faible dans ce régime, mais de l’effet de confinement géométrique près de la surface. Le mouvement brownien permet encore au bâtonnet d’explorer un intervalle d’angles relativement large, mais les grandes inclinaisons, proches de $\pm 90^\circ$, sont fortement réduites par l’interaction stérique avec la paroi. Les très faibles différences entre les bins voisins autour de $\theta = 0^\circ$ ne doivent pas être interprétées comme un déplacement physique significatif du maximum, mais comme des fluctuations statistiques liées à l’échantillonnage numérique.
 
 * **Pour $\alpha = 2$ :** Le maximum de la distribution se décale vers des angles positifs, autour de $\theta_{\max} \approx 5.5^\circ$. Ce déplacement indique que le cisaillement commence à influencer plus nettement l’orientation du bâtonnet près de la surface. La distribution résulte alors de la combinaison de deux effets : la contrainte géométrique imposée par la paroi, qui tend à maintenir le bâtonnet presque parallèle à la surface, et le couple hydrodynamique dû au cisaillement, qui introduit une orientation préférentielle positive.
 
@@ -449,12 +492,12 @@ Les faibles probabilités observées près de $\theta = \pm 90^\circ$ sont cohé
 
 ---
 
-> 💡 **Comparaison Physique Majeure (Volume vs Surface) :**
+> **Comparaison Physique Majeure (Volume vs Surface) :**
 > En volume ($\xi > 0.5$), le régime à $\alpha = 0.5$ est dominé par l'isotropie brownienne (courbe quasi-uniforme). Près de la surface ($\xi \leq 0.5$), un pic d'orientation très net apparaît immédiatement à $\alpha = 0.5$. Cela démontre l'impact crucial du confinement : la paroi brise la symétrie rotationnelle du système en imposant un alignement géométrique du bâtonnet parallèlement à elle.
 > 
 > En conclusion, près de la surface, l’orientation du bâtonnet est contrôlée conjointement par le confinement géométrique et par le cisaillement hydrodynamique. À faible $\alpha$, la paroi impose principalement un alignement quasi parallèle à la surface. Lorsque $\alpha$ augmente, le cisaillement déplace progressivement l’orientation préférentielle vers des angles positifs. Les positions des maxima physiques sont approximativement $\theta_{\max} \approx 0^\circ$ pour $\alpha = 0.5$, $\theta_{\max} \approx 5.5^\circ$ pour $\alpha = 2$, et $\theta_{\max} \approx 11.5^\circ$ pour $\alpha = 5$.
 >
-> ## Ⅱ.i.3. Comparaison et Synthèse Physique : Volume vs Région Proche de la Surface
+## III.3. Comparaison physique entre le volume et la région proche de la surface
 
 Les **Figures 1 et 2** permettent de comparer la distribution angulaire $P(\theta)$ du bâtonnet dans deux régions physiquement distinctes : le volume, défini par $\xi > 0.5$, et la région proche de la surface, définie par $\xi \leq 0.5$. Cette comparaison met en évidence le rôle fondamental de la paroi dans la dynamique d’orientation du bâtonnet.
 
@@ -467,7 +510,7 @@ Cette comparaison démontre que le volume et la surface correspondent à deux r�
 
 Le confinement près de la surface joue donc un rôle aussi important que le cisaillement dans la dynamique d’orientation. Le paramètre $\alpha$ contrôle l’intensité relative du cisaillement, mais la position du bâtonnet dans le pore, représentée par $\xi$, détermine également la forme de la distribution angulaire. Il est donc indispensable de séparer les statistiques en volume et près de la surface pour interpréter correctement la physique du système.
 
-## II.ii.1 Distribution angulaire dans le volume à fortes cisaillements ($\alpha$ élevés)
+## III.4. Distribution angulaire dans le volume pour une plage élargie de $\alpha$
 
 ![Distribution angulaire à forts alpha](Fig3.png)
 
@@ -484,7 +527,7 @@ Cette figure prolonge l’analyse effectuée dans le cas du volume pour des vale
 
 ---
 
-> 💡 **Synthèse de l'effet de l'augmentation de $\alpha$ :**
+> **Synthèse de l'effet de l'augmentation de $\alpha$ :**
 > L’évolution observée montre que l’augmentation de $\alpha$ produit deux effets principaux : l’augmentation de la hauteur du pic de $P(\theta)$ et la diminution progressive de sa largeur. Ces deux signatures indiquent une orientation de plus en plus forte du bâtonnet sous l’action du cisaillement. En parallèle, la position du maximum se déplace vers des angles plus proches de $\theta = 0^\circ$, ce qui correspond à une tendance à l’alignement parfait avec l’écoulement.
 
 Les positions des maxima physiques obtenus à partir des fichiers de simulation sont :
@@ -497,7 +540,7 @@ Il faut cependant noter que, pour $\alpha = 1$, la distribution reste encore ass
 
 En conclusion, la Figure 3 met clairement en évidence le passage vers un régime fortement orienté par le cisaillement. Dans le volume, lorsque $\alpha$ augmente, le bâtonnet passe d’une dynamique largement brownienne à une dynamique dominée par le cisaillement hydrodynamique, ce qui se traduit par une distribution angulaire plus étroite, plus élevée et déplacée vers les faibles angles.
 
-## II.ii.2. Distribution angulaire près de la surface à fortes valeurs de $\alpha$
+## III.5. Distribution angulaire près de la surface pour des valeurs intermédiaires et fortes de $\alpha$
 
 ![Distribution angulaire près de la surface à forts alpha](Fig4.png)
 
@@ -505,13 +548,13 @@ En conclusion, la Figure 3 met clairement en évidence le passage vers un régim
 
 La Figure 4 représente la distribution angulaire $P(\theta)$ du bâtonnet près de la surface, définie par la condition $\xi \leq 0.5$, pour un cisaillement linéaire et pour des valeurs élevées du paramètre $\alpha$ : $\alpha = 1$, $\alpha = 5$, $\alpha = 10$ et $\alpha = 100$.
 
-Dans cette région proche de la paroi, l’orientation du bâtonnet ést fortement influencée par le confinement géométrique. La présence de la surface limite les orientations accessibles, en particulier les grandes inclinaisons proches de $\pm 90^\circ$, car celles-ci augmentent le risque de contact avec la paroi. Ainsi, même lorsque le cisaillement n’est pas extrêmement élevé, la distribution reste centrée autour de faibles angles, correspondant à une orientation presque parallèle à la surface.
+Dans cette région proche de la paroi, l’orientation du bâtonnet est fortement influencée par le confinement géométrique. La présence de la surface limite les orientations accessibles, en particulier les grandes inclinaisons proches de $\pm 90^\circ$, car celles-ci augmentent le risque de contact avec la paroi. Ainsi, même lorsque le cisaillement n’est pas extrêmement élevé, la distribution reste centrée autour de faibles angles, correspondant à une orientation presque parallèle à la surface.
 
 Pour $\alpha = 1$, la distribution reste relativement large. Cela indique que la diffusion rotationnelle brownienne conserve encore une influence importante sur la dynamique d’orientation. Cependant, contrairement au cas du volume, la distribution n’est pas uniforme : la paroi impose déjà une sélection géométrique des orientations et favorise les angles proches de $\theta = 0^\circ$.
 
 Pour $\alpha = 5$ et $\alpha = 10$, le pic devient plus marqué et la distribution se concentre davantage autour d’angles positifs. Cette évolution montre que le couple hydrodynamique dû au cisaillement devient plus important par rapport aux fluctuations browniennes. Le bâtonnet passe alors plus de temps dans une région angulaire préférentielle, résultant de l’effet combiné du cisaillement et de la contrainte imposée par la surface.
 
-Pour $\alpha = 100$, la distribution devient beaucoup plus étroite et présente un pic très élevé autour de $\theta_{\max} \approx 7.5^\circ$. Ce comportement traduit une domination hydrodynamique très marquée. Dans ce régime, le bâtonnet ést fortement orienté par l’écoulement, tandis que la paroi empêche l’exploration de grandes inclinaisons. L’effet combiné du cisaillement intense et du confinement conduit donc à une orientation très préférentielle.
+Pour $\alpha = 100$, la distribution devient beaucoup plus étroite et présente un pic très élevé autour de $\theta_{\max} \approx 7.5^\circ$. Ce comportement traduit une domination hydrodynamique très marquée. Dans ce régime, le bâtonnet est fortement orienté par l’écoulement, tandis que la paroi empêche l’exploration de grandes inclinaisons. L’effet combiné du cisaillement intense et du confinement conduit donc à une orientation très préférentielle.
 
 ### Remarque sur le comportement non monotone de $\theta_{\max}$
 
@@ -529,9 +572,9 @@ $$\theta_{\max} \approx 11.5^\circ \quad \text{pour } \alpha = 10$$
 
 $$\theta_{\max} \approx 7.5^\circ \quad \text{pour } \alpha = 100$$
 
-En conclusion, la Figure 4 montre que près de la surface, la dynamique angulaire ést gouvernée par deux mécanismes complémentaires : le confinement stérique imposé par la paroi et le couple hydrodynamique induit par le cisaillement linéaire. Lorsque $\alpha$ augmente, la distribution devient globalement plus étroite et plus élevée, ce qui indique une orientation de plus en plus forte du bâtonnet. À très grand $\alpha$, le système atteint un régime fortement orienté, où le bâtonnet reste confiné dans un domaine angulaire réduit proche de la direction de l’écoulement.
+En conclusion, la Figure 4 montre que près de la surface, la dynamique angulaire est gouvernée par deux mécanismes complémentaires : le confinement stérique imposé par la paroi et le couple hydrodynamique induit par le cisaillement linéaire. Lorsque $\alpha$ augmente, la distribution devient globalement plus étroite et plus élevée, ce qui indique une orientation de plus en plus forte du bâtonnet. À très grand $\alpha$, le système atteint un régime fortement orienté, où le bâtonnet reste confiné dans un domaine angulaire réduit proche de la direction de l’écoulement.
 
-## II.ii.3. Comparaison entre la distribution dans le volume et près de la surface à fortes valeurs de $\alpha$
+## III.6. Comparaison entre le volume et la surface pour des valeurs intermédiaires et fortes de $\alpha$
 
 Les **Figures 3 et 4** permettent de comparer l’effet du cisaillement linéaire sur l’orientation du bâtonnet dans deux régions distinctes : le volume, défini par $\xi > 0.5$, et la région proche de la surface, définie par $\xi \leq 0.5$. Cette comparaison est essentielle, car elle met en évidence le rôle spécifique de la paroi dans la dynamique d’orientation.
 
@@ -547,9 +590,9 @@ Ainsi, les Figures 3 et 4 montrent que l’augmentation de $\alpha$ favorise l�
 
 En conclusion, cette comparaison confirme qu’il est nécessaire de séparer les statistiques en deux domaines, $\xi > 0.5$ et $\xi \leq 0.5$. Sans cette séparation, l’effet propre de la surface serait mélangé avec le comportement du volume, ce qui rendrait l’interprétation physique de $P(\theta)$ moins précise.
 
-# III.Écoulement Parabolique
+# IV. Écoulement à demi-profil parabolique de Poiseuille
 
-## III.i.1. Distribution angulaire $P(\theta)$ dans le volume ($\xi > 0.5$) pour un cisaillement parabolique
+## IV.1. Distribution angulaire $P(\theta)$ dans le volume ($\xi>0.5$)
 
 ![Distribution angulaire près de la surface à forts alpha](Fig5.png)
 
@@ -576,7 +619,7 @@ Cependant, pour $\alpha = 0.5$ et $\alpha = 2$, les distributions restent faible
 En conclusion, la Figure 5 montre que le cisaillement parabolique induit progressivement une anisotropie de la distribution angulaire dans le volume lorsque $\alpha$ augmente. Toutefois, cette anisotropie reste moins marquée que dans le cas du cisaillement linéaire, car le cisaillement local ressenti par le bâtonnet dépend de sa position. Cette figure met donc en évidence l’importance de la dépendance spatiale du cisaillement dans la dynamique d’orientation.
 
 
-## III.i.2. Distribution angulaire $P(\theta)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement parabolique
+## IV.2. Distribution angulaire $P(\theta)$ près de la surface ($\xi\leq0.5$)
 
 ![Figure 6](Fig6.png)
 *Figure 6 : Distribution angulaire $P(\theta)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement parabolique*
@@ -598,7 +641,7 @@ Les écarts entre ces positions étant extrêmement faibles, il convient d'inter
 
 En conclusion, la Figure 6 confirme que près de la surface, le confinement géométrique joue un rôle de sélection dominant sous cisaillement parabolique. La paroi impose un alignement parallèlement aux frontières stériques, tandis que l’augmentation de $\alpha$ n'introduit qu'une perturbation modérée (un léger décalage vers les angles positifs). L'effet de l'écoulement parabolique est donc présent, mais sa signature reste secondaire par rapport à l'effet d'exclusion de la surface.
 
-## III.i.3. Comparaison entre la distribution dans le volume et près de la surface pour un cisaillement parabolique
+## IV.3. Comparaison entre le volume et la région proche de la surface
 
 Les **Figures 5 et 6** permettent de comparer la distribution angulaire $P(\theta)$ du bâtonnet dans deux régions différentes du système, dans le cas d’un cisaillement parabolique : le volume, défini par $\xi > 0.5$, et la région proche de la surface, définie par $\xi \leq 0.5$.
 
@@ -614,11 +657,11 @@ Cette comparaison montre que le cisaillement parabolique n’agit pas de la mêm
 
 En conclusion, les Figures 5 et 6 montrent que, pour un cisaillement parabolique, l’orientation du bâtonnet résulte d’un équilibre entre trois effets : la diffusion rotationnelle brownienne, le cisaillement hydrodynamique local et le confinement géométrique. Dans le volume, la diffusion brownienne et la variation spatiale du cisaillement élargissent la distribution. Près de la surface, le confinement stérique impose une orientation proche de $\theta = 0^\circ$, tandis que l’augmentation de $\alpha$ introduit seulement un biais modéré vers les angles positifs.
 
-## III.ii. Distributions angulaires à fortes valeurs de $\alpha$ ($\alpha = 1, 5, 10, 100$)
+## IV.4. Distributions angulaires pour $\alpha=1$, $5$, $10$ et $100$
 
-Maintenant, nous passons aux distributions angulaires pour le cisaillement parabolique à fortes valeurs de $\alpha$ : $\alpha = 1, 5, 10$ et $100$.
+Maintenant, nous passons aux distributions angulaires pour le cisaillement parabolique et une plage élargie de $\alpha$ : $\alpha = 1, 5, 10$ et $100$.
 
-### III.ii.1. Distribution angulaire $P(\theta)$ dans le volume ($\xi > 0.5$) pour un cisaillement parabolique à fortes valeurs de $\alpha$
+### IV.4.1. Distribution angulaire $P(\theta)$ dans le volume
 
 ![Figure 7](Fig7.png)
 
@@ -641,7 +684,7 @@ Il faut cependant interpréter les maxima pour $\alpha = 1$ et $\alpha = 5$ avec
 
 En conclusion, la Figure 7 montre que, dans le volume, le cisaillement parabolique NY produit une orientation progressive du bâtonnet lorsque $\alpha$ augmente. Cependant, en raison de la dépendance spatiale du cisaillement local, l’orientation reste plus diffuse que dans le cas du cisaillement linéaire. À très grand $\alpha$, le couplage hydrodynamique devient dominant et la distribution se resserre autour d’un angle plus proche de la direction de l’écoulement.
 
-### III.ii.2. Distribution angulaire $P(\theta)$ près de la surface ($\xi \leq 0.5$) pour un cisaillement parabolique à fortes valeurs de $\alpha$
+### IV.4.2. Distribution angulaire $P(\theta)$ près de la surface
 
 ![Figure 8](Fig8.png)
 
@@ -672,9 +715,9 @@ Il faut noter que, pour $\alpha = 1$ et $\alpha = 5$, les distributions restent 
 
 En conclusion, la Figure 8 montre que près de la surface, le cisaillement parabolique renforce progressivement l’orientation préférentielle du bâtonnet lorsque $\alpha$ augmente. Toutefois, la paroi conserve un rôle essentiel : elle réduit les fortes inclinaisons et maintient la distribution dans une région de faibles angles. À très grand $\alpha$, l’effet hydrodynamique devient dominant et la distribution se resserre fortement autour d’une orientation proche de la direction de l’écoulement, tout en restant guidée par le confinement stérique.
 
-### III.ii.3. Comparaison entre le volume et la région proche de la surface pour le cisaillement parabolique à fortes valeurs de $\alpha$
+### IV.4.3. Comparaison entre le volume et la région proche de la surface
 
-Les **Figures 7 et 8** permettent de comparer la distribution angulaire $P(\theta)$ du bâtonnet dans deux régions différentes du système, dans le cas d’un cisaillement parabolique à fortes valeurs de $\alpha$ : le volume, défini par $\xi > 0.5$, et la région proche de la surface, définie par $\xi \leq 0.5$.
+Les **Figures 7 et 8** permettent de comparer la distribution angulaire $P(\theta)$ du bâtonnet dans deux régions différentes du système, dans le cas d’un cisaillement parabolique et pour des valeurs intermédiaires et fortes de $\alpha$ : le volume, défini par $\xi > 0.5$, et la région proche de la surface, définie par $\xi \leq 0.5$.
 
 Dans le volume, le bâtonnet peut explorer un domaine angulaire plus large, car il est moins directement contraint par la paroi. La distribution $P(\theta)$ reflète alors principalement la compétition entre la diffusion rotationnelle brownienne et le cisaillement hydrodynamique local. Comme le cisaillement parabolique dépend de la position, la distribution résulte d’une moyenne sur plusieurs intensités locales du cisaillement, ce qui rend les profils angulaires relativement larges, surtout pour les valeurs intermédiaires de $\alpha$.
 
@@ -688,11 +731,11 @@ Lorsque $\alpha$ augmente vers $\alpha = 10$ puis $\alpha = 100$, les deux régi
 
 Cette comparaison montre donc que le cisaillement parabolique oriente progressivement le bâtonnet dans les deux régions lorsque $\alpha$ augmente, mais que la surface modifie fortement la réponse angulaire. Dans le volume, l’orientation est principalement contrôlée par le cisaillement hydrodynamique local et par la diffusion brownienne. Près de la surface, l’orientation résulte d’un effet combiné : le cisaillement tend à aligner le bâtonnet avec l’écoulement, tandis que la paroi limite les orientations accessibles.
 
-**En conclusion**, les Figures 7 et 8 montrent que, pour un cisaillement parabolique à fortes valeurs de $\alpha$, l’orientation du bâtonnet devient de plus en plus marquée, mais selon des mécanismes différents dans le volume et près de la surface. Dans le volume, la dépendance spatiale du cisaillement élargit encore la distribution. Près de la surface, le confinement stérique renforce la sélection angulaire et conduit à une distribution plus fortement localisée autour de faibles angles.
+**En conclusion**, les Figures 7 et 8 montrent que, pour un cisaillement parabolique et des valeurs intermédiaires et fortes de $\alpha$, l’orientation du bâtonnet devient de plus en plus marquée, mais selon des mécanismes différents dans le volume et près de la surface. Dans le volume, la dépendance spatiale du cisaillement élargit encore la distribution. Près de la surface, le confinement stérique renforce la sélection angulaire et conduit à une distribution plus fortement localisée autour de faibles angles.
 
-## IV. Étude comparative entre le cisaillement linéaire et le cisaillement parabolique
+# V. Étude comparative entre le cisaillement uniforme et le demi-profil parabolique
 
-### IV.i.1. Comparaison de $P(\theta)$ dans le volume entre cisaillement linéaire et parabolique pour $\alpha = 0.5$
+## V.1. Comparaison de $P(\theta)$ dans le volume pour $\alpha=0.5$
 
 ![Figure 9](Fig9.png)
 
@@ -715,7 +758,7 @@ Cependant, pour $\alpha = 0.5$, ces maxima numériques ne sont pas physiquement 
 
 En conclusion, la Figure 9 montre que, dans le volume et pour $\alpha = 0.5$, le profil du cisaillement a peu d’effet sur l’orientation du bâtonnet. Le système reste dominé par le mouvement brownien rotationnel, et aucune orientation préférentielle nette ne peut être attribuée au cisaillement linéaire ou parabolique.
 
-### IV.i.2. Comparaison de $P(\theta)$ près de la surface entre cisaillement linéaire et parabolique pour $\alpha = 0.5$
+## V.2. Comparaison de $P(\theta)$ près de la surface pour $\alpha=0.5$
 
 ![Figure 10](Fig10.png)
 
@@ -738,7 +781,7 @@ Cependant, pour cette valeur faible de $\alpha$, il est plus rigoureux de consid
 
 En conclusion, la Figure 10 montre que près de la surface et pour $\alpha = 0.5$, le confinement géométrique domine la dynamique angulaire. Les deux profils d’écoulement conduisent pratiquement au même comportement : une orientation préférentielle proche de l’alignement parallèle à la surface, avec une faible influence du type de cisaillement.
 
-###  IV.i.3. Comparaison entre les Figures 9 et 10 : effet de la surface pour $\alpha = 0.5$
+## V.3. Comparaison entre les Figures 9 et 10 : effet de la surface pour $\alpha=0.5$
 
 Les Figures 9 et 10 permettent de comparer la distribution angulaire $P(\theta)$ du bâtonnet pour une même valeur faible du paramètre $\alpha = 0.5$, dans deux régions différentes du système : le volume, défini par $\xi > 0.5$, et la région proche de la surface, définie par $\xi \leq 0.5$.
 
@@ -752,7 +795,7 @@ Il est également important de noter que la différence entre cisaillement liné
 
 En conclusion, les Figures 9 et 10 montrent que, pour $\alpha = 0.5$, l’orientation du bâtonnet n’est pas principalement contrôlée par le cisaillement, mais par la région dans laquelle il se trouve. Dans le volume, le comportement est quasi brownien et faiblement orienté. Près de la surface, la paroi impose une orientation préférentielle proche de $\theta = 0^\circ$, indépendamment du caractère linéaire ou parabolique du cisaillement.
 
-###  IV.ii.1. Comparaison de $P(\theta)$ dans le volume entre cisaillement linéaire et parabolique pour $\alpha = 1$
+## V.4. Comparaison de $P(\theta)$ dans le volume pour $\alpha=1$
 
 ![Figure 11](Fig11.png)
 
@@ -773,7 +816,7 @@ $$\theta_{\max} \approx 31.5^\circ \quad \text{pour le cisaillement parabolique}
 **En conclusion**, pour $\alpha = 1$ dans le volume, les deux profils de cisaillement produisent encore des distributions larges, proches d’un régime dominé par le mouvement brownien. Le cisaillement linéaire introduit une anisotropie légèrement plus marquée, tandis que le cisaillement parabolique donne une réponse plus diffuse en raison de la variation spatiale du cisaillement local.
 
 
-### IV.ii.2. Comparaison de $P(\theta)$ près de la surface entre cisaillement linéaire et parabolique pour $\alpha = 1$
+## V.5. Comparaison de $P(\theta)$ près de la surface pour $\alpha=1$
 
 ![Figure 12](Fig12.png)
 
@@ -793,7 +836,7 @@ $$\theta_{\max} \approx 3.5^\circ \quad \text{pour le cisaillement parabolique}$
 
 En conclusion, pour $\alpha = 1$ près de la surface, les distributions angulaires obtenues avec les deux profils d’écoulement sont presque superposées. Cela montre que le confinement stérique domine la dynamique d’orientation, tandis que la différence entre cisaillement linéaire et parabolique reste faible dans ce régime.
 
-### IV.ii.3. Comparaison entre les Figures 11 et 12 : effet de la surface pour $\alpha = 1$
+## V.6. Comparaison entre les Figures 11 et 12 : effet de la surface pour $\alpha=1$
 
 Les Figures 11 et 12 comparent l’effet du profil de cisaillement, linéaire ou parabolique, sur la distribution angulaire $P(\theta)$ pour une même valeur du paramètre $\alpha = 1$. La Figure 11 correspond au volume ($\xi > 0.5$), tandis que la Figure 12 correspond à la région proche de la surface ($\xi \leq 0.5$).
 
@@ -805,7 +848,7 @@ Cette comparaison montre que la position du bâtonnet dans le pore modifie forte
 
 En conclusion, les Figures 11 et 12 montrent que, pour $\alpha = 1$, le système reste globalement dominé par la diffusion brownienne dans le volume, tandis que près de la surface il est dominé par le confinement géométrique. Le cisaillement commence seulement à influencer l’orientation, mais son effet reste faible par rapport à celui de la paroi dans la région $\xi \leq 0.5$.
 
-### IV.iii.1. Comparaison de $P(\theta)$ dans le volume entre cisaillement linéaire et parabolique pour $\alpha = 5$
+## V.7. Comparaison de $P(\theta)$ dans le volume pour $\alpha=5$
 
 ![Figure 13](Fig13.png)
 
@@ -823,15 +866,15 @@ $$\theta_{\max} \approx 36.5^\circ \quad \text{pour le cisaillement parabolique}
 
 **En conclusion**, pour $\alpha = 5$ dans le volume, le cisaillement linéaire produit une orientation plus forte et plus concentrée du bâtonnet, tandis que le cisaillement parabolique conduit à une distribution plus large en raison de la variation spatiale du cisaillement local. Cette comparaison montre que la forme du profil d’écoulement joue un rôle essentiel dans la dynamique d’orientation.
 
-### IV.iii.2. Comparaison de $P(\theta)$ près de la surface entre cisaillement linéaire et parabolique pour $\alpha = 5$
+## V.8. Comparaison de $P(\theta)$ près de la surface pour $\alpha=5$
 
 ![Figure 14](Fig14.png)
 
-La Figure 12 compare la distribution angulaire $P(\theta)$ du bâtonnet près de la surface, définie par $\xi \leq 0.5$, pour deux profils d’écoulement : le cisaillement linéaire et le cisaillement parabolique, à la même valeur du paramètre $\alpha = 5$.
+La Figure 14 compare la distribution angulaire $P(\theta)$ du bâtonnet près de la surface, définie par $\xi \leq 0.5$, pour deux profils d’écoulement : le cisaillement linéaire et le cisaillement parabolique, à la même valeur du paramètre $\alpha = 5$.
 
 Dans les deux cas, les distributions sont fortement concentrées autour des faibles angles. Cela traduit l’effet dominant de la paroi, qui limite les grandes inclinaisons du bâtonnet et favorise les orientations presque parallèles à la surface. Ainsi, contrairement au cas du volume, la présence de la paroi impose déjà une structure angulaire très marquée.
 
-Pour le cisaillement linéaire, la distribution presents un maximum plus élevé et situé autour de $\theta_{\max} \approx 11.5^\circ$. Cela montre que le cisaillement constant exerce un effet hydrodynamique mais plus homogène et plus marqué sur l’orientation du bâtonnet. Le profil linéaire tend donc à déplacer davantage l’orientation préférentielle vers des angles positifs.
+Pour le cisaillement linéaire, la distribution présente un maximum plus élevé et situé autour de $\theta_{\max} \approx 11.5^\circ$. Cela montre que le cisaillement constant exerce un effet hydrodynamique mais plus homogène et plus marqué sur l’orientation du bâtonnet. Le profil linéaire tend donc à déplacer davantage l’orientation préférentielle vers des angles positifs.
 
 Pour le cisaillement parabolique, le maximum est situé plus près de $\theta = 0^\circ$, autour de $\theta_{\max} \approx 3.5^\circ$, et la distribution est légèrement plus large. Cette différence s’explique par le fait que, dans le modèle utilisé, le cisaillement local dépend de la position selon $\alpha_{\text{local}} = \alpha(1-\xi)$. Le bâtonnet ne ressent donc pas une intensité de cisaillement constante, ce qui réduit l’effet d’orientation hydrodynamique par rapport au cas linéaire.
 
@@ -839,13 +882,13 @@ Les maxima numériques sont approximativement :
 $$\theta_{\max} \approx 11.5^\circ \quad \text{pour le cisaillement linéaire}$$
 $$\theta_{\max} \approx 3.5^\circ \quad \text{pour le cisaillement parabolique}$$
 
-Cette comparaison montre que, près de la surface, le confinement géométrique reste le factor principal qui structure la distribution angulaire. Cependant, la forme du profil de cisaillement modifie la position du maximum et la largeur de la distribution. Le cisaillement linéaire produit une orientation plus décalée vers les angles positifs, tandis que le cisaillement parabolique maintient davantage la distribution autour de l’orientation parallèle à la surface.
+Cette comparaison montre que, près de la surface, le confinement géométrique reste le facteur principal qui structure la distribution angulaire. Cependant, la forme du profil de cisaillement modifie la position du maximum et la largeur de la distribution. Le cisaillement linéaire produit une orientation plus décalée vers les angles positifs, tandis que le cisaillement parabolique maintient davantage la distribution autour de l’orientation parallèle à la surface.
 
 En conclusion, pour $\alpha = 5$ près de la surface, les deux profils d’écoulement conduisent à une orientation préférentielle du bâtonnet. Toutefois, cette orientation est plus fortement décalée dans le cas linéaire, alors qu’elle reste plus proche de $\theta = 0^\circ$ dans le cas parabolique. Cela confirme que la dépendance spatiale du cisaillement joue un rôle important dans la réponse angulaire du bâtonnet, même en présence de la contrainte imposée par la paroi.
 
-### IV.iii.3. Comparaison entre les Figures 13 et 14 : effet du profil de cisaillement dans le volume et près de la surface
+## V.9. Comparaison entre les Figures 13 et 14 : effet du profil d'écoulement
 
-Les **Figures 13 et 14** permettent de comparer l’effet du profil de cisaillement sur la distribution angulaire $P(\theta)$ pour une même valeur du paramètre $\alpha = 5$. La Figure 9 correspond au volume, défini par $\xi > 0.5$, tandis que la Figure 10 correspond à la région proche de la surface, définie par $\xi \leq 0.5$.
+Les **Figures 13 et 14** permettent de comparer l’effet du profil de cisaillement sur la distribution angulaire $P(\theta)$ pour une même valeur du paramètre $\alpha = 5$. La Figure 13 correspond au volume, défini par $\xi > 0.5$, tandis que la Figure 14 correspond à la région proche de la surface, définie par $\xi \leq 0.5$.
 
 Dans le volume, la différence entre le cisaillement linéaire et le cisaillement parabolique est très visible. Le cisaillement linéaire produit une distribution plus concentrée, avec un maximum plus élevé autour de $\theta_{\max} \approx 25.5^\circ$. En revanche, le cisaillement parabolique conduit à une distribution plus large et moins élevée, avec un maximum autour de $\theta_{\max} \approx 36.5^\circ$. Cette différence montre que, dans le volume, la forme du profil d’écoulement influence fortement la dynamique d’orientation du bâtonnet.
 
@@ -855,7 +898,7 @@ Cette comparaison montre que l’effet du profil de cisaillement dépend forteme
 
 **En conclusion**, les Figures 13 et 14 montrent que la dynamique angulaire ne dépend pas uniquement de la valeur de $\alpha$, mais aussi du profil spatial du cisaillement et de la position du bâtonnet par rapport à la surface. Le cisaillement linéaire tend à produire une orientation plus nette et plus décalée vers les angles positifs, tandis que le cisaillement parabolique donne une réponse plus diffuse dans le volume et plus proche de l’alignement parallèle à la surface près de la paroi.
 
-## V. Distribution spatiale $P(\xi)$ près de la surface
+# VI. Distribution spatiale $P(\xi)$ près de la surface
 
 Les Figures 15 à 18 présentent la distribution spatiale $P(\xi)$ du centre du bâtonnet dans la région proche de la surface, définie par $\xi \leq 0.5$. Cette distribution permet d’étudier la probabilité de présence du bâtonnet en fonction de sa distance normalisée à la paroi.
 
@@ -863,7 +906,7 @@ Il est important de noter que $P(\xi)$ est ici une distribution conditionnée à
 
 ---
 
-### V.i.1. Figure 15 : Distribution spatiale $P(\xi)$ près de la surface pour un cisaillement linéaire
+## VI.1. Figure 15 : cisaillement uniforme, $\alpha=0.5$, $2$ et $5$
 
 ![Figure 15](Fig15.png)
 
@@ -877,11 +920,11 @@ L’effet de $\alpha$ reste modéré pour ces valeurs. Les courbes gardent une f
 
 ---
 
-### V.i.2. Figure 16 : Distribution spatiale $P(\xi)$ près de la surface pour un cisaillement linéaire à fortes valeurs de $\alpha$
+## VI.2. Figure 16 : cisaillement uniforme, plage élargie de $\alpha$
 
 ![Figure 16](Fig16.png)
 
-La Figure 16 présente $P(\xi)$ près de la surface pour un cisaillement linéaire à fortes valeurs de $\alpha$ : $\alpha = 1$, $5$, $10$ et $100$.
+La Figure 16 présente $P(\xi)$ près de la surface pour un cisaillement linéaire et une plage élargie de $\alpha$ : $\alpha = 1$, $5$, $10$ et $100$.
 
 Comme dans la Figure 15, la probabilité augmente fortement lorsque $\xi$ se rapproche de $0.5$. Cela confirme que la région immédiatement proche de la paroi est moins accessible au centre du bâtonnet, en raison de l’exclusion stérique imposée par la surface.
 
@@ -891,7 +934,7 @@ En conclusion, même à fort cisaillement, la forme générale de $P(\xi)$ reste
 
 ---
 
-### V.ii.1 Figure 17 : Distribution spatiale $P(\xi)$ près de la surface pour un cisaillement parabolique
+## VI.3. Figure 17 : demi-profil parabolique, $\alpha=0.5$, $2$ et $5$
 
 ![Figure 17](Fig17.png)
 
@@ -905,11 +948,11 @@ Ainsi, la Figure 17 montre que, près de la surface, la distribution spatiale es
 
 ---
 
-### V.ii.2 Figure 18 : Distribution spatiale $P(\xi)$ près de la surface pour un cisaillement parabolique à fortes valeurs de $\alpha$
+## VI.4. Figure 18 : demi-profil parabolique, plage élargie de $\alpha$
 
 ![Figure 18](Fig18.png)
 
-La Figure 18 présente $P(\xi)$ près de la surface pour un cisaillement parabolique à fortes valeurs de $\alpha$ : $\alpha = 1$, $5$, $10$ et $100$.
+La Figure 18 présente $P(\xi)$ près de la surface pour un cisaillement parabolique et des valeurs intermédiaires et fortes de $\alpha$ : $\alpha = 1$, $5$, $10$ et $100$.
 
 La distribution reste croissante avec $\xi$, ce qui confirme que le bâtonnet est moins susceptible d’avoir son centre très près de la paroi et plus probable lorsqu’il se rapproche de la limite $\xi = 0.5$. Ce résultat est cohérent avec le rôle de la paroi, qui réduit fortement l’espace des configurations accessibles près de $\xi = 0$.
 
@@ -919,7 +962,7 @@ En conclusion, la Figure 18 montre que le cisaillement parabolique intense modif
 
 ---
 
-### V.iii. Comparaison générale des distributions $P(\xi)$
+## VI.5. Comparaison générale des distributions $P(\xi)$
 
 Les Figures 15 à 18 montrent que la distribution spatiale $P(\xi)$ près de la surface possède une structure robuste : elle augmente lorsque $\xi$ se rapproche de $0.5$. Cette tendance est observée pour les deux profils de cisaillement, linéaire et parabolique, et pour toutes les valeurs de $\alpha$.
 
