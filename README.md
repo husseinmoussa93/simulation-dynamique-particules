@@ -23,11 +23,7 @@ browniennes aléatoires.
 Balakrishnan décompose la force agissant sur une particule en une force
 dissipative, une force aléatoire et une éventuelle force extérieure :
 
-$$
-m\dot{v}(t)
-=
--m\gamma v(t)+\eta(t)+F_{\mathrm{ext}}(t).
-$$
+$$m\dot{v}(t)=-m\gamma v(t)+\eta(t)+F_{\mathrm{ext}}(t).$$
 
 Cette relation est l’équation de Langevin présentée à la page 18,
 équation (2.18) du livre (PDF p. 36). Le terme $-m\gamma v$ représente
@@ -38,13 +34,7 @@ Dans la limite diffusive, l’algorithme utilisé dans notre simulation peut
 être interprété comme une discrétisation d’une dynamique angulaire
 sur-amortie de type Langevin :
 
-$$
-d\theta
-=
--\dot{\gamma}_{\mathrm{local}}(z_c)\sin^2\theta\,dt
-+
-\sqrt{2D_{\mathrm{rot}}}\,dW_\theta.
-$$
+$$d\theta=-\dot{\gamma}_{\mathrm{local}}(z_c)\sin^2\theta\,dt+\sqrt{2D_{\mathrm{rot}}}\,dW_\theta.$$
 
 Le premier terme représente l’entraînement hydrodynamique par le cisaillement.
 Le second décrit la diffusion rotationnelle brownienne. Cette équation continue
@@ -55,39 +45,23 @@ constitue une interprétation théorique de l’algorithme discret, et non une
 
 Balakrishnan caractérise le bruit blanc par :
 
-$$
-\langle\eta(t)\rangle=0,
-\qquad
-\langle\eta(t)\eta(t')\rangle
-=
-\Gamma\delta(t-t').
-$$
+$$\langle\eta(t)\rangle=0,\qquad\langle\eta(t)\eta(t')\rangle=\Gamma\delta(t-t').$$
 
 La seconde relation apparaît à la page 27, équation (3.10), tandis que
 l’intensité du bruit est reliée à la dissipation par :
 
-$$
-\Gamma=2m\gamma k_BT.
-$$
+$$\Gamma=2m\gamma k_BT.$$
 
 Cette dernière relation, donnée à la page 28, équation (3.14), constitue
 un exemple de relation fluctuation-dissipation.
 
 Dans notre modèle rotationnel, la relation correspondante est :
 
-$$
-\left\langle(\Delta\theta_B)^2\right\rangle
-=
-2D_{\mathrm{rot}}\Delta t.
-$$
+$$\left\langle(\Delta\theta_B)^2\right\rangle=2D_{\mathrm{rot}}\Delta t.$$
 
 Le programme représente cette diffusion par une marche aléatoire discrète :
 
-$$
-\Delta\theta_B=\pm\Delta_B,
-\qquad
-\Delta_B^2=2D_{\mathrm{rot}}\Delta t.
-$$
+$$\Delta\theta_B=\pm\Delta_B,\qquad\Delta_B^2=2D_{\mathrm{rot}}\Delta t.$$
 
 Les deux signes sont choisis avec la même probabilité. La moyenne de
 l’incrément est donc nulle, tandis que sa variance est $\Delta_B^2$.
@@ -101,30 +75,16 @@ grand nombre de petits pas indépendants.
 
 Le déplacement brownien transverse utilisé dans le programme est :
 
-$$
-\Delta z_B
-=
-\pm\frac{L_B}{3}\Delta_B.
-$$
+$$\Delta z_B=\pm\frac{L_B}{3}\Delta_B.$$
 
 Il vérifie :
 
-$$
-\langle\Delta z_B\rangle=0,
-\qquad
-\left\langle(\Delta z_B)^2\right\rangle
-=
-\frac{L_B^2}{9}\Delta_B^2.
-$$
+$$\langle\Delta z_B\rangle=0,\qquad\left\langle(\Delta z_B)^2\right\rangle=\frac{L_B^2}{9}\Delta_B^2.$$
 
 Si l’on utilise $\Delta_B^2=2D_{\mathrm{rot}}\Delta t$, on peut définir
 un coefficient de diffusion translationnelle effectif :
 
-$$
-D_{\mathrm{tr}}
-=
-\frac{L_B^2}{9}D_{\mathrm{rot}}.
-$$
+$$D_{\mathrm{tr}}=\frac{L_B^2}{9}D_{\mathrm{rot}}.$$
 
 Cette relation appartient au modèle spécifique du bâtonnet utilisé dans
 la simulation. Elle ne doit pas être attribuée directement à Balakrishnan.
@@ -135,26 +95,17 @@ $\Delta t$, mais utilise le pas réduit $\Delta_B$.
 
 Le mouvement déterministe de l’orientation est décrit par :
 
-$$
-\frac{d\theta}{dt}
-=
--\dot{\gamma}_{\mathrm{local}}(z_c)\sin^2\theta.
-$$
+$$\frac{d\theta}{dt}=-\dot{\gamma}_{\mathrm{local}}(z_c)\sin^2\theta.$$
 
 Le paramètre sans dimension contrôlant la dynamique est :
 
-$$
-\boxed{
-\alpha=\frac{\dot{\gamma}_0}{D_{\mathrm{rot}}}
-}
-$$
+$\boxed{\alpha=\frac{\dot{\gamma}_0}{D_{\mathrm{rot}}}}$$
 
 Il joue le rôle d’un nombre de Péclet rotationnel. Il compare le temps
 caractéristique de diffusion rotationnelle au temps caractéristique du
 cisaillement :
 
-$$
-\alpha\ll1:
+$$\alpha\ll1:
 \text{ régime principalement brownien},
 $$
 
