@@ -1,4 +1,4 @@
-## 1. Dérivation et justification du profil parabolique de cisaillement</li>
+**I.** Dérivation et justification du profil parabolique de cisaillement</li>
 
 
 ### 1.1. Origine physique du profil
