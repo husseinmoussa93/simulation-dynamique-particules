@@ -1,3 +1,412 @@
+# Référence théorique : physique statistique hors équilibre
+
+## 1. Positionnement du problème
+
+Le système étudié appartient au domaine de la **physique statistique hors
+équilibre**. Il est constitué d’un bâtonnet rigide immergé dans un fluide,
+soumis simultanément aux fluctuations thermiques, au confinement géométrique
+et à un écoulement de cisaillement imposé.
+
+Balakrishnan explique qu’un système initialement à l’équilibre s’en éloigne
+lorsqu’une sollicitation extérieure lui est appliquée. Il peut ensuite atteindre
+un état stationnaire hors équilibre, dans lequel les grandeurs statistiques
+deviennent indépendantes du temps sans que le système retrouve nécessairement
+l’équilibre thermodynamique (Balakrishnan, p. 2 ; PDF p. 20).
+
+Dans la présente simulation, le cisaillement constitue la sollicitation
+extérieure. Il produit une rotation hydrodynamique déterministe, tandis que
+les collisions microscopiques avec le fluide engendrent des fluctuations
+browniennes aléatoires.
+
+## 2. Description stochastique de Langevin
+
+Balakrishnan décompose la force agissant sur une particule en une force
+dissipative, une force aléatoire et une éventuelle force extérieure :
+
+$$
+m\dot{v}(t)
+=
+-m\gamma v(t)+\eta(t)+F_{\mathrm{ext}}(t).
+$$
+
+Cette relation est l’équation de Langevin présentée à la page 18,
+équation (2.18) du livre (PDF p. 36). Le terme $-m\gamma v$ représente
+la dissipation visqueuse, $\eta(t)$ les fluctuations thermiques et
+$F_{\mathrm{ext}}(t)$ l’action extérieure.
+
+Dans la limite diffusive, l’algorithme utilisé dans notre simulation peut
+être interprété comme une discrétisation d’une dynamique angulaire
+sur-amortie de type Langevin :
+
+$$
+d\theta
+=
+-\dot{\gamma}_{\mathrm{local}}(z_c)\sin^2\theta\,dt
++
+\sqrt{2D_{\mathrm{rot}}}\,dW_\theta.
+$$
+
+Le premier terme représente l’entraînement hydrodynamique par le cisaillement.
+Le second décrit la diffusion rotationnelle brownienne. Cette équation continue
+constitue une interprétation théorique de l’algorithme discret, et non une
+équation intégrée explicitement par le code.
+
+## 3. Fluctuations browniennes
+
+Balakrishnan caractérise le bruit blanc par :
+
+$$
+\langle\eta(t)\rangle=0,
+\qquad
+\langle\eta(t)\eta(t')\rangle
+=
+\Gamma\delta(t-t').
+$$
+
+La seconde relation apparaît à la page 27, équation (3.10), tandis que
+l’intensité du bruit est reliée à la dissipation par :
+
+$$
+\Gamma=2m\gamma k_BT.
+$$
+
+Cette dernière relation, donnée à la page 28, équation (3.14), constitue
+un exemple de relation fluctuation-dissipation.
+
+Dans notre modèle rotationnel, la relation correspondante est :
+
+$$
+\left\langle(\Delta\theta_B)^2\right\rangle
+=
+2D_{\mathrm{rot}}\Delta t.
+$$
+
+Le programme représente cette diffusion par une marche aléatoire discrète :
+
+$$
+\Delta\theta_B=\pm\Delta_B,
+\qquad
+\Delta_B^2=2D_{\mathrm{rot}}\Delta t.
+$$
+
+Les deux signes sont choisis avec la même probabilité. La moyenne de
+l’incrément est donc nulle, tandis que sa variance est $\Delta_B^2$.
+
+Cette approximation est cohérente avec l’appendice E de Balakrishnan,
+pages 269-273 (PDF pp. 287-291), où le passage d’une marche aléatoire
+discrète à une équation de diffusion est démontré dans la limite d’un
+grand nombre de petits pas indépendants.
+
+## 4. Diffusion translationnelle
+
+Le déplacement brownien transverse utilisé dans le programme est :
+
+$$
+\Delta z_B
+=
+\pm\frac{L_B}{3}\Delta_B.
+$$
+
+Il vérifie :
+
+$$
+\langle\Delta z_B\rangle=0,
+\qquad
+\left\langle(\Delta z_B)^2\right\rangle
+=
+\frac{L_B^2}{9}\Delta_B^2.
+$$
+
+Si l’on utilise $\Delta_B^2=2D_{\mathrm{rot}}\Delta t$, on peut définir
+un coefficient de diffusion translationnelle effectif :
+
+$$
+D_{\mathrm{tr}}
+=
+\frac{L_B^2}{9}D_{\mathrm{rot}}.
+$$
+
+Cette relation appartient au modèle spécifique du bâtonnet utilisé dans
+la simulation. Elle ne doit pas être attribuée directement à Balakrishnan.
+De plus, le code ne calcule pas explicitement $D_{\mathrm{rot}}$ ni
+$\Delta t$, mais utilise le pas réduit $\Delta_B$.
+
+## 5. Rotation hydrodynamique et nombre de Péclet
+
+Le mouvement déterministe de l’orientation est décrit par :
+
+$$
+\frac{d\theta}{dt}
+=
+-\dot{\gamma}_{\mathrm{local}}(z_c)\sin^2\theta.
+$$
+
+Le paramètre sans dimension contrôlant la dynamique est :
+
+$$
+\boxed{
+\alpha=\frac{\dot{\gamma}_0}{D_{\mathrm{rot}}}
+}
+$$
+
+Il joue le rôle d’un nombre de Péclet rotationnel. Il compare le temps
+caractéristique de diffusion rotationnelle au temps caractéristique du
+cisaillement :
+
+$$
+\alpha\ll1:
+\text{ régime principalement brownien},
+$$
+
+$$
+\alpha\gg1:
+\text{ régime principalement hydrodynamique}.
+$$
+
+En utilisant $\Delta_B^2=2D_{\mathrm{rot}}\Delta t$, l’incrément
+hydrodynamique programmé devient :
+
+$$
+\boxed{
+\Delta\theta_H
+=
+-\frac{\alpha_{\mathrm{local}}}{2}
+\sin^2\theta\,\Delta_B^2
+}
+$$
+
+L’équation hydrodynamique de rotation du bâtonnet ne provient pas directement
+du livre de Balakrishnan. Elle doit être justifiée à partir des articles
+spécialisés sur la dynamique des particules anisotropes sous cisaillement.
+
+## 6. Cisaillement linéaire
+
+Pour l’écoulement linéaire, le taux de cisaillement est uniforme :
+
+$$
+\dot{\gamma}_{\mathrm{local}}=\dot{\gamma}_0.
+$$
+
+Par conséquent :
+
+$$
+\boxed{\alpha_{\mathrm{local}}=\alpha}
+$$
+
+Tous les bâtonnets subissent alors la même intensité de cisaillement,
+indépendamment de leur position transverse.
+
+## 7. Cisaillement parabolique
+
+La simulation parabolique repose sur un demi-profil de Poiseuille :
+
+$$
+u(z)
+=
+U_{\max}
+\left[
+2\frac{z}{D}
+-
+\left(\frac{z}{D}\right)^2
+\right].
+$$
+
+Ce profil satisfait la condition de non-glissement $u(0)=0$ à la paroi,
+ainsi que les conditions $u(D)=U_{\max}$ et $u'(D)=0$ au plan de symétrie.
+
+Le taux de cisaillement local est la dérivée du profil de vitesse :
+
+$$
+\dot{\gamma}(z)
+=
+\frac{du}{dz}
+=
+\frac{2U_{\max}}{D}
+\left(1-\frac{z}{D}\right).
+$$
+
+En définissant le taux de cisaillement maximal à la paroi par :
+
+$$
+\dot{\gamma}_0=\frac{2U_{\max}}{D},
+$$
+
+on obtient :
+
+$$
+\dot{\gamma}_{\mathrm{local}}(z)
+=
+\dot{\gamma}_0
+\left(1-\frac{z}{D}\right).
+$$
+
+Ainsi, le profil de vitesse est parabolique, tandis que son gradient,
+c’est-à-dire le taux de cisaillement, varie linéairement avec la position.
+
+Le paramètre local devient :
+
+$$
+\alpha_{\mathrm{local}}(z)
+=
+\alpha
+\left(1-\frac{z}{D}\right).
+$$
+
+Comme $D=L_B$ et $\xi=z_c/L_B$ dans la simulation :
+
+$$
+\boxed{
+\alpha_{\mathrm{local}}(\xi)
+=
+\alpha(1-\xi)
+}
+$$
+
+Il s’agit exactement de la loi utilisée dans le programme ayant produit
+les fichiers de résultats. Elle représente un demi-profil de Poiseuille,
+où $D$ est interprété comme la distance entre la paroi étudiée et le
+plan de symétrie de l’écoulement.
+
+## 8. Formulation de Fokker-Planck
+
+Balakrishnan établit la correspondance entre une équation différentielle
+stochastique et son équation de Fokker-Planck à la page 73,
+équations (6.6)-(6.7) (PDF p. 91).
+
+Dans notre système, la distribution conjointe $P(z_c,\theta,t)$ peut être
+décrite approximativement par :
+
+$$
+\frac{\partial P}{\partial t}
+=
+\frac{\partial}{\partial\theta}
+\left[
+\dot{\gamma}_{\mathrm{local}}(z_c)
+\sin^2\theta\,P
+\right]
++
+D_{\mathrm{rot}}
+\frac{\partial^2P}{\partial\theta^2}
++
+D_{\mathrm{tr}}
+\frac{\partial^2P}{\partial z_c^2}.
+$$
+
+La généralisation aux processus à plusieurs variables est présentée par
+Balakrishnan aux pages 158-159 et 169-170.
+
+Cette équation peut également être écrite sous la forme :
+
+$$
+\frac{\partial P}{\partial t}
+=
+-\frac{\partial J_\theta}{\partial\theta}
+-\frac{\partial J_z}{\partial z_c},
+$$
+
+avec :
+
+$$
+J_\theta
+=
+-\dot{\gamma}_{\mathrm{local}}(z_c)
+\sin^2\theta\,P
+-
+D_{\mathrm{rot}}\frac{\partial P}{\partial\theta},
+$$
+
+$$
+J_z
+=
+-D_{\mathrm{tr}}\frac{\partial P}{\partial z_c}.
+$$
+
+## 9. Confinement et parois réfléchissantes
+
+Balakrishnan traite la diffusion dans une région finie avec des frontières
+réfléchissantes aux pages 97-98 (PDF pp. 115-116). Une frontière
+imperméable impose l’annulation du flux normal :
+
+$$
+\mathbf{J}\cdot\mathbf{n}=0.
+$$
+
+Dans notre modèle, la géométrie du bâtonnet impose en plus :
+
+$$
+z_c
+\geq
+\frac{L_B}{2}|\sin\theta|.
+$$
+
+Lorsque le centre du bâtonnet s’approche de la paroi, les grandes valeurs
+de $|\theta|$ deviennent géométriquement interdites. Le confinement crée
+donc une corrélation entre la position $z_c$ et l’orientation $\theta$.
+
+## 10. État stationnaire hors équilibre
+
+Balakrishnan définit une distribution stationnaire à la page 56 par :
+
+$$
+\frac{\partial P_{\mathrm{st}}}{\partial t}=0.
+$$
+
+Il distingue ensuite, à la page 57, stationnarité et équilibre détaillé.
+À l’équilibre, la condition d’équilibre détaillé est associée à
+l’invariance par renversement du temps.
+
+Dans notre simulation, le cisaillement extérieur maintient la dynamique
+orientée du bâtonnet. Le système peut donc satisfaire :
+
+$$
+\frac{\partial P_{\mathrm{st}}}{\partial t}=0,
+$$
+
+tout en conservant un courant de probabilité non nul :
+
+$$
+\mathbf{J}_{\mathrm{st}}\neq0.
+$$
+
+Il s’agit alors d’un état stationnaire hors équilibre et non d’un état
+d’équilibre thermodynamique.
+
+## 11. Signification statistique des résultats
+
+Les histogrammes numériques correspondent à des distributions
+conditionnelles extraites de la distribution conjointe stationnaire :
+
+$$
+P_{\mathrm{bulk}}(\theta)
+=
+P(\theta\mid\xi>0.5),
+$$
+
+$$
+P_{\mathrm{surface}}(\theta)
+=
+P(\theta\mid\xi\leq0.5),
+$$
+
+$$
+P_{\mathrm{surface}}(\xi)
+=
+P(\xi\mid\xi\leq0.5).
+$$
+
+Ces distributions montrent comment l’orientation et la position du
+bâtonnet résultent de la compétition entre diffusion brownienne,
+cisaillement hydrodynamique et confinement stérique.
+
+Une distribution indépendante du temps ne suffit cependant pas, à elle
+seule, à démontrer l’équilibre. Une caractérisation plus complète du
+caractère hors équilibre nécessiterait l’étude des courants de probabilité
+ou de la production d’entropie.
+
+## Référence bibliographique
+
+Balakrishnan, V. (2021). *Elements of Nonequilibrium Statistical Mechanics*.
+Springer, Cham. DOI: 10.1007/978-3-030-62233-6.
 ## Ⅰ.Dérivation et justification du profil parabolique de cisaillement
 
 
