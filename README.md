@@ -536,7 +536,11 @@ Le taux de cisaillement local, obtenu par la dérivée spatiale de la vitesse, e
 
 $$\dot{\gamma}(z) = \frac{du}{dz} = \frac{2U_{\max}}{D} \left(1-\frac{z}{D}\right)$$
 
-En définissant le taux de cisaillement maximal à la paroi par $\dot{\gamma}_0 = 2U_{\max}/D$, nous obtenons :
+En définissant le taux de cisaillement maximal à la paroi, nous obtenons l'expression suivante :
+
+$$\dot{\gamma}_0 = \frac{2U_{\max}}{D}$$
+
+Ce qui nous permet d'écrire le taux de cisaillement local sous la forme :
 
 $$\dot{\gamma}_{\mathrm{local}}(z) = \dot{\gamma}_0 \left(1-\frac{z}{D}\right)$$
 
@@ -544,12 +548,16 @@ Par conséquent, le paramètre de Péclet rotationnel local, qui contrôle l'int
 
 $$\alpha_{\mathrm{local}}(z) = \alpha \left(1-\frac{z}{D}\right)$$
 
-Étant donné que dans la simulation, la distance caractéristique est fixée par la longueur du bâtonnet ($D = L_B$) et que la position adimensionnelle est définie par $\xi = z_c/L_B$, cette relation fondamentale se réduit à :
+Dans notre simulation, la distance caractéristique *D* est fixée par la longueur du bâtonnet *L*<sub>*B*</sub> (*D* = *L*<sub>*B*</sub>). En introduisant la position adimensionnelle du centre du bâtonnet :
+
+$$\xi = \frac{z_c}{L_B}$$
+
+Cette relation fondamentale se réduit harmonieusement à :
 
 $$\boxed{\alpha_{\mathrm{local}}(\xi) = \alpha(1-\xi)}$$
 
-Cette variation linéaire de $\alpha_{\mathrm{local}}$ intervient directement dans l'étape d'actualisation angulaire du code (implémentée dans la fonction `DynRot`). L’incrément de rotation hydrodynamique appliqué à chaque pas de temps $\Delta_B$ est donné par :
+Cette variation linéaire de l'intensité du cisaillement local intervient directement dans l'étape d'actualisation angulaire du code (implémentée dans la fonction `DynRot`). L’incrément de rotation hydrodynamique appliqué à chaque pas de temps &Delta;<sub>*B*</sub> est donné par la formule :
 
 $$\boxed{\Delta\theta_H = -\frac{\alpha(1-\xi)}{2} \sin^2\theta \, (\Delta_B)^2}$$
 
-Ainsi, contrairement au cas du cisaillement linéaire où $\alpha_{\mathrm{local}} = \alpha$ reste rigoureusement constant dans tout el système, l’intensité du cisaillement parabolique dépend explicitement de la position spatiale du centre du bâtonnet. Elle est maximale à la paroi ($\xi = 0$) et s'annule linéairement à la limite supérieure du domaine ($\xi = 1$).
+Ainsi, contrairement au cas du cisaillement linéaire où le paramètre local reste rigoureusement constant dans tout le système, l’intensité du cisaillement parabolique dépend explicitement de la position spatiale du centre du bâtonnet. Elle est maximale à la paroi (&xi; = 0) et s'annule linéairement à la limite supérieure du domaine (&xi; = 1).
