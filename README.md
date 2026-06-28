@@ -105,26 +105,14 @@ Il joue le rôle d’un nombre de Péclet rotationnel. Il compare le temps
 caractéristique de diffusion rotationnelle au temps caractéristique du
 cisaillement :
 
-$$\alpha\ll1:
-\text{ régime principalement brownien},
-$$
+$$\alpha\ll1:\text{ régime principalement brownien},$$
 
-$$
-\alpha\gg1:
-\text{ régime principalement hydrodynamique}.
-$$
+$$\alpha\gg1:\text{ régime principalement hydrodynamique}.$$
 
 En utilisant $\Delta_B^2=2D_{\mathrm{rot}}\Delta t$, l’incrément
 hydrodynamique programmé devient :
 
-$$
-\boxed{
-\Delta\theta_H
-=
--\frac{\alpha_{\mathrm{local}}}{2}
-\sin^2\theta\,\Delta_B^2
-}
-$$
+$$\boxed{\Delta\theta_H=-\frac{\alpha_{\mathrm{local}}}{2}\sin^2\theta\,\Delta_B^2}$$
 
 L’équation hydrodynamique de rotation du bâtonnet ne provient pas directement
 du livre de Balakrishnan. Elle doit être justifiée à partir des articles
@@ -134,15 +122,11 @@ spécialisés sur la dynamique des particules anisotropes sous cisaillement.
 
 Pour l’écoulement linéaire, le taux de cisaillement est uniforme :
 
-$$
-\dot{\gamma}_{\mathrm{local}}=\dot{\gamma}_0.
-$$
+$$\dot{\gamma}_{\mathrm{local}}=\dot{\gamma}_0.$$
 
 Par conséquent :
 
-$$
-\boxed{\alpha_{\mathrm{local}}=\alpha}
-$$
+$$\boxed{\alpha_{\mathrm{local}}=\alpha}$$
 
 Tous les bâtonnets subissent alors la même intensité de cisaillement,
 indépendamment de leur position transverse.
@@ -151,67 +135,33 @@ indépendamment de leur position transverse.
 
 La simulation parabolique repose sur un demi-profil de Poiseuille :
 
-$$
-u(z)
-=
-U_{\max}
-\left[
-2\frac{z}{D}
--
-\left(\frac{z}{D}\right)^2
-\right].
-$$
+$$u(z)=U_{\max}\left[2\frac{z}{D}-\left(\frac{z}{D}\right)^2\right].$$
 
 Ce profil satisfait la condition de non-glissement $u(0)=0$ à la paroi,
 ainsi que les conditions $u(D)=U_{\max}$ et $u'(D)=0$ au plan de symétrie.
 
 Le taux de cisaillement local est la dérivée du profil de vitesse :
 
-$$
-\dot{\gamma}(z)
-=
-\frac{du}{dz}
-=
-\frac{2U_{\max}}{D}
-\left(1-\frac{z}{D}\right).
-$$
+$$\dot{\gamma}(z)=\frac{du}{dz}=\frac{2U_{\max}}{D}\left(1-\frac{z}{D}\right).$$
 
 En définissant le taux de cisaillement maximal à la paroi par :
 
-$$
-\dot{\gamma}_0=\frac{2U_{\max}}{D},
-$$
+$$\dot{\gamma}_0=\frac{2U_{\max}}{D},$$
 
 on obtient :
 
-$$
-\dot{\gamma}_{\mathrm{local}}(z)
-=
-\dot{\gamma}_0
-\left(1-\frac{z}{D}\right).
-$$
+$$\dot{\gamma}_{\mathrm{local}}(z)=\dot{\gamma}_0\left(1-\frac{z}{D}\right).$$
 
 Ainsi, le profil de vitesse est parabolique, tandis que son gradient,
 c’est-à-dire le taux de cisaillement, varie linéairement avec la position.
 
 Le paramètre local devient :
 
-$$
-\alpha_{\mathrm{local}}(z)
-=
-\alpha
-\left(1-\frac{z}{D}\right).
-$$
+$$\alpha_{\mathrm{local}}(z)=\alpha\left(1-\frac{z}{D}\right).$$
 
 Comme $D=L_B$ et $\xi=z_c/L_B$ dans la simulation :
 
-$$
-\boxed{
-\alpha_{\mathrm{local}}(\xi)
-=
-\alpha(1-\xi)
-}
-$$
+$$\boxed{\alpha_{\mathrm{local}}(\xi)=\alpha(1-\xi)}$$
 
 Il s’agit exactement de la loi utilisée dans le programme ayant produit
 les fichiers de résultats. Elle représente un demi-profil de Poiseuille,
@@ -227,50 +177,20 @@ stochastique et son équation de Fokker-Planck à la page 73,
 Dans notre système, la distribution conjointe $P(z_c,\theta,t)$ peut être
 décrite approximativement par :
 
-$$
-\frac{\partial P}{\partial t}
-=
-\frac{\partial}{\partial\theta}
-\left[
-\dot{\gamma}_{\mathrm{local}}(z_c)
-\sin^2\theta\,P
-\right]
-+
-D_{\mathrm{rot}}
-\frac{\partial^2P}{\partial\theta^2}
-+
-D_{\mathrm{tr}}
-\frac{\partial^2P}{\partial z_c^2}.
-$$
+$$\frac{\partial P}{\partial t}=\frac{\partial}{\partial\theta}\left[\dot{\gamma}_{\mathrm{local}}(z_c)\sin^2\theta\,P\right]+D_{\mathrm{rot}}\frac{\partial^2P}{\partial\theta^2}+D_{\mathrm{tr}}\frac{\partial^2P}{\partial z_c^2}.$$
 
 La généralisation aux processus à plusieurs variables est présentée par
 Balakrishnan aux pages 158-159 et 169-170.
 
 Cette équation peut également être écrite sous la forme :
 
-$$
-\frac{\partial P}{\partial t}
-=
--\frac{\partial J_\theta}{\partial\theta}
--\frac{\partial J_z}{\partial z_c},
-$$
+$$\frac{\partial P}{\partial t}=-\frac{\partial J_\theta}{\partial\theta}-\frac{\partial J_z}{\partial z_c},$$
 
 avec :
 
-$$
-J_\theta
-=
--\dot{\gamma}_{\mathrm{local}}(z_c)
-\sin^2\theta\,P
--
-D_{\mathrm{rot}}\frac{\partial P}{\partial\theta},
-$$
+$$J_\theta=-\dot{\gamma}_{\mathrm{local}}(z_c)\sin^2\theta\,P-D_{\mathrm{rot}}\frac{\partial P}{\partial\theta},$$
 
-$$
-J_z
-=
--D_{\mathrm{tr}}\frac{\partial P}{\partial z_c}.
-$$
+$$J_z=-D_{\mathrm{tr}}\frac{\partial P}{\partial z_c}.$$
 
 ## 9. Confinement et parois réfléchissantes
 
@@ -278,17 +198,11 @@ Balakrishnan traite la diffusion dans une région finie avec des frontières
 réfléchissantes aux pages 97-98 (PDF pp. 115-116). Une frontière
 imperméable impose l’annulation du flux normal :
 
-$$
-\mathbf{J}\cdot\mathbf{n}=0.
-$$
+$$\mathbf{J}\cdot\mathbf{n}=0.$$
 
 Dans notre modèle, la géométrie du bâtonnet impose en plus :
 
-$$
-z_c
-\geq
-\frac{L_B}{2}|\sin\theta|.
-$$
+$$z_c\geq\frac{L_B}{2}|\sin\theta|.$$
 
 Lorsque le centre du bâtonnet s’approche de la paroi, les grandes valeurs
 de $|\theta|$ deviennent géométriquement interdites. Le confinement crée
@@ -298,9 +212,7 @@ donc une corrélation entre la position $z_c$ et l’orientation $\theta$.
 
 Balakrishnan définit une distribution stationnaire à la page 56 par :
 
-$$
-\frac{\partial P_{\mathrm{st}}}{\partial t}=0.
-$$
+$$\frac{\partial P_{\mathrm{st}}}{\partial t}=0.$$
 
 Il distingue ensuite, à la page 57, stationnarité et équilibre détaillé.
 À l’équilibre, la condition d’équilibre détaillé est associée à
@@ -309,15 +221,11 @@ l’invariance par renversement du temps.
 Dans notre simulation, le cisaillement extérieur maintient la dynamique
 orientée du bâtonnet. Le système peut donc satisfaire :
 
-$$
-\frac{\partial P_{\mathrm{st}}}{\partial t}=0,
-$$
+$$\frac{\partial P_{\mathrm{st}}}{\partial t}=0,$$
 
 tout en conservant un courant de probabilité non nul :
 
-$$
-\mathbf{J}_{\mathrm{st}}\neq0.
-$$
+$$\mathbf{J}_{\mathrm{st}}\neq0.$$
 
 Il s’agit alors d’un état stationnaire hors équilibre et non d’un état
 d’équilibre thermodynamique.
@@ -327,23 +235,11 @@ d’équilibre thermodynamique.
 Les histogrammes numériques correspondent à des distributions
 conditionnelles extraites de la distribution conjointe stationnaire :
 
-$$
-P_{\mathrm{bulk}}(\theta)
-=
-P(\theta\mid\xi>0.5),
-$$
+$$P_{\mathrm{bulk}}(\theta)=P(\theta\mid\xi>0.5),$$
 
-$$
-P_{\mathrm{surface}}(\theta)
-=
-P(\theta\mid\xi\leq0.5),
-$$
+$$P_{\mathrm{surface}}(\theta)=P(\theta\mid\xi\leq0.5),$$
 
-$$
-P_{\mathrm{surface}}(\xi)
-=
-P(\xi\mid\xi\leq0.5).
-$$
+$$P_{\mathrm{surface}}(\xi)=P(\xi\mid\xi\leq0.5).$$
 
 Ces distributions montrent comment l’orientation et la position du
 bâtonnet résultent de la compétition entre diffusion brownienne,
