@@ -79,7 +79,7 @@ $$\Delta z_B=\pm\frac{L_B}{3}\Delta_B.$$
 
 Il vérifie :
 
-$$\langle\Delta z_B\rangle=0,\qquad\left\langle(\Delta z_B)^2\right\rangle=\frac{L_B^2}{9}\Delta_B^2.$$
+$$\langle\Deltaz_B\rangle=0,\qquad\left\langle(\Delta z_B)^2\right\rangle=\frac{L_B^2}{9}\Delta_B^2.$$
 
 Si l’on utilise $\Delta_B^2=2D_{\mathrm{rot}}\Delta t$, on peut définir
 un coefficient de diffusion translationnelle effectif :
