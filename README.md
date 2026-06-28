@@ -11,7 +11,7 @@ Balakrishnan explique qu’un système initialement à l’équilibre s’en él
 lorsqu’une sollicitation extérieure lui est appliquée. Il peut ensuite atteindre
 un état stationnaire hors équilibre, dans lequel les grandeurs statistiques
 deviennent indépendantes du temps sans que le système retrouve nécessairement
-l’équilibre thermodynamique (Balakrishnan, p. 2 ; PDF p. 20).
+l’équilibre thermodynamique (Balakrishnan, p. 2).
 
 Dans la présente simulation, le cisaillement constitue la sollicitation
 extérieure. Il produit une rotation hydrodynamique déterministe, tandis que
@@ -26,7 +26,7 @@ dissipative, une force aléatoire et une éventuelle force extérieure :
 $$m\dot{v}(t)=-m\gamma v(t)+\eta(t)+F_{\mathrm{ext}}(t).$$
 
 Cette relation est l’équation de Langevin présentée à la page 18,
-équation (2.18) du livre (PDF p. 36). Le terme $-m\gamma v$ représente
+équation (2.18) du livre . Le terme $-m\gamma v$ représente
 la dissipation visqueuse, $\eta(t)$ les fluctuations thermiques et
 $F_{\mathrm{ext}}(t)$ l’action extérieure.
 
@@ -67,7 +67,7 @@ Les deux signes sont choisis avec la même probabilité. La moyenne de
 l’incrément est donc nulle, tandis que sa variance est $\Delta_B^2$.
 
 Cette approximation est cohérente avec l’appendice E de Balakrishnan,
-pages 269-273 (PDF pp. 287-291), où le passage d’une marche aléatoire
+pages 269-273 , où le passage d’une marche aléatoire
 discrète à une équation de diffusion est démontré dans la limite d’un
 grand nombre de petits pas indépendants.
 
@@ -172,7 +172,7 @@ plan de symétrie de l’écoulement.
 
 Balakrishnan établit la correspondance entre une équation différentielle
 stochastique et son équation de Fokker-Planck à la page 73,
-équations (6.6)-(6.7) (PDF p. 91).
+équations (6.6)-(6.7) .
 
 Dans notre système, la distribution conjointe $P(z_c,\theta,t)$ peut être
 décrite approximativement par :
@@ -195,7 +195,7 @@ $$J_z=-D_{\mathrm{tr}}\frac{\partial P}{\partial z_c}.$$
 ## 9. Confinement et parois réfléchissantes
 
 Balakrishnan traite la diffusion dans une région finie avec des frontières
-réfléchissantes aux pages 97-98 (PDF pp. 115-116). Une frontière
+réfléchissantes aux pages 97-98. Une frontière
 imperméable impose l’annulation du flux normal :
 
 $$\mathbf{J}\cdot\mathbf{n}=0.$$
