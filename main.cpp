@@ -24,7 +24,8 @@ using namespace std;
 const int FLOW_COUNT = 2;
 const int ALPHA_COUNT = 7;
 const int THETA_BIN_COUNT = 180;
-const int KSI_BIN_COUNT = 500;
+const int KSI_SURFACE_BIN_COUNT = 500;
+const int KSI_FULL_BIN_COUNT = 1000;
 const long STEP_COUNT = 10000000L;
 const long double SURFACE_KSI_LIMIT = 0.5L;
 const long double KSI_BIN_WIDTH = 0.001L;
@@ -42,8 +43,8 @@ long double zc,teta,teta5,zc5,qsi,teta1,phi,phi5, phi1,phi4,d, tetac,phic,teta4,
 
 long statBulk[FLOW_COUNT][ALPHA_COUNT][THETA_BIN_COUNT];
 long statSurface[FLOW_COUNT][ALPHA_COUNT][THETA_BIN_COUNT];
-long statKsiSurface[FLOW_COUNT][ALPHA_COUNT][KSI_BIN_COUNT];
-long statKsiFull[FLOW_COUNT][ALPHA_COUNT][KSI_BIN_COUNT];
+long statKsiSurface[FLOW_COUNT][ALPHA_COUNT][KSI_SURFACE_BIN_COUNT];
+long statKsiFull[FLOW_COUNT][ALPHA_COUNT][KSI_FULL_BIN_COUNT];
 
 long grain1,grain2,grain3,grain4;
 
@@ -179,14 +180,14 @@ int ThetaBin(long double teta)
     return (int)num;
 }
 
-int KsiBin(long double qsi)
+int KsiBin(long double qsi,int binCount)
 {
     long num;
 
     num=(long)floor(qsi/KSI_BIN_WIDTH);
 
     if(num<0) num=0;
-    if(num>=KSI_BIN_COUNT) num=KSI_BIN_COUNT-1;
+    if(num>=binCount) num=binCount-1;
 
     return (int)num;
 }
@@ -201,9 +202,13 @@ void ResetHistograms(int flowIndex,int alphaIndex)
         statSurface[flowIndex][alphaIndex][i]=0;
     }
 
-    for(i=0;i<KSI_BIN_COUNT;i++)
+    for(i=0;i<KSI_SURFACE_BIN_COUNT;i++)
     {
         statKsiSurface[flowIndex][alphaIndex][i]=0;
+    }
+
+    for(i=0;i<KSI_FULL_BIN_COUNT;i++)
+    {
         statKsiFull[flowIndex][alphaIndex][i]=0;
     }
 }
@@ -256,7 +261,7 @@ void WriteThetaHistogram(const string &filename,long hist[THETA_BIN_COUNT])
     fout.close();
 }
 
-void WriteKsiHistogram(const string &filename,long hist[KSI_BIN_COUNT])
+void WriteKsiHistogram(const string &filename,long hist[],int count)
 {
     int i;
     long total;
@@ -264,9 +269,9 @@ void WriteKsiHistogram(const string &filename,long hist[KSI_BIN_COUNT])
     long double probability;
     ofstream fout(filename.c_str());
 
-    total=HistogramTotal(hist,KSI_BIN_COUNT);
+    total=HistogramTotal(hist,count);
 
-    for(i=0;i<KSI_BIN_COUNT;i++)
+    for(i=0;i<count;i++)
     {
         ksiCenter=(i+0.5L)*KSI_BIN_WIDTH;
         probability=0;
@@ -354,12 +359,12 @@ void MouvBaton(long double eb,long double ed,int flowIndex,int alphaIndex)
         qsi=(long double)(zc/LB);
         num=ThetaBin(teta);
 
-        statKsiFull[flowIndex][alphaIndex][KsiBin(qsi)]++;
+        statKsiFull[flowIndex][alphaIndex][KsiBin(qsi,KSI_FULL_BIN_COUNT)]++;
 
         if(qsi<=SURFACE_KSI_LIMIT)
         {
             statSurface[flowIndex][alphaIndex][num]++;
-            statKsiSurface[flowIndex][alphaIndex][KsiBin(qsi)]++;
+            statKsiSurface[flowIndex][alphaIndex][KsiBin(qsi,KSI_SURFACE_BIN_COUNT)]++;
         }
         else
         {
@@ -434,11 +439,13 @@ int main()
 
             WriteKsiHistogram(
                 MakeFilename("ksi","surface",flowNames[flowIndex],alphaLabels[alphaIndex]),
-                statKsiSurface[flowIndex][alphaIndex]);
+                statKsiSurface[flowIndex][alphaIndex],
+                KSI_SURFACE_BIN_COUNT);
 
             WriteKsiHistogram(
                 MakeFilename("ksi","full",flowNames[flowIndex],alphaLabels[alphaIndex]),
-                statKsiFull[flowIndex][alphaIndex]);
+                statKsiFull[flowIndex][alphaIndex],
+                KSI_FULL_BIN_COUNT);
         }
     }
 
