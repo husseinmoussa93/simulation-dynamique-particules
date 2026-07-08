@@ -3,6 +3,7 @@ using namespace std;
 #include <fstream>
 #include <cmath>
 #include <string>
+#include <direct.h>
 
 #define IM1 2147483563
 #define IM2 2147483399
@@ -21,12 +22,13 @@ using namespace std;
 #define D   880e-9
 
 const int FLOW_COUNT = 2;
-const int ALPHA_COUNT = 6;
+const int ALPHA_COUNT = 7;
 const int THETA_BIN_COUNT = 180;
 const int KSI_BIN_COUNT = 500;
 const long STEP_COUNT = 10000000L;
 const long double SURFACE_KSI_LIMIT = 0.5L;
 const long double KSI_BIN_WIDTH = 0.001L;
+const char *OUTPUT_DIR = "results_alpha0_full";
 
 enum FlowType
 {
@@ -369,7 +371,9 @@ string MakeFilename(const char *quantity,const char *region,const char *flowName
 {
     string filename;
 
-    filename=quantity;
+    filename=OUTPUT_DIR;
+    filename+="\\";
+    filename+=quantity;
     filename+="_";
     filename+=region;
     filename+="_";
@@ -386,8 +390,9 @@ int main()
     int flowIndex;
     int alphaIndex;
 
-    long double alphaValues[ALPHA_COUNT]={0.5,1.0,2.0,5.0,10.0,100.0};
+    long double alphaValues[ALPHA_COUNT]={0.0,0.5,1.0,2.0,5.0,10.0,100.0};
     const char *alphaLabels[ALPHA_COUNT]={
+        "alpha_0",
         "alpha_0p5",
         "alpha_1",
         "alpha_2",
@@ -401,6 +406,8 @@ int main()
 
     pi=acosl(-1.0);
     DeltaB=0.03;
+
+    _mkdir(OUTPUT_DIR);
 
     for(flowIndex=0;flowIndex<FLOW_COUNT;flowIndex++)
     {
