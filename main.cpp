@@ -43,6 +43,7 @@ long double zc,teta,teta5,zc5,qsi,teta1,phi,phi5, phi1,phi4,d, tetac,phic,teta4,
 long statBulk[FLOW_COUNT][ALPHA_COUNT][THETA_BIN_COUNT];
 long statSurface[FLOW_COUNT][ALPHA_COUNT][THETA_BIN_COUNT];
 long statKsiSurface[FLOW_COUNT][ALPHA_COUNT][KSI_BIN_COUNT];
+long statKsiFull[FLOW_COUNT][ALPHA_COUNT][KSI_BIN_COUNT];
 
 long grain1,grain2,grain3,grain4;
 
@@ -203,6 +204,7 @@ void ResetHistograms(int flowIndex,int alphaIndex)
     for(i=0;i<KSI_BIN_COUNT;i++)
     {
         statKsiSurface[flowIndex][alphaIndex][i]=0;
+        statKsiFull[flowIndex][alphaIndex][i]=0;
     }
 }
 
@@ -352,6 +354,8 @@ void MouvBaton(long double eb,long double ed,int flowIndex,int alphaIndex)
         qsi=(long double)(zc/LB);
         num=ThetaBin(teta);
 
+        statKsiFull[flowIndex][alphaIndex][KsiBin(qsi)]++;
+
         if(qsi<=SURFACE_KSI_LIMIT)
         {
             statSurface[flowIndex][alphaIndex][num]++;
@@ -431,6 +435,10 @@ int main()
             WriteKsiHistogram(
                 MakeFilename("ksi","surface",flowNames[flowIndex],alphaLabels[alphaIndex]),
                 statKsiSurface[flowIndex][alphaIndex]);
+
+            WriteKsiHistogram(
+                MakeFilename("ksi","full",flowNames[flowIndex],alphaLabels[alphaIndex]),
+                statKsiFull[flowIndex][alphaIndex]);
         }
     }
 
