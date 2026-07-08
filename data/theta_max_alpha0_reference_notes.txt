@@ -1,0 +1,4 @@
+# alpha_0 reference values
+# bulk theta_max at alpha=0 is numerically detectable but not physically meaningful because P(theta) is quasi-isotropic.
+linear_surface_alpha_0	1.5
+parabolic_surface_alpha_0	1.5
