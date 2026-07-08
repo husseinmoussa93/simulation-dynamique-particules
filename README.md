@@ -898,75 +898,108 @@ Cette comparaison montre que l’effet du profil de cisaillement dépend forteme
 
 **En conclusion**, les Figures 13 et 14 montrent que la dynamique angulaire ne dépend pas uniquement de la valeur de $\alpha$, mais aussi du profil spatial du cisaillement et de la position du bâtonnet par rapport à la surface. Le cisaillement linéaire tend à produire une orientation plus nette et plus décalée vers les angles positifs, tandis que le cisaillement parabolique donne une réponse plus diffuse dans le volume et plus proche de l’alignement parallèle à la surface près de la paroi.
 
-# VI. Distribution spatiale $P(\xi)$ près de la surface
+# VI. Résultats complémentaires : distribution spatiale et angle préférentiel
 
-Les Figures 15 à 18 présentent la distribution spatiale $P(\xi)$ du centre du bâtonnet dans la région proche de la surface, définie par $\xi \leq 0.5$. Cette distribution permet d’étudier la probabilité de présence du bâtonnet en fonction de sa distance normalisée à la paroi.
+Dans cette partie, nous présentons les corrections et les résultats complémentaires ajoutés après la discussion avec le superviseur. Les Figures 15 à 18 correspondent aux distributions spatiales normalisées corrigées, tandis que les Figures 19 et 20 présentent l'évolution de l'angle préférentiel $\theta_{\max}$ en fonction du paramètre $\alpha$.
 
-Il est important de noter que $P(\xi)$ est ici une distribution conditionnée à la région proche de la surface. Elle décrit donc comment les positions sont réparties à l’intérieur de la zone $\xi \leq 0.5$, et non pas la probabilité totale d’être près de la surface par rapport au volume.
-
----
-
-## VI.1. Figure 15 : cisaillement uniforme, $\alpha=0.5$, $2$ et $5$
-
-![Figure 15](Fig15.png)
-
-La Figure 15 représente la distribution spatiale $P(\xi)$ près de la surface pour un cisaillement linéaire, pour $\alpha = 0.5$, $\alpha = 2$ et $\alpha = 5$.
-
-Pour les trois valeurs de $\alpha$, la distribution augmente progressivement lorsque $\xi$ se rapproche de $0.5$. Cela signifie que le centre du bâtonnet est moins probable très près de la paroi, c’est-à-dire pour $\xi \approx 0$, et devient plus probable lorsque le bâtonnet s’éloigne légèrement de la surface.
-
-Ce comportement est principalement dû à un effet géométrique. Très près de la paroi, le bâtonnet ne peut pas adopter toutes les orientations possibles, car certaines orientations conduiraient à une intersection avec la surface. Le nombre de configurations accessibles est donc réduit. Lorsque $\xi$ augmente, le centre du bâtonnet s’éloigne de la paroi et davantage d’orientations deviennent possibles, ce qui augmente la probabilité $P(\xi)$.
-
-L’effet de $\alpha$ reste modéré pour ces valeurs. Les courbes gardent une forme globale similaire, ce qui montre que, pour $\alpha = 0.5$, $2$ et $5$, la structure de $P(\xi)$ est dominée par le confinement géométrique plutôt que par le cisaillement.
+Les distributions spatiales sont maintenant représentées sur tout l'intervalle $0 \leq \xi \leq 1$. Les oscillations statistiques visibles dans les anciennes versions ont été réduites par un regroupement des données avec un pas $\Delta \xi = 0.005$. Cette opération améliore la lisibilité des résultats sans modifier la physique du modèle.
 
 ---
 
-## VI.2. Figure 16 : cisaillement uniforme, plage élargie de $\alpha$
+## VI.1. Figure 15 : distribution normalisée $\rho(\xi)/\rho_{\mathrm{bulk}}$ sous cisaillement linéaire pour faibles valeurs de $\alpha$
 
-![Figure 16](Fig16.png)
+![Figure 15](Fig15_corrected.png)
 
-La Figure 16 présente $P(\xi)$ près de la surface pour un cisaillement linéaire et une plage élargie de $\alpha$ : $\alpha = 1$, $5$, $10$ et $100$.
+La Figure 15 représente la distribution spatiale normalisée $\rho(\xi)/\rho_{\mathrm{bulk}}$ dans le cas d'un cisaillement linéaire, pour les faibles valeurs de $\alpha$ : $\alpha = 0$, $0.5$, $2$ et $5$.
 
-Comme dans la Figure 15, la probabilité augmente fortement lorsque $\xi$ se rapproche de $0.5$. Cela confirme que la région immédiatement proche de la paroi est moins accessible au centre du bâtonnet, en raison de l’exclusion stérique imposée par la surface.
+On observe clairement que la densité normalisée est très faible près de la surface, c'est-à-dire pour $\xi$ proche de 0. Cette région correspond à une couche de déplétion. Physiquement, le centre de masse du bâtonnet ne peut pas explorer librement cette zone, car une partie de l'espace géométrique est interdite par la présence de la paroi. Si le centre de masse est trop proche de la surface, certaines orientations du bâtonnet provoqueraient un contact avec la paroi.
 
-Pour $\alpha = 100$, la courbe présente une augmentation plus marquée et des oscillations plus visibles. Physiquement, cela traduit le fait que le fort cisaillement modifie la dynamique du bâtonnet près de la paroi et favorise certaines trajectoires ou configurations. Cependant, les oscillations fines doivent être interprétées avec prudence, car elles peuvent aussi provenir de la discrétisation numérique, du binning de $\xi$, et du nombre fini d’échantillons.
+Lorsque $\xi$ augmente, la densité augmente progressivement jusqu'à atteindre une valeur proche de 1. À partir de $\xi \approx 0.5$, la distribution devient presque constante : cette zone correspond au bulk, où l'influence directe de la paroi devient faible.
 
-En conclusion, même à fort cisaillement, la forme générale de $P(\xi)$ reste dominée par la géométrie de confinement : le bâtonnet est moins présent très près de la paroi et plus probable vers la limite $\xi = 0.5$.
-
----
-
-## VI.3. Figure 17 : demi-profil parabolique, $\alpha=0.5$, $2$ et $5$
-
-![Figure 17](Fig17.png)
-
-La Figure 17 représente la distribution spatiale $P(\xi)$ près de la surface pour un cisaillement parabolique, pour $\alpha = 0.5$, $2$ et $5$.
-
-Les courbes montrent la même tendance générale que dans le cas linéaire : $P(\xi)$ augmente lorsque $\xi$ se rapproche de $0.5$. Cela indique que l’effet principal reste l’exclusion géométrique près de la paroi. À faible distance de la surface, le bâtonnet dispose de moins de configurations angulaires accessibles ; lorsqu’il s’éloigne de la paroi, le nombre de configurations possibles augmente.
-
-Dans le cas parabolique, le cisaillement local dépend de la position. Dans le modèle utilisé ici, le cisaillement effectif varie selon $\alpha_{\text{local}} = \alpha(1-\xi)$. Cette dépendance spatiale modifie légèrement la distribution, mais pour $\alpha = 0.5$, $2$ et $5$, l’effet reste secondaire devant la contrainte géométrique imposée par la paroi.
-
-Ainsi, la Figure 17 montre que, près de la surface, la distribution spatiale est principalement contrôlée par le confinement, tandis que le profil parabolique du cisaillement apporte seulement des modifications modérées.
+Le cas $\alpha = 0$ joue ici le rôle de référence sans cisaillement hydrodynamique. La proximité des courbes montre que, pour les faibles valeurs de $\alpha$, la structure spatiale de $\rho(\xi)$ est dominée principalement par le confinement stérique plutôt que par le cisaillement.
 
 ---
 
-## VI.4. Figure 18 : demi-profil parabolique, plage élargie de $\alpha$
+## VI.2. Figure 16 : distribution normalisée $\rho(\xi)/\rho_{\mathrm{bulk}}$ sous cisaillement linéaire pour fortes valeurs de $\alpha$
 
-![Figure 18](Fig18.png)
+![Figure 16](Fig16_corrected.png)
 
-La Figure 18 présente $P(\xi)$ près de la surface pour un cisaillement parabolique et des valeurs intermédiaires et fortes de $\alpha$ : $\alpha = 1$, $5$, $10$ et $100$.
+La Figure 16 présente la même distribution spatiale normalisée $\rho(\xi)/\rho_{\mathrm{bulk}}$, mais pour des valeurs plus élevées de $\alpha$ : $\alpha = 1$, $5$, $10$ et $100$.
 
-La distribution reste croissante avec $\xi$, ce qui confirme que le bâtonnet est moins susceptible d’avoir son centre très près de la paroi et plus probable lorsqu’il se rapproche de la limite $\xi = 0.5$. Ce résultat est cohérent avec le rôle de la paroi, qui réduit fortement l’espace des configurations accessibles près de $\xi = 0$.
+Même lorsque le cisaillement devient plus intense, la forme générale de la distribution reste gouvernée par la présence de la paroi. La couche de déplétion près de $\xi = 0$ reste visible, ce qui confirme son origine géométrique. Elle ne disparaît pas lorsque $\alpha$ augmente, car elle résulte d'une contrainte d'accessibilité spatiale imposée au centre de masse du bâtonnet.
 
-Pour $\alpha = 100$, la courbe devient plus structurée et présente des oscillations plus prononcées. Cela indique que le fort cisaillement influence davantage la dynamique spatiale du bâtonnet. Néanmoins, ces oscillations doivent être interprétées avec prudence : elles peuvent refléter à la fois une structuration dynamique réelle et des effets numériques liés à la discrétisation de la position et à l’échantillonnage statistique.
+Pour les grandes valeurs de $\alpha$, le cisaillement hydrodynamique influence davantage l'orientation du bâtonnet, mais son effet sur la distribution spatiale reste secondaire par rapport au confinement. La densité atteint toujours un plateau proche de 1 dans la région du bulk.
 
-En conclusion, la Figure 18 montre que le cisaillement parabolique intense modifie la distribution spatiale près de la surface, mais sans changer la tendance dominante : $P(\xi)$ augmente vers $\xi = 0.5$, principalement en raison du confinement géométrique.
+Ainsi, cette figure montre que le cisaillement peut modifier légèrement la répartition spatiale, mais que la couche de déplétion est une propriété robuste du système confiné.
 
 ---
 
-## VI.5. Comparaison générale des distributions $P(\xi)$
+## VI.3. Figure 17 : distribution normalisée $\rho(\xi)/\rho_{\mathrm{bulk}}$ sous demi-profil parabolique pour faibles valeurs de $\alpha$
 
-Les Figures 15 à 18 montrent que la distribution spatiale $P(\xi)$ près de la surface possède une structure robuste : elle augmente lorsque $\xi$ se rapproche de $0.5$. Cette tendance est observée pour les deux profils de cisaillement, linéaire et parabolique, et pour toutes les valeurs de $\alpha$.
+![Figure 17](Fig17_corrected.png)
 
-Le résultat physique principal est que la région très proche de la paroi est moins accessible au centre du bâtonnet. Cette diminution de probabilité près de $\xi = 0$ provient du confinement stérique : près de la surface, certaines orientations sont interdites ou fortement défavorisées. À mesure que le centre du bâtonnet s’éloigne de la paroi, davantage d’orientations deviennent possibles, ce qui augmente $P(\xi)$.
+La Figure 17 correspond au cas du demi-profil parabolique pour les faibles valeurs de $\alpha$ : $\alpha = 0$, $0.5$, $2$ et $5$.
 
-L’effet de $\alpha$ devient surtout visible aux grandes valeurs, en particulier pour $\alpha = 100$, où les distributions présentent une structuration plus marquée. Toutefois, la tendance globale reste gouvernée par la géométrie de confinement. Ainsi, $P(\xi)$ met en évidence le rôle central de la paroi dans la distribution spatiale du bâtonnet, tandis que le cisaillement module cette distribution sans en changer la forme générale.
+Contrairement au cisaillement linéaire, le cisaillement local n'est pas constant. Dans le modèle utilisé, il dépend de la position selon la relation :
 
+$$
+\alpha_{\mathrm{local}}(\xi) = \alpha(1-\xi)
+$$
+
+Cela signifie que le bâtonnet ne ressent pas la même intensité de cisaillement selon sa position dans le mésopore. Le cisaillement est plus important près de la surface et diminue lorsqu'on se rapproche du bulk.
+
+Malgré cette variation spatiale du cisaillement, la distribution $\rho(\xi)/\rho_{\mathrm{bulk}}$ conserve la même structure générale : une couche de déplétion près de la surface, suivie d'une montée progressive vers un plateau proche de 1. Cela montre que, pour les faibles valeurs de $\alpha$, le confinement stérique reste le mécanisme dominant dans la formation de la distribution spatiale.
+
+---
+
+## VI.4. Figure 18 : distribution normalisée $\rho(\xi)/\rho_{\mathrm{bulk}}$ sous demi-profil parabolique pour fortes valeurs de $\alpha$
+
+![Figure 18](Fig18_corrected.png)
+
+La Figure 18 présente la distribution spatiale normalisée dans le cas du demi-profil parabolique pour les fortes valeurs de $\alpha$ : $\alpha = 1$, $5$, $10$ et $100$.
+
+À forte valeur de $\alpha$, le cisaillement hydrodynamique devient important, mais il reste spatialement non uniforme. Le bâtonnet subit donc un cisaillement local dépendant de $\xi$. Cette inhomogénéité peut modifier légèrement la forme des courbes, mais la structure principale demeure inchangée : la densité est faible près de la surface et atteint un plateau dans le bulk.
+
+La comparaison avec la Figure 16 montre que le profil parabolique ne supprime pas la couche de déplétion. Celle-ci est donc une conséquence fondamentale de la géométrie confinée du système, et non un effet spécifique du type de cisaillement.
+
+---
+
+## VI.5. Figure 19 : variation de $\theta_{\max}$ en fonction de $\alpha$ dans le bulk
+
+![Figure 19](Fig19_theta_max_bulk.png)
+
+La Figure 19 représente l'évolution de l'angle préférentiel $\theta_{\max}$ en fonction de $\alpha$ dans le bulk, pour deux types d'écoulement : le cisaillement linéaire et le demi-profil parabolique.
+
+Dans le bulk, le bâtonnet est moins contraint par la paroi. Son orientation résulte donc principalement de la compétition entre deux effets : la diffusion rotationnelle brownienne, qui tend à désordonner l'orientation, et le couple hydrodynamique dû au cisaillement, qui tend à aligner le bâtonnet avec l'écoulement.
+
+Lorsque $\alpha$ augmente, $\theta_{\max}$ diminue globalement. Cela signifie que le maximum de probabilité se déplace vers des angles plus proches de la direction de l'écoulement. Physiquement, plus $\alpha$ est grand, plus le cisaillement domine la diffusion brownienne rotationnelle. Le bâtonnet passe alors davantage de temps dans des orientations proches de l'axe de l'écoulement.
+
+Le cisaillement linéaire produit une diminution plus régulière de $\theta_{\max}$. Dans le cas du demi-profil parabolique, les valeurs sont plus dispersées, car le cisaillement local dépend de la position $\xi$. La distribution angulaire mesurée dans le bulk résulte donc d'une moyenne sur plusieurs intensités locales de cisaillement.
+
+Le cas $\alpha = 0$ n'est pas représenté sur cette figure lorsque l'axe des abscisses est logarithmique, car $\log(0)$ n'est pas défini. De plus, dans le bulk sans cisaillement, la distribution angulaire est quasi isotrope ; il n'existe donc pas de $\theta_{\max}$ physiquement significatif.
+
+---
+
+## VI.6. Figure 20 : variation de $\theta_{\max}$ en fonction de $\alpha$ dans la couche de déplétion
+
+![Figure 20](Fig20_theta_max_depletion_layer.png)
+
+La Figure 20 montre l'évolution de $\theta_{\max}$ en fonction de $\alpha$ dans la couche de déplétion, c'est-à-dire près de la surface.
+
+Dans cette région, l'orientation du bâtonnet n'est pas gouvernée uniquement par le cisaillement. La paroi impose une contrainte géométrique forte : les grandes inclinaisons sont défavorisées car elles augmentent la probabilité de contact entre le bâtonnet et la surface. Ainsi, même lorsque le cisaillement est faible, le bâtonnet tend déjà à adopter des orientations proches de la surface.
+
+C'est pourquoi $\theta_{\max}$ reste globalement proche des petits angles. Contrairement au bulk, où $\theta_{\max}$ peut varier fortement avec $\alpha$, la couche de déplétion impose une sélection géométrique des orientations accessibles. Le cisaillement modifie cette orientation préférentielle, mais il agit sur un espace angulaire déjà restreint par le confinement.
+
+La comparaison entre cisaillement linéaire et demi-profil parabolique montre que la réponse près de la surface est plus complexe que dans le bulk. Elle résulte d'un couplage entre l'effet hydrodynamique local et la contrainte stérique imposée par la paroi.
+
+Ainsi, la Figure 20 confirme que la couche de déplétion n'est pas seulement une zone de faible densité spatiale ; c'est aussi une région où la dynamique orientationnelle du bâtonnet est profondément modifiée par la présence de la surface.
+
+---
+
+## VI.7. Conclusion de cette partie
+
+Les Figures 15 à 18 montrent que la distribution spatiale normalisée $\rho(\xi)/\rho_{\mathrm{bulk}}$ est dominée par le confinement stérique. La couche de déplétion apparaît près de la surface pour tous les profils d'écoulement et pour toutes les valeurs de $\alpha$. Le cisaillement modifie légèrement les profils, mais il ne supprime pas cette structure géométrique fondamentale.
+
+Les Figures 19 et 20 complètent cette analyse en montrant l'évolution de l'angle préférentiel $\theta_{\max}$ avec $\alpha$. Dans le bulk, l'augmentation de $\alpha$ favorise l'alignement du bâtonnet avec l'écoulement. Près de la surface, la paroi impose une contrainte supplémentaire qui limite les orientations accessibles et maintient $\theta_{\max}$ dans une région de petits angles.
+
+Ces résultats montrent que la dynamique du bâtonnet confiné résulte d'un équilibre entre diffusion brownienne rotationnelle, cisaillement hydrodynamique et confinement stérique.
