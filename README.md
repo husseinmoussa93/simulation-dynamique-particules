@@ -1008,181 +1008,181 @@ Ces résultats montrent que la dynamique du bâtonnet confiné résulte d'un éq
 
 # Partie complémentaire : résultats ajoutés après les remarques du superviseur
 
-Cette partie est ajoutée à la suite du rapport initial afin de conserver l'ancien travail complet tout en présentant les nouveaux résultats demandés : introduction de alpha = 0, correction de la distribution spatiale P(xi) jusqu'à xi = 1, représentation brute et binnée de P(xi), et évolution de theta_max(alpha) dans le volume et dans la couche de déplétion.
+Cette partie est ajoutée à la suite du rapport initial afin de conserver l'ancien travail complet tout en présentant les nouveaux résultats demandés : introduction de $\alpha=0$, correction de la distribution spatiale $P(\xi)$ jusqu'à $\xi=1$, représentation brute et binnée de $P(\xi)$, et évolution de $\theta_{\max}(\alpha)$ dans le volume et dans la couche de déplétion.
 
-# Simulation numÃ©rique d'un bÃ¢tonnet brownien confinÃ©
+# Simulation numérique d'un bâtonnet brownien confiné
 
-Ce dÃ©pÃ´t prÃ©sente une simulation numÃ©rique en C++ de la dynamique d'un bÃ¢tonnet brownien rigide confinÃ© dans un mÃ©sopore. Le but physique est d'Ã©tudier comment un Ã©coulement de cisaillement, le mouvement brownien et la proximitÃ© d'une surface modifient l'orientation et la position transverse de la particule.
+Ce dépôt présente une simulation numérique en C++ de la dynamique d'un bâtonnet brownien rigide confiné dans un mésopore. Le but physique est d'étudier comment un écoulement de cisaillement, le mouvement brownien et la proximité d'une surface modifient l'orientation et la position transverse de la particule.
 
-La version actuelle compare deux profils d'Ã©coulement :
+La version actuelle compare deux profils d'écoulement :
 
-- un cisaillement linÃ©aire uniforme ;
+- un cisaillement linéaire uniforme ;
 - un demi-profil parabolique de type Poiseuille.
 
-Les simulations sont effectuÃ©es pour les valeurs suivantes du paramÃ¨tre de contrÃ´le :
+Les simulations sont effectuées pour les valeurs suivantes du paramètre de contrôle :
 
 $$
 \alpha = 0,\ 0.5,\ 1,\ 2,\ 5,\ 10,\ 100.
 $$
 
-La valeur $\alpha = 0$ sert de rÃ©fÃ©rence sans cisaillement hydrodynamique. Elle permet de distinguer ce qui vient uniquement du confinement gÃ©omÃ©trique et de la diffusion brownienne de ce qui est rÃ©ellement produit par l'Ã©coulement.
+La valeur $\alpha = 0$ sert de référence sans cisaillement hydrodynamique. Elle permet de distinguer ce qui vient uniquement du confinement géométrique et de la diffusion brownienne de ce qui est réellement produit par l'écoulement.
 
 ---
 
-## 1. ModÃ¨le physique
+## 1. Modèle physique
 
-Le systÃ¨me Ã©tudiÃ© est un bÃ¢tonnet rigide de longueur $L_B$ confinÃ© prÃ¨s d'une surface. Dans le code utilisÃ© ici :
+Le système étudié est un bâtonnet rigide de longueur $L_B$ confiné près d'une surface. Dans le code utilisé ici :
 
 $$
 L_B = D = 880\ \mathrm{nm}.
 $$
 
-La position transverse du centre de masse est notÃ©e $z_c$. On introduit la position rÃ©duite :
+La position transverse du centre de masse est notée $z_c$. On introduit la position réduite :
 
 $$
 \xi = \frac{z_c}{L_B}.
 $$
 
-Comme $D = L_B$, la variable $\xi$ varie entre 0 et 1 dans la gÃ©omÃ©trie actuelle. La surface infÃ©rieure correspond Ã  $\xi = 0$, tandis que la zone Ã©loignÃ©e de la surface correspond Ã  $\xi > 0.5$.
+Comme $D = L_B$, la variable $\xi$ varie entre 0 et 1 dans la géométrie actuelle. La surface inférieure correspond à $\xi = 0$, tandis que la zone éloignée de la surface correspond à $\xi > 0.5$.
 
-Deux rÃ©gions statistiques sont sÃ©parÃ©es :
+Deux régions statistiques sont séparées :
 
 $$
-\xi \leq 0.5 \quad \text{: couche de dÃ©plÃ©tion, proche de la surface},
+\xi \leq 0.5 \quad \text{: couche de déplétion, proche de la surface},
 $$
 
 $$
 \xi > 0.5 \quad \text{: volume}.
 $$
 
-L'angle d'orientation du bÃ¢tonnet est notÃ© $\theta$. Il est mesurÃ© par rapport Ã  la direction de l'Ã©coulement, avec :
+L'angle d'orientation du bâtonnet est noté $\theta$. Il est mesuré par rapport à la direction de l'écoulement, avec :
 
 $$
 -90^\circ \leq \theta < 90^\circ.
 $$
 
-Lorsque $\theta$ est proche de $0^\circ$, le bÃ¢tonnet est presque parallÃ¨le aux lignes de courant et Ã  la surface. Lorsque $|\theta|$ augmente, le bÃ¢tonnet devient plus inclinÃ© et risque davantage d'interagir avec la paroi.
+Lorsque $\theta$ est proche de $0^\circ$, le bâtonnet est presque parallèle aux lignes de courant et à la surface. Lorsque $|\theta|$ augmente, le bâtonnet devient plus incliné et risque davantage d'interagir avec la paroi.
 
 ---
 
-## 2. Dynamique simulÃ©e
+## 2. Dynamique simulée
 
-La dynamique rÃ©sulte de trois contributions principales.
+La dynamique résulte de trois contributions principales.
 
-La premiÃ¨re est la diffusion rotationnelle brownienne. Elle modÃ©lise les fluctuations thermiques du fluide et tend Ã  dÃ©sordonner l'orientation du bÃ¢tonnet :
+La première est la diffusion rotationnelle brownienne. Elle modélise les fluctuations thermiques du fluide et tend à désordonner l'orientation du bâtonnet :
 
 $$
 \Delta \theta_B = \pm \Delta_B.
 $$
 
-La deuxiÃ¨me est la diffusion translationnelle brownienne suivant $z_c$. Elle dÃ©place le centre de masse dans la direction transverse :
+La deuxième est la diffusion translationnelle brownienne suivant $z_c$. Elle déplace le centre de masse dans la direction transverse :
 
 $$
 \Delta z_B = \pm \frac{L_B}{3}\Delta_B.
 $$
 
-La troisiÃ¨me est la rotation hydrodynamique induite par le cisaillement :
+La troisième est la rotation hydrodynamique induite par le cisaillement :
 
 $$
 \Delta \theta_H =
 -\frac{\alpha_{\mathrm{local}}}{2}\sin^2(\theta)\Delta_B^2.
 $$
 
-Cette relation exprime le fait que le cisaillement n'agit pas comme un bruit alÃ©atoire, mais comme un terme dÃ©terministe qui favorise certaines orientations.
+Cette relation exprime le fait que le cisaillement n'agit pas comme un bruit aléatoire, mais comme un terme déterministe qui favorise certaines orientations.
 
-Le paramÃ¨tre $\alpha$ joue le rÃ´le d'un nombre de PÃ©clet rotationnel :
+Le paramètre $\alpha$ joue le rôle d'un nombre de Péclet rotationnel :
 
 $$
 \alpha \sim \frac{\dot{\gamma}_0}{D_{\mathrm{rot}}}.
 $$
 
-Il compare l'effet du cisaillement hydrodynamique Ã  la diffusion rotationnelle brownienne. Lorsque $\alpha$ est petit, le mouvement brownien domine. Lorsque $\alpha$ est grand, l'Ã©coulement impose progressivement une orientation prÃ©fÃ©rentielle.
+Il compare l'effet du cisaillement hydrodynamique à la diffusion rotationnelle brownienne. Lorsque $\alpha$ est petit, le mouvement brownien domine. Lorsque $\alpha$ est grand, l'écoulement impose progressivement une orientation préférentielle.
 
 ---
 
 ## 3. Profils de cisaillement
 
-### 3.1 Cisaillement linÃ©aire
+### 3.1 Cisaillement linéaire
 
-Dans le cas linÃ©aire, le cisaillement est supposÃ© uniforme dans la zone Ã©tudiÃ©e :
+Dans le cas linéaire, le cisaillement est supposé uniforme dans la zone étudiée :
 
 $$
 \alpha_{\mathrm{local}} = \alpha.
 $$
 
-Chaque position transverse ressent donc la mÃªme intensitÃ© de cisaillement.
+Chaque position transverse ressent donc la même intensité de cisaillement.
 
 ### 3.2 Demi-profil parabolique
 
-Dans le cas parabolique, la simulation utilise un cisaillement local dÃ©pendant de la position :
+Dans le cas parabolique, la simulation utilise un cisaillement local dépendant de la position :
 
 $$
 \alpha_{\mathrm{local}}(\xi) = \alpha(1-\xi).
 $$
 
-Ce choix correspond Ã  un demi-profil de Poiseuille. Dans un Ã©coulement de Poiseuille entre deux parois, la vitesse est parabolique et le taux de cisaillement est proportionnel Ã  la dÃ©rivÃ©e de cette vitesse. Sur une moitiÃ© du canal, le cisaillement local dÃ©croÃ®t linÃ©airement lorsqu'on s'Ã©loigne de la paroi.
+Ce choix correspond à un demi-profil de Poiseuille. Dans un écoulement de Poiseuille entre deux parois, la vitesse est parabolique et le taux de cisaillement est proportionnel à la dérivée de cette vitesse. Sur une moitié du canal, le cisaillement local décroît linéairement lorsqu'on s'éloigne de la paroi.
 
-Ainsi, prÃ¨s de la surface, le cisaillement local est plus fort. Vers la rÃ©gion $\xi \simeq 1$, il devient plus faible. Cela explique pourquoi les distributions obtenues sous demi-profil parabolique sont souvent plus larges ou plus irrÃ©guliÃ¨res : elles rÃ©sultent d'une moyenne sur plusieurs valeurs locales de cisaillement.
+Ainsi, près de la surface, le cisaillement local est plus fort. Vers la région $\xi \simeq 1$, il devient plus faible. Cela explique pourquoi les distributions obtenues sous demi-profil parabolique sont souvent plus larges ou plus irrégulières : elles résultent d'une moyenne sur plusieurs valeurs locales de cisaillement.
 
 ---
 
-## 4. Grandeurs statistiques calculÃ©es
+## 4. Grandeurs statistiques calculées
 
 La simulation produit trois familles principales de grandeurs.
 
-La premiÃ¨re est la distribution angulaire dans le volume :
+La première est la distribution angulaire dans le volume :
 
 $$
 P(\theta)\quad \text{pour}\quad \xi > 0.5.
 $$
 
-La deuxiÃ¨me est la distribution angulaire dans la couche de dÃ©plÃ©tion :
+La deuxième est la distribution angulaire dans la couche de déplétion :
 
 $$
 P(\theta)\quad \text{pour}\quad \xi \leq 0.5.
 $$
 
-La troisiÃ¨me est la distribution spatiale transverse :
+La troisième est la distribution spatiale transverse :
 
 $$
 P(\xi)\quad \text{pour}\quad 0 \leq \xi \leq 1.
 $$
 
-Pour les distributions spatiales, une reprÃ©sentation normalisÃ©e est aussi utilisÃ©e :
+Pour les distributions spatiales, une représentation normalisée est aussi utilisée :
 
 $$
 \frac{\rho(\xi)}{\rho_{\mathrm{bulk}}}.
 $$
 
-Cette normalisation compare la densitÃ© locale Ã  la densitÃ© moyenne dans le volume. Elle permet de visualiser clairement la couche de dÃ©plÃ©tion : si $\rho(\xi)/\rho_{\mathrm{bulk}} < 1$, la rÃ©gion est statistiquement appauvrie en centres de masse.
+Cette normalisation compare la densité locale à la densité moyenne dans le volume. Elle permet de visualiser clairement la couche de déplétion : si $\rho(\xi)/\rho_{\mathrm{bulk}} < 1$, la région est statistiquement appauvrie en centres de masse.
 
 ---
 
-## 5. Distributions angulaires sous cisaillement linÃ©aire
+## 5. Distributions angulaires sous cisaillement linéaire
 
 ### Figure 1 : distribution angulaire dans le volume
 
 ![Figure 1](figures/Fig1_full_alpha0_linear_bulk.png)
 
-La Figure 1 montre $P(\theta)$ dans le volume pour un cisaillement linÃ©aire. Dans cette rÃ©gion, le bÃ¢tonnet est moins contraint par la surface et peut explorer un domaine angulaire plus large.
+La Figure 1 montre $P(\theta)$ dans le volume pour un cisaillement linéaire. Dans cette région, le bâtonnet est moins contraint par la surface et peut explorer un domaine angulaire plus large.
 
-Pour $\alpha = 0$, il n'y a pas de rotation hydrodynamique. La distribution constitue donc une rÃ©fÃ©rence brownienne. En volume, aucun alignement imposÃ© par le cisaillement ne doit Ãªtre attendu.
+Pour $\alpha = 0$, il n'y a pas de rotation hydrodynamique. La distribution constitue donc une référence brownienne. En volume, aucun alignement imposé par le cisaillement ne doit être attendu.
 
-Lorsque $\alpha$ augmente, la distribution devient progressivement anisotrope. Les faibles valeurs de $\alpha$ correspondent Ã  une compÃ©tition entre la diffusion rotationnelle brownienne et le couple hydrodynamique. Aux grandes valeurs, en particulier $\alpha = 10$ et $\alpha = 100$, l'effet de l'Ã©coulement devient dominant : la probabilitÃ© se concentre autour d'un intervalle angulaire plus Ã©troit.
+Lorsque $\alpha$ augmente, la distribution devient progressivement anisotrope. Les faibles valeurs de $\alpha$ correspondent à une compétition entre la diffusion rotationnelle brownienne et le couple hydrodynamique. Aux grandes valeurs, en particulier $\alpha = 10$ et $\alpha = 100$, l'effet de l'écoulement devient dominant : la probabilité se concentre autour d'un intervalle angulaire plus étroit.
 
-Le dÃ©placement du maximum vers des angles plus proches de $0^\circ$ indique que le bÃ¢tonnet tend Ã  s'aligner avec les lignes de courant lorsque le nombre de PÃ©clet rotationnel augmente.
+Le déplacement du maximum vers des angles plus proches de $0^\circ$ indique que le bâtonnet tend à s'aligner avec les lignes de courant lorsque le nombre de Péclet rotationnel augmente.
 
-### Figure 2 : distribution angulaire dans la couche de dÃ©plÃ©tion
+### Figure 2 : distribution angulaire dans la couche de déplétion
 
 ![Figure 2](figures/Fig2_full_alpha0_linear_depletion.png)
 
-La Figure 2 prÃ©sente $P(\theta)$ prÃ¨s de la surface. La diffÃ©rence essentielle avec le volume est la prÃ©sence de la contrainte stÃ©rique imposÃ©e par la paroi.
+La Figure 2 présente $P(\theta)$ près de la surface. La différence essentielle avec le volume est la présence de la contrainte stérique imposée par la paroi.
 
-MÃªme lorsque $\alpha = 0$, le bÃ¢tonnet ne peut pas adopter librement toutes les orientations. Les grandes inclinaisons augmentent le risque d'intersection avec la surface. La gÃ©omÃ©trie favorise donc naturellement les orientations presque parallÃ¨les Ã  la paroi, c'est-Ã -dire proches de $\theta = 0^\circ$.
+Même lorsque $\alpha = 0$, le bâtonnet ne peut pas adopter librement toutes les orientations. Les grandes inclinaisons augmentent le risque d'intersection avec la surface. La géométrie favorise donc naturellement les orientations presque parallèles à la paroi, c'est-à-dire proches de $\theta = 0^\circ$.
 
-Lorsque $\alpha$ augmente, le cisaillement renforce cette orientation prÃ©fÃ©rentielle. Cependant, dans la couche de dÃ©plÃ©tion, l'effet dominant n'est pas seulement hydrodynamique : il est aussi gÃ©omÃ©trique. La paroi rÃ©duit l'espace des orientations accessibles avant mÃªme que le cisaillement n'agisse fortement.
+Lorsque $\alpha$ augmente, le cisaillement renforce cette orientation préférentielle. Cependant, dans la couche de déplétion, l'effet dominant n'est pas seulement hydrodynamique : il est aussi géométrique. La paroi réduit l'espace des orientations accessibles avant même que le cisaillement n'agisse fortement.
 
-Cette figure montre donc une compÃ©tition entre deux mÃ©canismes : le confinement stÃ©rique, qui existe mÃªme Ã  $\alpha = 0$, et le cisaillement linÃ©aire, qui devient plus visible lorsque $\alpha$ augmente.
+Cette figure montre donc une compétition entre deux mécanismes : le confinement stérique, qui existe même à $\alpha = 0$, et le cisaillement linéaire, qui devient plus visible lorsque $\alpha$ augmente.
 
 ---
 
@@ -1192,88 +1192,88 @@ Cette figure montre donc une compÃ©tition entre deux mÃ©canismes : le confin
 
 ![Figure 3](figures/Fig3_full_alpha0_parabolic_bulk.png)
 
-La Figure 3 montre $P(\theta)$ dans le volume pour le demi-profil parabolique. Contrairement au cisaillement linÃ©aire, le taux de cisaillement local n'est pas constant :
+La Figure 3 montre $P(\theta)$ dans le volume pour le demi-profil parabolique. Contrairement au cisaillement linéaire, le taux de cisaillement local n'est pas constant :
 
 $$
 \alpha_{\mathrm{local}}(\xi) = \alpha(1-\xi).
 $$
 
-Le volume contient donc des particules situÃ©es Ã  diffÃ©rentes positions $\xi$, chacune ressentant une intensitÃ© hydrodynamique diffÃ©rente. La distribution globale est une superposition de sous-populations soumises Ã  des cisaillements locaux distincts.
+Le volume contient donc des particules situées à différentes positions $\xi$, chacune ressentant une intensité hydrodynamique différente. La distribution globale est une superposition de sous-populations soumises à des cisaillements locaux distincts.
 
-Cette inhomogÃ©nÃ©itÃ© explique pourquoi les pics sont gÃ©nÃ©ralement moins simples Ã  interprÃ©ter que dans le cas linÃ©aire. Aux faibles valeurs de $\alpha$, les maxima numÃ©riques peuvent Ãªtre influencÃ©s par le bruit statistique et par la largeur des distributions. Aux fortes valeurs, l'orientation devient plus nette, mais elle reste marquÃ©e par la variation spatiale du cisaillement.
+Cette inhomogénéité explique pourquoi les pics sont généralement moins simples à interpréter que dans le cas linéaire. Aux faibles valeurs de $\alpha$, les maxima numériques peuvent être influencés par le bruit statistique et par la largeur des distributions. Aux fortes valeurs, l'orientation devient plus nette, mais elle reste marquée par la variation spatiale du cisaillement.
 
-La figure met donc en Ã©vidence une dynamique hors Ã©quilibre plus complexe : le bÃ¢tonnet ne subit pas seulement une compÃ©tition entre diffusion brownienne et cisaillement, mais aussi une variation de l'intensitÃ© du cisaillement selon sa position.
+La figure met donc en évidence une dynamique hors équilibre plus complexe : le bâtonnet ne subit pas seulement une compétition entre diffusion brownienne et cisaillement, mais aussi une variation de l'intensité du cisaillement selon sa position.
 
-### Figure 4 : distribution angulaire dans la couche de dÃ©plÃ©tion
+### Figure 4 : distribution angulaire dans la couche de déplétion
 
 ![Figure 4](figures/Fig4_full_alpha0_parabolic_depletion.png)
 
-La Figure 4 correspond Ã  la couche de dÃ©plÃ©tion sous demi-profil parabolique. Cette rÃ©gion est physiquement importante parce qu'elle combine deux effets forts : la proximitÃ© de la surface et un cisaillement local Ã©levÃ©.
+La Figure 4 correspond à la couche de déplétion sous demi-profil parabolique. Cette région est physiquement importante parce qu'elle combine deux effets forts : la proximité de la surface et un cisaillement local élevé.
 
-La surface impose une sÃ©lection gÃ©omÃ©trique des orientations. Le demi-profil parabolique ajoute ensuite une rotation hydrodynamique dÃ©pendante de la position. Le rÃ©sultat est une distribution centrÃ©e prÃ¨s des faibles angles, avec une Ã©volution progressive lorsque $\alpha$ augmente.
+La surface impose une sélection géométrique des orientations. Le demi-profil parabolique ajoute ensuite une rotation hydrodynamique dépendante de la position. Le résultat est une distribution centrée près des faibles angles, avec une évolution progressive lorsque $\alpha$ augmente.
 
-ComparÃ©e au volume, la couche de dÃ©plÃ©tion prÃ©sente des orientations beaucoup plus contraintes. Le bÃ¢tonnet ne peut pas explorer librement les grands angles, car ceux-ci le rapprochent mÃ©caniquement de la paroi. La paroi agit donc comme un filtre gÃ©omÃ©trique sur l'espace angulaire accessible.
+Comparée au volume, la couche de déplétion présente des orientations beaucoup plus contraintes. Le bâtonnet ne peut pas explorer librement les grands angles, car ceux-ci le rapprochent mécaniquement de la paroi. La paroi agit donc comme un filtre géométrique sur l'espace angulaire accessible.
 
 ---
 
-## 7. Distributions spatiales : donnÃ©es brutes et traitement statistique
+## 7. Distributions spatiales : données brutes et traitement statistique
 
-Les Figures 5a et 6a prÃ©sentent les distributions spatiales brutes $P(\xi)$. Elles montrent directement le rÃ©sultat du comptage dans des bins fins. Les oscillations visibles, surtout pour les grandes valeurs de $\alpha$, proviennent du nombre fini d'Ã©chantillons et de la finesse du pas en $\xi$.
+Les Figures 5a et 6a présentent les distributions spatiales brutes $P(\xi)$. Elles montrent directement le résultat du comptage dans des bins fins. Les oscillations visibles, surtout pour les grandes valeurs de $\alpha$, proviennent du nombre fini d'échantillons et de la finesse du pas en $\xi$.
 
-Pour faire apparaÃ®tre la tendance physique robuste, les Figures 5b et 6b utilisent un regroupement statistique de cinq bins successifs :
+Pour faire apparaître la tendance physique robuste, les Figures 5b et 6b utilisent un regroupement statistique de cinq bins successifs :
 
 $$
 \Delta \xi = 0.005.
 $$
 
-Ce traitement ne modifie pas la dynamique simulÃ©e. Il agit uniquement comme un post-traitement statistique destinÃ© Ã  rÃ©duire les oscillations de comptage et Ã  rendre la couche de dÃ©plÃ©tion plus lisible.
+Ce traitement ne modifie pas la dynamique simulée. Il agit uniquement comme un post-traitement statistique destiné à réduire les oscillations de comptage et à rendre la couche de déplétion plus lisible.
 
-### Figure 5a : distribution spatiale brute sous cisaillement linÃ©aire
+### Figure 5a : distribution spatiale brute sous cisaillement linéaire
 
 ![Figure 5a](figures/Fig5a_raw_Pxi_linear.png)
 
-La Figure 5a montre la distribution spatiale brute $P(\xi)$ pour le cisaillement linÃ©aire. Le profil croÃ®t depuis la surface jusqu'Ã  la rÃ©gion du volume. Cette croissance traduit l'existence d'une couche de dÃ©plÃ©tion : prÃ¨s de la paroi, une partie des positions du centre de masse est gÃ©omÃ©triquement moins accessible Ã  cause de la longueur finie du bÃ¢tonnet.
+La Figure 5a montre la distribution spatiale brute $P(\xi)$ pour le cisaillement linéaire. Le profil croît depuis la surface jusqu'à la région du volume. Cette croissance traduit l'existence d'une couche de déplétion : près de la paroi, une partie des positions du centre de masse est géométriquement moins accessible à cause de la longueur finie du bâtonnet.
 
-Le saut autour de $\xi \simeq 0.5$ correspond au passage entre la rÃ©gion proche de la surface et le volume. Dans le volume, la densitÃ© devient beaucoup plus proche d'un plateau.
+Le saut autour de $\xi \simeq 0.5$ correspond au passage entre la région proche de la surface et le volume. Dans le volume, la densité devient beaucoup plus proche d'un plateau.
 
-### Figure 5b : distribution spatiale normalisÃ©e sous cisaillement linÃ©aire
+### Figure 5b : distribution spatiale normalisée sous cisaillement linéaire
 
 ![Figure 5b](figures/Fig5b_binned_Pxi_linear.png)
 
-La Figure 5b montre la mÃªme information aprÃ¨s regroupement statistique et normalisation par $\rho_{\mathrm{bulk}}$.
+La Figure 5b montre la même information après regroupement statistique et normalisation par $\rho_{\mathrm{bulk}}$.
 
-La lecture physique devient plus claire : la quantitÃ© $\rho(\xi)/\rho_{\mathrm{bulk}}$ est faible prÃ¨s de la surface, puis augmente progressivement jusqu'Ã  atteindre une valeur proche de 1 dans le volume. Cela signifie que la densitÃ© locale rejoint la densitÃ© moyenne du volume lorsque le centre de masse est suffisamment Ã©loignÃ© de la paroi.
+La lecture physique devient plus claire : la quantité $\rho(\xi)/\rho_{\mathrm{bulk}}$ est faible près de la surface, puis augmente progressivement jusqu'à atteindre une valeur proche de 1 dans le volume. Cela signifie que la densité locale rejoint la densité moyenne du volume lorsque le centre de masse est suffisamment éloigné de la paroi.
 
-Cette figure confirme que l'effet principal sur $P(\xi)$ est gÃ©omÃ©trique. Le cisaillement modifie lÃ©gÃ¨rement les profils, mais la forme gÃ©nÃ©rale de la couche de dÃ©plÃ©tion est imposÃ©e par l'exclusion stÃ©rique du bÃ¢tonnet prÃ¨s de la surface.
+Cette figure confirme que l'effet principal sur $P(\xi)$ est géométrique. Le cisaillement modifie légèrement les profils, mais la forme générale de la couche de déplétion est imposée par l'exclusion stérique du bâtonnet près de la surface.
 
 ### Figure 6a : distribution spatiale brute sous demi-profil parabolique
 
 ![Figure 6a](figures/Fig6a_raw_Pxi_parabolic.png)
 
-La Figure 6a prÃ©sente la distribution spatiale brute $P(\xi)$ pour le demi-profil parabolique. Comme dans le cas linÃ©aire, la densitÃ© est faible prÃ¨s de la surface et augmente vers le volume.
+La Figure 6a présente la distribution spatiale brute $P(\xi)$ pour le demi-profil parabolique. Comme dans le cas linéaire, la densité est faible près de la surface et augmente vers le volume.
 
-Les oscillations brutes sont visibles parce que la statistique est collectÃ©e avec un pas fin en $\xi$. Elles ne doivent pas Ãªtre interprÃ©tÃ©es comme des structures physiques pÃ©riodiques. Elles sont liÃ©es Ã  la discrÃ©tisation de l'histogramme et au caractÃ¨re alÃ©atoire de la dynamique brownienne.
+Les oscillations brutes sont visibles parce que la statistique est collectée avec un pas fin en $\xi$. Elles ne doivent pas être interprétées comme des structures physiques périodiques. Elles sont liées à la discrétisation de l'histogramme et au caractère aléatoire de la dynamique brownienne.
 
-### Figure 6b : distribution spatiale normalisÃ©e sous demi-profil parabolique
+### Figure 6b : distribution spatiale normalisée sous demi-profil parabolique
 
 ![Figure 6b](figures/Fig6b_binned_Pxi_parabolic.png)
 
-La Figure 6b montre la distribution spatiale normalisÃ©e aprÃ¨s regroupement statistique. Comme dans le cas linÃ©aire, la courbe rÃ©vÃ¨le clairement une rÃ©gion appauvrie prÃ¨s de la surface et un plateau dans le volume.
+La Figure 6b montre la distribution spatiale normalisée après regroupement statistique. Comme dans le cas linéaire, la courbe révèle clairement une région appauvrie près de la surface et un plateau dans le volume.
 
-La diffÃ©rence physique avec le cisaillement linÃ©aire vient du fait que le cisaillement local dÃ©pend de $\xi$. Le bÃ¢tonnet proche de la surface ressent un cisaillement plus fort que celui situÃ© plus loin. MalgrÃ© cela, la forme globale de $\rho(\xi)/\rho_{\mathrm{bulk}}$ reste dominÃ©e par le confinement stÃ©rique.
+La différence physique avec le cisaillement linéaire vient du fait que le cisaillement local dépend de $\xi$. Le bâtonnet proche de la surface ressent un cisaillement plus fort que celui situé plus loin. Malgré cela, la forme globale de $\rho(\xi)/\rho_{\mathrm{bulk}}$ reste dominée par le confinement stérique.
 
 ---
 
-## 8. Ã‰volution de l'angle le plus probable
+## 8. Évolution de l'angle le plus probable
 
-L'angle $\theta_{\max}$ est dÃ©fini comme le centre du bin angulaire oÃ¹ la probabilitÃ© $P(\theta)$ est maximale.
+L'angle $\theta_{\max}$ est défini comme le centre du bin angulaire où la probabilité $P(\theta)$ est maximale.
 
 Il faut cependant distinguer deux situations :
 
-- si la distribution est fortement piquÃ©e, $\theta_{\max}$ correspond Ã  une orientation prÃ©fÃ©rentielle physiquement significative ;
-- si la distribution est large ou presque uniforme, $\theta_{\max}$ est seulement un maximum numÃ©rique, parfois produit par de faibles fluctuations statistiques.
+- si la distribution est fortement piquée, $\theta_{\max}$ correspond à une orientation préférentielle physiquement significative ;
+- si la distribution est large ou presque uniforme, $\theta_{\max}$ est seulement un maximum numérique, parfois produit par de faibles fluctuations statistiques.
 
-Pour cette raison, les courbes $\theta_{\max}(\alpha)$ sont tracÃ©es uniquement pour les valeurs positives de $\alpha$. La valeur $\alpha = 0$ est une rÃ©fÃ©rence sans cisaillement, mais elle ne dÃ©finit pas un maximum hydrodynamique pertinent dans le volume.
+Pour cette raison, les courbes $\theta_{\max}(\alpha)$ sont tracées uniquement pour les valeurs positives de $\alpha$. La valeur $\alpha = 0$ est une référence sans cisaillement, mais elle ne définit pas un maximum hydrodynamique pertinent dans le volume.
 
 ### Figure 7 : variation de $\theta_{\max}$ dans le volume
 
@@ -1281,83 +1281,83 @@ Pour cette raison, les courbes $\theta_{\max}(\alpha)$ sont tracÃ©es uniquemen
 
 La Figure 7 montre la variation de $\theta_{\max}$ en fonction de $\alpha$ dans le volume.
 
-Dans le cas du cisaillement linÃ©aire, la tendance gÃ©nÃ©rale est une diminution de $\theta_{\max}$ lorsque $\alpha$ augmente. Physiquement, cela signifie que le bÃ¢tonnet s'oriente de plus en plus prÃ¨s de la direction de l'Ã©coulement. Ã€ grand $\alpha$, le couple hydrodynamique domine la diffusion brownienne rotationnelle et impose un alignement plus marquÃ©.
+Dans le cas du cisaillement linéaire, la tendance générale est une diminution de $\theta_{\max}$ lorsque $\alpha$ augmente. Physiquement, cela signifie que le bâtonnet s'oriente de plus en plus près de la direction de l'écoulement. À grand $\alpha$, le couple hydrodynamique domine la diffusion brownienne rotationnelle et impose un alignement plus marqué.
 
-Dans le cas du demi-profil parabolique, l'Ã©volution est moins monotone aux faibles et moyennes valeurs de $\alpha$. Cette irrÃ©gularitÃ© n'est pas surprenante : le volume mÃ©lange des particules soumises Ã  diffÃ©rents cisaillements locaux. De plus, lorsque les distributions sont larges, le maximum numÃ©rique peut se dÃ©placer sans correspondre Ã  une orientation physique trÃ¨s nette.
+Dans le cas du demi-profil parabolique, l'évolution est moins monotone aux faibles et moyennes valeurs de $\alpha$. Cette irrégularité n'est pas surprenante : le volume mélange des particules soumises à différents cisaillements locaux. De plus, lorsque les distributions sont larges, le maximum numérique peut se déplacer sans correspondre à une orientation physique très nette.
 
-Ã€ grande valeur de $\alpha$, la tendance redevient plus claire : le maximum se rapproche de faibles angles, ce qui traduit l'orientation progressive du bÃ¢tonnet par l'Ã©coulement.
+À grande valeur de $\alpha$, la tendance redevient plus claire : le maximum se rapproche de faibles angles, ce qui traduit l'orientation progressive du bâtonnet par l'écoulement.
 
-### Figure 8 : variation de $\theta_{\max}$ dans la couche de dÃ©plÃ©tion
+### Figure 8 : variation de $\theta_{\max}$ dans la couche de déplétion
 
 ![Figure 8](figures/Fig8_theta_max_depletion.png)
 
-La Figure 8 montre l'Ã©volution de $\theta_{\max}$ dans la couche de dÃ©plÃ©tion.
+La Figure 8 montre l'évolution de $\theta_{\max}$ dans la couche de déplétion.
 
-Contrairement au volume, les valeurs de $\theta_{\max}$ restent proches de faibles angles. Cela confirme que la surface impose une orientation presque parallÃ¨le Ã  la paroi. Le cisaillement peut dÃ©placer lÃ©gÃ¨rement le maximum, mais il agit dans un espace angulaire dÃ©jÃ  fortement contraint.
+Contrairement au volume, les valeurs de $\theta_{\max}$ restent proches de faibles angles. Cela confirme que la surface impose une orientation presque parallèle à la paroi. Le cisaillement peut déplacer légèrement le maximum, mais il agit dans un espace angulaire déjà fortement contraint.
 
-Cette figure montre donc que la couche de dÃ©plÃ©tion n'est pas simplement une version plus dense ou moins dense du volume. Elle correspond Ã  un rÃ©gime physique diffÃ©rent, dominÃ© par l'interaction entre confinement stÃ©rique, diffusion brownienne et cisaillement local.
+Cette figure montre donc que la couche de déplétion n'est pas simplement une version plus dense ou moins dense du volume. Elle correspond à un régime physique différent, dominé par l'interaction entre confinement stérique, diffusion brownienne et cisaillement local.
 
 ---
 
-## 9. Valeurs numÃ©riques de $\theta_{\max}$
+## 9. Valeurs numériques de $\theta_{\max}$
 
-Les valeurs suivantes ont Ã©tÃ© extraites des histogrammes angulaires. Elles doivent Ãªtre lues comme des maxima numÃ©riques. Leur signification physique est forte lorsque la distribution est Ã©troite et contrastÃ©e, et plus faible lorsque la distribution est large.
+Les valeurs suivantes ont été extraites des histogrammes angulaires. Elles doivent être lues comme des maxima numériques. Leur signification physique est forte lorsque la distribution est étroite et contrastée, et plus faible lorsque la distribution est large.
 
 ### Volume
 
-| $\alpha$ | Cisaillement linÃ©aire | Demi-profil parabolique |
+| $\alpha$ | Cisaillement linéaire | Demi-profil parabolique |
 |---:|---:|---:|
-| 0.5 | 32.5Â° | 60.5Â° |
-| 1 | 36.5Â° | 31.5Â° |
-| 2 | 32.5Â° | 57.5Â° |
-| 5 | 25.5Â° | 36.5Â° |
-| 10 | 20.5Â° | 34.5Â° |
-| 100 | 9.5Â° | 14.5Â° |
+| 0.5 | 32.5° | 60.5° |
+| 1 | 36.5° | 31.5° |
+| 2 | 32.5° | 57.5° |
+| 5 | 25.5° | 36.5° |
+| 10 | 20.5° | 34.5° |
+| 100 | 9.5° | 14.5° |
 
-### Couche de dÃ©plÃ©tion
+### Couche de déplétion
 
-| $\alpha$ | Cisaillement linÃ©aire | Demi-profil parabolique |
+| $\alpha$ | Cisaillement linéaire | Demi-profil parabolique |
 |---:|---:|---:|
-| 0.5 | -1.5Â° | 1.5Â° |
-| 1 | 1.5Â° | 3.5Â° |
-| 2 | 5.5Â° | 0.5Â° |
-| 5 | 11.5Â° | 3.5Â° |
-| 10 | 11.5Â° | 9.5Â° |
-| 100 | 7.5Â° | 10.5Â° |
+| 0.5 | -1.5° | 1.5° |
+| 1 | 1.5° | 3.5° |
+| 2 | 5.5° | 0.5° |
+| 5 | 11.5° | 3.5° |
+| 10 | 11.5° | 9.5° |
+| 100 | 7.5° | 10.5° |
 
 ---
 
 ## 10. Conclusion physique
 
-Les rÃ©sultats montrent que l'orientation du bÃ¢tonnet est gouvernÃ©e par trois mÃ©canismes :
+Les résultats montrent que l'orientation du bâtonnet est gouvernée par trois mécanismes :
 
-- la diffusion rotationnelle brownienne, qui tend Ã  dÃ©sordonner l'orientation ;
-- le cisaillement hydrodynamique, qui favorise une orientation prÃ©fÃ©rentielle ;
-- le confinement stÃ©rique, qui limite les orientations possibles prÃ¨s de la surface.
+- la diffusion rotationnelle brownienne, qui tend à désordonner l'orientation ;
+- le cisaillement hydrodynamique, qui favorise une orientation préférentielle ;
+- le confinement stérique, qui limite les orientations possibles près de la surface.
 
-Dans le volume, l'augmentation de $\alpha$ conduit progressivement Ã  une orientation plus marquÃ©e du bÃ¢tonnet par l'Ã©coulement. Cette tendance est plus directe dans le cas linÃ©aire, car le cisaillement est uniforme.
+Dans le volume, l'augmentation de $\alpha$ conduit progressivement à une orientation plus marquée du bâtonnet par l'écoulement. Cette tendance est plus directe dans le cas linéaire, car le cisaillement est uniforme.
 
-Dans la couche de dÃ©plÃ©tion, la paroi joue un rÃ´le dominant. MÃªme sans cisaillement, elle favorise les orientations presque parallÃ¨les Ã  la surface. Le cisaillement modifie ensuite cette organisation, mais ne remplace pas la contrainte gÃ©omÃ©trique.
+Dans la couche de déplétion, la paroi joue un rôle dominant. Même sans cisaillement, elle favorise les orientations presque parallèles à la surface. Le cisaillement modifie ensuite cette organisation, mais ne remplace pas la contrainte géométrique.
 
-Les distributions spatiales $P(\xi)$ confirment l'existence d'une couche appauvrie prÃ¨s de la surface. Cette couche n'est pas une sÃ©paration de phase : elle correspond Ã  une exclusion gÃ©omÃ©trique due Ã  la taille finie du bÃ¢tonnet et Ã  l'impossibilitÃ© d'occuper certaines configurations proches de la paroi.
+Les distributions spatiales $P(\xi)$ confirment l'existence d'une couche appauvrie près de la surface. Cette couche n'est pas une séparation de phase : elle correspond à une exclusion géométrique due à la taille finie du bâtonnet et à l'impossibilité d'occuper certaines configurations proches de la paroi.
 
-La comparaison entre les donnÃ©es brutes et les profils regroupÃ©s montre enfin l'importance du post-traitement statistique. Le regroupement des bins rÃ©duit les oscillations numÃ©riques sans modifier le modÃ¨le physique, ce qui permet de mieux distinguer les tendances robustes.
+La comparaison entre les données brutes et les profils regroupés montre enfin l'importance du post-traitement statistique. Le regroupement des bins réduit les oscillations numériques sans modifier le modèle physique, ce qui permet de mieux distinguer les tendances robustes.
 
 ---
 
 ## 11. Fichiers principaux
 
 - `main.cpp` : code C++ complet de la simulation.
-- `figures/` : figures finales utilisÃ©es pour l'interprÃ©tation physique.
-- `data/` : fichiers numÃ©riques post-traitÃ©s pour les figures $\theta_{\max}(\alpha)$ et $\rho(\xi)/\rho_{\mathrm{bulk}}$.
+- `figures/` : figures finales utilisées pour l'interprétation physique.
+- `data/` : fichiers numériques post-traités pour les figures $\theta_{\max}(\alpha)$ et $\rho(\xi)/\rho_{\mathrm{bulk}}$.
 
-Le programme Ã©crit ses rÃ©sultats dans le dossier :
+Le programme écrit ses résultats dans le dossier :
 
 ```text
 results_alpha0_full
 ```
 
-Les principaux fichiers gÃ©nÃ©rÃ©s suivent les formes :
+Les principaux fichiers générés suivent les formes :
 
 ```text
 teta_bulk_<profil>_alpha_<valeur>.txt
@@ -1366,16 +1366,15 @@ ksi_surface_<profil>_alpha_<valeur>.txt
 ksi_full_<profil>_alpha_<valeur>.txt
 ```
 
-oÃ¹ `<profil>` vaut `linear` ou `parabolic`, et `<valeur>` vaut `0`, `0p5`, `1`, `2`, `5`, `10` ou `100`.
+où `<profil>` vaut `linear` ou `parabolic`, et `<valeur>` vaut `0`, `0p5`, `1`, `2`, `5`, `10` ou `100`.
 
 ---
 
-## 12. Note mÃ©thodologique
+## 12. Note méthodologique
 
-Les rÃ©sultats prÃ©sentÃ©s ici correspondent Ã  une simulation stochastique Ã  graines pseudo-alÃ©atoires fixes. Ce choix rend les comparaisons reproductibles. Pour une Ã©tude statistique plus complÃ¨te, il serait utile de rÃ©pÃ©ter les simulations avec plusieurs jeux de graines indÃ©pendantes et d'ajouter des barres d'incertitude sur les histogrammes et sur $\theta_{\max}$.
+Les résultats présentés ici correspondent à une simulation stochastique à graines pseudo-aléatoires fixes. Ce choix rend les comparaisons reproductibles. Pour une étude statistique plus complète, il serait utile de répéter les simulations avec plusieurs jeux de graines indépendantes et d'ajouter des barres d'incertitude sur les histogrammes et sur $\theta_{\max}$.
 
-Une amÃ©lioration future importante serait Ã©galement d'Ã©tudier d'autres rapports entre le diamÃ¨tre du mÃ©sopore et la longueur du bÃ¢tonnet, notamment le cas oÃ¹ le diamÃ¨tre du mÃ©sopore devient infÃ©rieur Ã  la longueur du bÃ¢tonnet.
-
+Une amélioration future importante serait également d'étudier d'autres rapports entre le diamètre du mésopore et la longueur du bâtonnet, notamment le cas où le diamètre du mésopore devient inférieur à la longueur du bâtonnet.
 
 ---
 
