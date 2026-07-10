@@ -6,6 +6,8 @@ Le cadre scientifique du projet est relié aux travaux de Balakrishnan sur la ph
 
 Pour une lecture synthétique et approfondie des mécanismes physiques et cinétiques, voir le document complémentaire : [Interprétation physique et cinétique](interpretation_physique_cinetique.md).
 
+Pour une lecture figure par figure des résultats à la lumière des références, voir : [Lecture des résultats selon les références](lecture_resultats_selon_references.md).
+
 ## Organisation et paramètres numériques
 
 - `main.cpp` : simulation séquentielle des deux profils d'écoulement pour $\alpha=0$, $0.5$, $1$, $2$, $5$, $10$ et $100$.
