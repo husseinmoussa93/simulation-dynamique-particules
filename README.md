@@ -1,4 +1,4 @@
-# Simulation de la dynamique d'un bâtonnet brownien confiné
+﻿# Simulation de la dynamique d'un bâtonnet brownien confiné
 
 Ce dépôt contient le code C++ et l'analyse des distributions d'orientation et de position d'un bâtonnet brownien confiné, soumis à un écoulement de cisaillement uniforme ou à un demi-profil parabolique de Poiseuille.
 
@@ -7,6 +7,8 @@ Le cadre scientifique du projet est relié aux travaux de Balakrishnan sur la ph
 Pour une lecture synthétique et approfondie des mécanismes physiques et cinétiques, voir le document complémentaire : [Interprétation physique et cinétique](interpretation_physique_cinetique.md).
 
 Pour une lecture figure par figure des résultats à la lumière des références, voir : [Lecture des résultats selon les références](lecture_resultats_selon_references.md).
+
+Pour la continuité scientifique et technique du projet, voir : [Notes de continuité du projet](PROJECT_CONTEXT.md).
 
 ## Organisation et paramètres numériques
 
@@ -1413,3 +1415,5 @@ Afin de conserver l'historique scientifique du travail, deux versions du program
 - `main_alpha0_full_xi_corrected.cpp` : version complète actuelle, avec $\alpha=0$ et la correction de la distribution spatiale $P(\xi)$ jusqu'à $\xi=1$.
 
 Le fichier `main.cpp` à la racine du dépôt correspond à la version complète actuelle permettant de régénérer les nouveaux résultats.
+
+
