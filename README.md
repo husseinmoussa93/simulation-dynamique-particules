@@ -1376,3 +1376,14 @@ Les rÃ©sultats prÃ©sentÃ©s ici correspondent Ã  une simulation stochasti
 
 Une amÃ©lioration future importante serait Ã©galement d'Ã©tudier d'autres rapports entre le diamÃ¨tre du mÃ©sopore et la longueur du bÃ¢tonnet, notamment le cas oÃ¹ le diamÃ¨tre du mÃ©sopore devient infÃ©rieur Ã  la longueur du bÃ¢tonnet.
 
+
+---
+
+## Versions du code C++
+
+Afin de conserver l'historique scientifique du travail, deux versions du programme C++ sont disponibles dans le dossier `code_versions/` :
+
+- `main_original_before_alpha0.cpp` : version initiale utilisée avant l'ajout du cas $\alpha=0$ ; elle contient les valeurs $\alpha=0.5$, $1$, $2$, $5$, $10$ et $100$.
+- `main_alpha0_full_xi_corrected.cpp` : version complète actuelle, avec $\alpha=0$ et la correction de la distribution spatiale $P(\xi)$ jusqu'à $\xi=1$.
+
+Le fichier `main.cpp` à la racine du dépôt correspond à la version complète actuelle permettant de régénérer les nouveaux résultats.
