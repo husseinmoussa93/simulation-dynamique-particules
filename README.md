@@ -4,6 +4,8 @@ Ce dépôt contient le code C++ et l'analyse des distributions d'orientation et 
 
 Le cadre scientifique du projet est relié aux travaux de Balakrishnan sur la physique statistique hors équilibre, ainsi qu'aux travaux de Hijazi, Khater, Tannous et Atwi sur les distributions de probabilité de particules anisotropes en écoulement laminaire, dans le bulk, près des surfaces solides et à l'intérieur de mésopores.
 
+Pour une lecture synthétique et approfondie des mécanismes physiques et cinétiques, voir le document complémentaire : [Interprétation physique et cinétique](interpretation_physique_cinetique.md).
+
 ## Organisation et paramètres numériques
 
 - `main.cpp` : simulation séquentielle des deux profils d'écoulement pour $\alpha=0$, $0.5$, $1$, $2$, $5$, $10$ et $100$.
