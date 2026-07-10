@@ -2,10 +2,12 @@
 
 Ce dépôt contient le code C++ et l'analyse des distributions d'orientation et de position d'un bâtonnet brownien confiné, soumis à un écoulement de cisaillement uniforme ou à un demi-profil parabolique de Poiseuille.
 
+Le cadre scientifique du projet est relié aux travaux de Balakrishnan sur la physique statistique hors équilibre, ainsi qu'aux travaux de Hijazi, Khater, Tannous et Atwi sur les distributions de probabilité de particules anisotropes en écoulement laminaire, dans le bulk, près des surfaces solides et à l'intérieur de mésopores.
+
 ## Organisation et paramètres numériques
 
-- `main.cpp` : simulation séquentielle des deux profils d'écoulement pour $\alpha=0.5$, $1$, $2$, $5$, $10$ et $100$.
-- `Fig1.png` à `Fig18.png` : distributions $P(\theta)$ dans le volume et près de la surface, comparaisons entre écoulements et distributions $P(\xi)$ près de la surface.
+- `main.cpp` : simulation séquentielle des deux profils d'écoulement pour $\alpha=0$, $0.5$, $1$, $2$, $5$, $10$ et $100$.
+- `Fig1.png` à `Fig20.png` : distributions $P(\theta)$ dans le volume et dans la couche de déplétion, comparaisons entre écoulements, distributions spatiales $P(\xi)$ et courbes $\theta_{\max}(\alpha)$.
 - $L_B=D=880\,\mathrm{nm}$, $\Delta_B=0.03$ et $10^7$ itérations par cas.
 - Région proche de la surface : $\xi\leq0.5$ ; volume : $\xi>0.5$, avec $\xi=z_c/L_B$.
 
@@ -19,15 +21,16 @@ Dans Code::Blocks, créer un projet console C++, ajouter `main.cpp`, sélectionn
 g++ -O2 -std=c++11 main.cpp -o simulation
 ```
 
-Le programme crée 36 fichiers dans le répertoire d'exécution. Les noms suivent les formes :
+Le programme crée 56 fichiers dans le répertoire d'exécution : deux profils d'écoulement, sept valeurs de $\alpha$ et quatre familles de sorties statistiques. Les noms suivent les formes :
 
 ```text
 teta_bulk_<profil>_alpha_<valeur>.txt
 teta_surface_<profil>_alpha_<valeur>.txt
 ksi_surface_<profil>_alpha_<valeur>.txt
+ksi_full_<profil>_alpha_<valeur>.txt
 ```
 
-où `<profil>` vaut `linear` ou `parabolic` et `<valeur>` vaut `0p5`, `1`, `2`, `5`, `10` ou `100`. Les graines pseudo-aléatoires sont fixes, de sorte que l'exécution est reproductible pour cette version du programme.
+où `<profil>` vaut `linear` ou `parabolic` et `<valeur>` vaut `0`, `0p5`, `1`, `2`, `5`, `10` ou `100`. Les graines pseudo-aléatoires sont fixes, de sorte que l'exécution est reproductible pour cette version du programme.
 
 ## Portée et limites numériques
 
@@ -287,17 +290,37 @@ seule, à démontrer l’équilibre. Une caractérisation plus complète du
 caractère hors équilibre nécessiterait l’étude des courants de probabilité
 ou de la production d’entropie.
 
-## I.12. Référence bibliographique
+## I.12. Références scientifiques utilisées
 
-Balakrishnan, V. (2021). *Elements of Nonequilibrium Statistical Mechanics*.
-Springer, Cham. DOI: 10.1007/978-3-030-62233-6.
+Le présent travail s'appuie sur deux niveaux de références. Le premier niveau fournit le cadre général de la physique statistique hors équilibre : bruit thermique, dynamique de Langevin, équation de Fokker-Planck, état stationnaire et rôle des frontières. Le second niveau concerne spécifiquement les particules anisotropes en solution, les distributions d'orientation, les mésopores et les interactions avec les parois.
+
+Balakrishnan, V. (2021). *Elements of Nonequilibrium Statistical Mechanics*. Springer, Cham. DOI: 10.1007/978-3-030-62233-6.
+
+Khater, A., Tannous, C., & Hijazi, A. (2001). *Exact solutions of the Boeder differential equation for macromolecular orientations in a flowing liquid*. arXiv:physics/0104035. https://arxiv.org/abs/physics/0104035
+
+Hijazi, A. (2000). *Simulations numériques de densités de probabilité de macromolécules en solution sous écoulement laminaire*. Thèse de doctorat, Université du Maine, spécialité Physique des Matériaux et des Surfaces.
 
 Hijazi, A., & Khater, A. (2008). *Boëder PDF Brownian simulations for macromolecular rod-like particles near uneven solid surfaces*. European Polymer Journal. DOI: 10.1016/j.eurpolymj.2008.08.007.
+
+Atwi, A. (2012). *Theoretical and numerical calculations for the dynamics of colloidal suspensions of molecular particles in flowing solution inside mesopores*. Thèse de doctorat, Le Mans Université / Université Libanaise. NNT: 2012LEMA1004. HAL: https://theses.hal.science/tel-00718615v1
 
 Atwi, A., Khater, A., & Hijazi, A. (2013). *Three-dimensional simulations for the dynamics of dilute colloidal suspensions of ellipsoidal-like particles flowing in the bulk and near solid boundaries*. Polymer, 54, 1555-1566. DOI: 10.1016/j.polymer.2013.01.018.
 
 Atwi, A., Hijazi, A., & Khater, A. (2016). *Simulations of the PDF functions for dilute colloidal suspensions of molecular particles flowing in mesopores with rough surface boundaries*. Colloid Journal, 78(1), 15-29. DOI: 10.1134/S1061933X16010038.
 
+## I.13. Rôle précis des références dans ce modèle
+
+Le livre de Balakrishnan sert de base pour comprendre pourquoi notre simulation relève de la **physique statistique hors équilibre**. Le cisaillement imposé agit comme une sollicitation extérieure permanente, tandis que les fluctuations browniennes représentent l'effet thermique du fluide. Les notions de dynamique de Langevin, de bruit blanc, de diffusion, de Fokker-Planck et d'état stationnaire justifient donc l'interprétation statistique des histogrammes numériques.
+
+Les travaux de Boeder, repris et approfondis par Khater, Tannous et Hijazi, constituent la base physique de la distribution angulaire $P(\theta)$ pour des macromolécules allongées soumises à un écoulement. Ils relient l'orientation du bâtonnet au cisaillement hydrodynamique et au nombre de Péclet rotationnel. C'est dans cette continuité que le paramètre $\alpha$ est interprété comme le rapport entre le cisaillement imposé et la diffusion rotationnelle brownienne.
+
+La thèse de Hijazi (2000) est particulièrement proche du cœur historique du projet : elle traite des densités de probabilité de macromolécules en solution sous écoulement laminaire. Elle justifie l'utilisation de distributions statistiques plutôt que l'étude d'une seule trajectoire, car la grandeur pertinente n'est pas la position instantanée d'une particule isolée, mais la probabilité d'observer une orientation ou une position donnée après un grand nombre d'événements brownien-hydrodynamiques.
+
+La thèse d'Atwi (2012) est la référence la plus directement liée aux extensions actuelles du projet. Elle traite explicitement de particules moléculaires dans des **mésopores**, de l'écoulement de Poiseuille, des régions de bulk et de couche de déplétion, des collisions diffusives avec les parois, ainsi que du coefficient de restitution et des interactions de Hamaker. Les pages 40-43 introduisent la compétition entre force hydrodynamique et diffusion brownienne rotationnelle pour des bâtonnets dans des pores. Les pages 52-54 discutent le passage du cisaillement de Couette au profil de Poiseuille. Les pages 119-120 relient directement les PDF angulaires au bulk et à la couche de déplétion. Le chapitre 5, à partir de la page 134, sera particulièrement utile pour la future étude du coefficient de restitution.
+
+Les articles d'Atwi, Hijazi et Khater complètent cette base en montrant comment les distributions de probabilité $P(\theta)$ et les distributions spatiales dans les mésopores sont modifiées par les frontières solides, la rugosité de surface et la proximité de la paroi. Dans notre travail, la distinction entre le volume et la couche de déplétion, ainsi que l'analyse de $P(\xi)$, s'inscrivent directement dans cette ligne de recherche.
+
+Ainsi, notre simulation ne se limite pas à produire des courbes numériques. Elle constitue une version simplifiée et reproductible d'un problème physique plus large : la dynamique statistique hors équilibre de particules anisotropes confinées, soumises simultanément à la diffusion brownienne, au cisaillement hydrodynamique et aux contraintes géométriques imposées par les surfaces solides.
 
 # II. Dérivation et justification du profil parabolique de cisaillement
 
