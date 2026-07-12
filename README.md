@@ -1407,6 +1407,128 @@ Une amélioration future importante serait également d'étudier d'autres rappor
 
 ---
 
+## 13. Section II : influence du rapport de confinement D/L<sub>B</sub>
+
+Cette section correspond à l'extension demandée par le superviseur : étudier l'effet du confinement lorsque le diamètre effectif du mésopore devient comparable ou inférieur à la longueur du bâtonnet. Dans la première partie du travail, la géométrie de référence était :
+
+$$
+D=L_B.
+$$
+
+Ici, on conserve la même dynamique brownienne et hydrodynamique, mais on fait varier le rapport de confinement :
+
+$$
+\frac{D}{L_B}=1,\ 0.75,\ 0.5,\ 0.25.
+$$
+
+La valeur D/L<sub>B</sub> = 1 correspond à la géométrie initiale. Lorsque D/L<sub>B</sub> diminue, le canal devient plus étroit relativement à la longueur du bâtonnet. Le confinement stérique devient alors plus sévère : certaines orientations qui étaient possibles dans un canal large deviennent géométriquement interdites.
+
+Pour isoler clairement cet effet, les figures de cette section sont construites à α = 100. Ce choix place le système dans un régime où le cisaillement hydrodynamique est fort, ce qui permet de voir comment l'alignement imposé par l'écoulement est modifié par la restriction géométrique.
+
+### Figure II-1 : angle limite géométrique
+
+![Figure II-1](figures/SectionII_Fig01_angle_limite_vs_DoverLB.png)
+
+Cette figure représente l'angle limite géométrique θ<sub>limite</sub> en fonction du rapport D/L<sub>B</sub>. Cet angle n'est pas un résultat dynamique de la simulation : il provient directement de la géométrie du bâtonnet dans le canal.
+
+Si le bâtonnet de longueur L<sub>B</sub> est incliné d'un angle θ, sa projection transverse est proportionnelle à L<sub>B</sub> sin|θ|. Pour que le bâtonnet puisse rester dans un canal de diamètre D, il faut que cette projection ne dépasse pas D. On obtient donc :
+
+$$
+\theta_{\mathrm{limite}}=\arcsin\left(\frac{D}{L_B}\right).
+$$
+
+Lorsque D/L<sub>B</sub> = 1, toutes les orientations entre -90° et +90° sont géométriquement possibles. Lorsque D/L<sub>B</sub> diminue, l'espace angulaire accessible se rétrécit fortement. Cela explique pourquoi le confinement n'agit pas seulement sur la position du centre de masse, mais aussi directement sur l'orientation du bâtonnet.
+
+### Figure II-2 : θ<sub>max</sub> dans le volume
+
+![Figure II-2](figures/SectionII_Fig02_theta_max_volume_alpha100.png)
+
+La Figure II-2 montre la variation de θ<sub>max</sub> dans le volume pour α = 100. Le maximum angulaire est extrait des histogrammes P(θ). Il doit être interprété avec prudence : lorsque le confinement devient fort, la position du maximum est influencée à la fois par le cisaillement hydrodynamique et par la réduction de l'espace angulaire autorisé.
+
+Pour D/L<sub>B</sub> proche de 1, le bâtonnet dispose encore d'un domaine angulaire large. Le cisaillement peut donc sélectionner une orientation préférentielle à l'intérieur d'un espace relativement ouvert. Pour D/L<sub>B</sub> plus petit, la géométrie impose déjà une restriction forte ; θ<sub>max</sub> ne mesure plus seulement l'alignement hydrodynamique, mais aussi la sélection stérique imposée par le canal.
+
+### Figure II-3 : θ<sub>max</sub> dans la couche de déplétion
+
+![Figure II-3](figures/SectionII_Fig03_theta_max_surface_alpha100.png)
+
+Près de la surface, la contrainte stérique est encore plus importante que dans le volume. La Figure II-3 montre que θ<sub>max</sub> reste fortement contrôlé par la proximité de la paroi.
+
+Dans cette région, les grandes inclinaisons augmentent la probabilité de contact avec la surface. Le bâtonnet est donc naturellement favorisé dans des orientations presque parallèles à la paroi. Le cisaillement peut déplacer légèrement le maximum, mais il agit sur un espace angulaire déjà fortement réduit par la géométrie.
+
+### Figure II-4 : θ<sub>max</sub> au centre du canal
+
+![Figure II-4](figures/SectionII_Fig04_theta_max_centre_alpha100.png)
+
+Cette figure complète les deux précédentes en considérant la région centrale du canal. Elle permet de séparer partiellement l'effet de la paroi de l'effet global du confinement.
+
+Même loin de la surface immédiate, la réduction de D/L<sub>B</sub> limite les orientations possibles. Cela montre que le confinement n'est pas seulement un effet local de paroi : lorsque le canal devient suffisamment étroit, toute la dynamique orientationnelle du bâtonnet est modifiée.
+
+### Figure II-5 : fraction de particules près de la surface
+
+![Figure II-5](figures/SectionII_Fig05_fraction_surface_alpha100.png)
+
+La Figure II-5 représente la fraction de statistiques collectées dans la couche proche de la surface. Cette grandeur indique combien de temps, statistiquement, le centre de masse du bâtonnet passe dans la région de déplétion.
+
+Lorsque D/L<sub>B</sub> diminue, l'espace transverse accessible devient plus contraint. La séparation entre volume et couche de déplétion devient donc plus sensible à la géométrie. Cette figure relie directement la distribution spatiale P(ξ) à la question de confinement : ce n'est pas uniquement l'orientation qui change, mais aussi la manière dont le bâtonnet explore l'espace transverse.
+
+### Figure II-6 : P(θ) dans le volume sous cisaillement linéaire
+
+![Figure II-6](figures/SectionII_Fig06_Ptheta_volume_lineaire_alpha100.png)
+
+La Figure II-6 montre la distribution angulaire P(θ) dans le volume, sous cisaillement linéaire, pour différents rapports D/L<sub>B</sub>. Lorsque D/L<sub>B</sub> diminue, la distribution se concentre dans un domaine angulaire plus restreint.
+
+Ce comportement est attendu physiquement : le cisaillement tend à aligner le bâtonnet, tandis que le confinement supprime progressivement les orientations trop inclinées. La distribution observée est donc le résultat d'une double sélection : une sélection hydrodynamique due au cisaillement et une sélection géométrique due à la taille finie du canal.
+
+### Figure II-7 : P(θ) dans le volume sous profil de Poiseuille
+
+![Figure II-7](figures/SectionII_Fig07_Ptheta_volume_poiseuille_alpha100.png)
+
+Sous profil de Poiseuille, le cisaillement local dépend de la position transverse. La Figure II-7 montre donc une distribution qui combine deux effets : l'inhomogénéité du cisaillement et la restriction géométrique liée à D/L<sub>B</sub>.
+
+Par rapport au cas linéaire, les distributions peuvent être plus complexes, car différentes positions ξ correspondent à différentes intensités locales de cisaillement. Cependant, la tendance fondamentale reste la même : lorsque D/L<sub>B</sub> diminue, l'espace angulaire accessible se réduit et les orientations compatibles avec la géométrie deviennent dominantes.
+
+### Figure II-8 : P(θ) près de la surface sous cisaillement linéaire
+
+![Figure II-8](figures/SectionII_Fig08_Ptheta_surface_lineaire_alpha100.png)
+
+La Figure II-8 présente P(θ) dans la couche de déplétion pour le cisaillement linéaire. Cette région est la plus sensible à la paroi.
+
+La distribution devient fortement localisée autour des orientations autorisées par la géométrie. Les grandes inclinaisons sont défavorisées, non pas parce que le cisaillement les interdit directement, mais parce qu'elles provoqueraient une intersection géométrique avec la surface. Cette figure illustre donc très clairement le rôle du confinement stérique.
+
+### Figure II-9 : P(θ) près de la surface sous profil de Poiseuille
+
+![Figure II-9](figures/SectionII_Fig09_Ptheta_surface_poiseuille_alpha100.png)
+
+Dans le cas du profil de Poiseuille, la couche de déplétion subit à la fois une contrainte de paroi et un cisaillement local dépendant de ξ. La Figure II-9 montre que l'orientation près de la surface est dominée par cette combinaison.
+
+Le confinement fixe d'abord les orientations possibles. Le cisaillement agit ensuite à l'intérieur de cet espace réduit. C'est pourquoi l'effet hydrodynamique ne doit pas être interprété indépendamment de la géométrie : près de la surface, les deux mécanismes sont intrinsèquement couplés.
+
+### Figure II-10 : P(ξ) sous cisaillement linéaire
+
+![Figure II-10](figures/SectionII_Fig10_Pxi_lineaire_alpha100.png)
+
+La Figure II-10 montre la distribution spatiale P(ξ) sous cisaillement linéaire. Elle renseigne sur la probabilité de présence du centre de masse selon la position transverse.
+
+Lorsque le confinement devient fort, la distribution spatiale est profondément modifiée. Les zones accessibles au centre de masse se réduisent, et certaines positions deviennent beaucoup plus probables que d'autres. Les pics observés traduisent donc la réduction de l'espace disponible, et non une séparation de phase : il s'agit d'un effet d'exclusion géométrique.
+
+### Figure II-11 : P(ξ) sous profil de Poiseuille
+
+![Figure II-11](figures/SectionII_Fig11_Pxi_poiseuille_alpha100.png)
+
+La Figure II-11 présente la même analyse spatiale pour le profil de Poiseuille. La différence avec le cisaillement linéaire vient du fait que l'intensité locale du cisaillement varie avec ξ.
+
+Malgré cette différence hydrodynamique, la signature principale reste géométrique : lorsque D/L<sub>B</sub> diminue, le bâtonnet explore un espace transverse plus restreint. Le profil P(ξ) reflète alors la compétition entre diffusion translationnelle brownienne, interactions avec les parois et cisaillement local.
+
+### Conclusion de la Section II
+
+Cette deuxième extension montre que le rapport D/L<sub>B</sub> est un paramètre géométrique central du problème. Le paramètre α contrôle la compétition entre cisaillement et diffusion rotationnelle, tandis que D/L<sub>B</sub> contrôle l'espace des configurations accessibles.
+
+Lorsque D/L<sub>B</sub> diminue, le système n'est plus seulement un bâtonnet brownien orienté par l'écoulement : il devient un système fortement contraint, où la géométrie du mésopore impose une sélection préalable des positions et des orientations possibles.
+
+Cette conclusion est cohérente avec l'esprit des travaux de Hijazi et d'Atwi sur les macromolécules en solution sous écoulement laminaire : les distributions de probabilité ne dépendent pas uniquement de la dynamique brownienne et hydrodynamique, mais aussi de l'espace géométrique dans lequel les configurations de la macromolécule sont autorisées.
+
+---
+
 ## Versions du code C++
 
 Afin de conserver l'historique scientifique du travail, deux versions du programme C++ sont disponibles dans le dossier `code_versions/` :
@@ -1415,5 +1537,6 @@ Afin de conserver l'historique scientifique du travail, deux versions du program
 - `main_alpha0_full_xi_corrected.cpp` : version complète actuelle, avec $\alpha=0$ et la correction de la distribution spatiale $P(\xi)$ jusqu'à $\xi=1$.
 
 Le fichier `main.cpp` à la racine du dépôt correspond à la version complète actuelle permettant de régénérer les nouveaux résultats.
+
 
 
