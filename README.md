@@ -1529,12 +1529,110 @@ Cette conclusion est cohérente avec l'esprit des travaux de Hijazi et d'Atwi su
 
 ---
 
+## Section III : Effet des coefficients de restitution aux parois
+
+Cette troisième extension introduit une question plus cinétique : que devient la distribution statistique lorsque la règle de contact avec les parois est modifiée ? Les sections précédentes étudiaient principalement l'effet de l'intensité du cisaillement et du confinement géométrique. Ici, on conserve une géométrie fortement confinée, avec D/L<sub>B</sub> = 0.5, et on fixe α = 100 afin de travailler dans un régime où le cisaillement hydrodynamique est suffisamment intense pour rendre visibles les effets des conditions aux limites.
+
+Les deux coefficients e et e' décrivent la réponse numérique du bâtonnet lorsqu'il rencontre respectivement les deux parois du mésopore. Dans cette étude, ils sont pris égaux, e = e', avec les valeurs 0, 0.25, 0.5, 0.75 et 1. Une valeur faible correspond à une interaction fortement dissipative avec la paroi, tandis qu'une valeur proche de 1 représente une interaction plus réfléchissante. Cette modification ne change ni la diffusion brownienne, ni le profil hydrodynamique, ni la méthode de construction des histogrammes ; elle agit uniquement sur la manière dont le bâtonnet est réinjecté dans le domaine géométriquement admissible après interaction avec la surface.
+
+### Figure III-1 : Variation de θ<sub>max</sub> avec e = e'
+
+![Figure III-1](figures/SectionIII_Fig01_theta_max_restitution.png)
+
+La Figure III-1 compare la position du maximum angulaire θ<sub>max</sub> lorsque les coefficients de restitution sont modifiés. Pour le cisaillement linéaire, les maxima restent principalement localisés autour d'un angle négatif imposé par le confinement fort. Cela indique que, dans cette configuration, l'orientation dominante est contrôlée avant tout par la contrainte géométrique et par le cisaillement.
+
+Pour le profil de Poiseuille, la réponse devient plus sensible lorsque e = e' tend vers 1. Cette différence vient du fait que le cisaillement local dépend de la position transverse. Le mécanisme de réinjection par la paroi modifie donc plus fortement les régions effectivement explorées par le centre de masse.
+
+### Figure III-2 : Fraction de présence près de la surface
+
+![Figure III-2](figures/SectionIII_Fig02_surface_fraction_restitution.png)
+
+La Figure III-2 montre la fraction statistique du temps passé près de la surface. Lorsque e = e' augmente, cette fraction diminue pour les deux écoulements. Physiquement, une paroi plus réfléchissante renvoie plus efficacement le centre de masse vers l'intérieur du mésopore ; le bâtonnet reste donc moins longtemps dans la couche de déplétion.
+
+La diminution est plus marquée sous cisaillement linéaire. Cela montre que la combinaison d'un entraînement uniforme et d'une restitution plus forte favorise un éloignement plus net de la surface. Sous Poiseuille, la variation spatiale du cisaillement rend la réponse plus progressive.
+
+### Figure III-3 : P(θ) dans tout le domaine sous cisaillement linéaire
+
+![Figure III-3](figures/SectionIII_Fig03_Ptheta_total_linear_restitution.png)
+
+La Figure III-3 présente P(θ) dans l'ensemble du domaine sous cisaillement linéaire. Les distributions restent très concentrées dans la fenêtre angulaire autorisée par D/L<sub>B</sub> = 0.5. Le coefficient de restitution modifie surtout l'intensité et la finesse du pic, mais il ne supprime pas la sélection géométrique principale.
+
+Ce comportement est attendu dans un mésopore fortement confiné : même si la dynamique pariétale change, les orientations accessibles restent d'abord limitées par la géométrie. Le rôle de e = e' est donc cinétique, tandis que la borne angulaire reste principalement stérique.
+
+### Figure III-4 : P(θ) dans tout le domaine sous profil de Poiseuille
+
+![Figure III-4](figures/SectionIII_Fig04_Ptheta_total_poiseuille_restitution.png)
+
+La Figure III-4 montre le même observable sous profil de Poiseuille. Le profil non uniforme rend la réponse plus sensible aux changements de position transverse. L'effet de restitution se superpose donc à l'inhomogénéité du cisaillement local.
+
+Dans cette situation, une modification du contact avec la paroi ne modifie pas seulement la fréquence des collisions ; elle modifie aussi les régions de ξ dans lesquelles le bâtonnet passe le plus de temps. Comme le cisaillement dépend de la position, cette redistribution spatiale influence indirectement l'orientation.
+
+### Figure III-5 : P(θ) près de la surface sous cisaillement linéaire
+
+![Figure III-5](figures/SectionIII_Fig05_Ptheta_surface_linear_restitution.png)
+
+Près de la surface, la Figure III-5 montre que la distribution angulaire est fortement imposée par la paroi. Les grandes inclinaisons sont géométriquement interdites ou très défavorisées. Le coefficient e = e' agit alors comme un paramètre cinétique de contact : il modifie la fréquence de retour vers la surface et la durée de résidence dans la couche de déplétion.
+
+Cette figure est importante car elle sépare clairement deux mécanismes : la paroi fixe les orientations possibles, tandis que la restitution contrôle la manière dont la particule quitte ou rejoint cette zone.
+
+### Figure III-6 : P(θ) près de la surface sous profil de Poiseuille
+
+![Figure III-6](figures/SectionIII_Fig06_Ptheta_surface_poiseuille_restitution.png)
+
+La Figure III-6 indique que, sous Poiseuille, l'effet près de la surface reste contraint par la géométrie, mais la dépendance spatiale du cisaillement rend la forme de P(θ) moins directement comparable au cas linéaire.
+
+La couche de déplétion n'est donc pas seulement une région de contact avec la paroi. C'est aussi une région où le cisaillement local peut différer fortement de celui ressenti plus au centre du pore. Cette double contrainte explique la sensibilité de la distribution à la fois à e = e' et au type d'écoulement.
+
+### Figure III-7 : P(θ) au centre sous cisaillement linéaire
+
+![Figure III-7](figures/SectionIII_Fig07_Ptheta_center_linear_restitution.png)
+
+La Figure III-7 isole la région centrale du mésopore sous cisaillement linéaire. Cette zone est moins dominée par les contacts directs avec la paroi. Elle permet donc de distinguer plus clairement ce qui relève de l'alignement hydrodynamique de ce qui relève du mécanisme de restitution.
+
+Lorsque le bâtonnet se trouve loin de la surface, l'effet de e = e' devient indirect : il apparaît surtout par la manière dont les interactions précédentes avec les parois ont redistribué les positions et les orientations.
+
+### Figure III-8 : P(θ) au centre sous profil de Poiseuille
+
+![Figure III-8](figures/SectionIII_Fig08_Ptheta_center_poiseuille_restitution.png)
+
+La Figure III-8 présente la même analyse au centre pour le profil de Poiseuille. Le cisaillement local y est différent de celui près des parois, ce qui rend l'interprétation plus délicate que dans le cas linéaire.
+
+Cette figure montre que la restitution n'agit pas de manière isolée. Elle modifie la statistique de résidence dans les différentes zones du pore, et cette redistribution interagit ensuite avec le profil hydrodynamique local.
+
+### Figure III-9 : Distribution spatiale P(ξ) sous cisaillement linéaire
+
+![Figure III-9](figures/SectionIII_Fig09_Pxi_linear_restitution.png)
+
+La Figure III-9 représente la distribution spatiale P(ξ) sous cisaillement linéaire. Elle montre que les coefficients de restitution ne sont pas de simples paramètres numériques : ils contrôlent la statistique de résidence près des surfaces.
+
+Lorsque la restitution augmente, le contact pariétal devient plus efficace pour renvoyer la particule vers l'intérieur. Cela modifie directement la densité de probabilité transverse, donc la fréquence avec laquelle le bâtonnet visite la couche de déplétion.
+
+### Figure III-10 : Distribution spatiale P(ξ) sous profil de Poiseuille
+
+![Figure III-10](figures/SectionIII_Fig10_Pxi_poiseuille_restitution.png)
+
+La Figure III-10 montre P(ξ) sous profil de Poiseuille. Comme le cisaillement dépend de ξ, une modification de la distribution spatiale entraîne aussi une modification de l'histoire hydrodynamique moyenne vécue par le bâtonnet.
+
+Cette figure relie donc directement la dynamique pariétale à la dynamique d'orientation : changer e = e' modifie la probabilité de présence dans chaque région du pore, et donc le cisaillement local effectivement échantillonné.
+
+### Conclusion de la Section III
+
+Le résultat principal de cette section est que les coefficients de restitution agissent sur la dynamique pariétale, tandis que α contrôle le rapport entre entraînement hydrodynamique et diffusion brownienne rotationnelle, et que D/L<sub>B</sub> contrôle la fenêtre angulaire géométriquement accessible.
+
+Ces trois paramètres ne jouent donc pas le même rôle physique. α sélectionne l'intensité de l'alignement, D/L<sub>B</sub> fixe la contrainte géométrique, et e, e' déterminent la durée de résidence et le mode de réinjection après contact avec la paroi.
+
+Cette séparation est essentielle pour interpréter correctement les distributions stationnaires. Elle est cohérente avec le cadre des travaux de Hijazi sur les distributions de probabilité de macromolécules sous écoulement laminaire, avec les travaux d'Atwi sur les systèmes confinés, et avec les modèles mésoscopiques où les conditions aux limites modifient fortement les distributions de probabilité.
+
+---
+
 ## Versions du code C++
 
-Afin de conserver l'historique scientifique du travail, deux versions du programme C++ sont disponibles dans le dossier `code_versions/` :
+Afin de conserver l'historique scientifique du travail, plusieurs versions du programme C++ sont disponibles dans le dossier `code_versions/` :
 
-- `main_original_before_alpha0.cpp` : version initiale utilisée avant l'ajout du cas $\alpha=0$ ; elle contient les valeurs $\alpha=0.5$, $1$, $2$, $5$, $10$ et $100$.
-- `main_alpha0_full_xi_corrected.cpp` : version complète actuelle, avec $\alpha=0$ et la correction de la distribution spatiale $P(\xi)$ jusqu'à $\xi=1$.
+- `main_original_before_alpha0.cpp` : version initiale utilisée avant l'ajout du cas α = 0 ; elle contient les valeurs α = 0.5, 1, 2, 5, 10 et 100.
+- `main_alpha0_full_xi_corrected.cpp` : version complète actuelle, avec α = 0 et la correction de la distribution spatiale P(ξ) jusqu'à ξ = 1.
+- `main_section2_confinement.cpp` : version utilisée pour la Section II, consacrée à l'effet du rapport de confinement D/L<sub>B</sub> sur les distributions P(θ), P(ξ) et θ<sub>max</sub>.
+- `main_section3_restitution.cpp` : version utilisée pour la Section III, consacrée à l'effet des coefficients de restitution e et e' sur les distributions angulaires et spatiales.
 
 Le fichier `main.cpp` à la racine du dépôt correspond à la version complète actuelle permettant de régénérer les nouveaux résultats.
 
