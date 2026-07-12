@@ -16,6 +16,11 @@ Ne pas supprimer l'ancien travail. Le superviseur a demandé de conserver les r�
 - `code_versions/main_alpha0_full_xi_corrected.cpp` : version complète actuelle avec alpha = 0 et correction de P(xi) jusqu'à xi = 1.
 - `figures/` : figures finales corrigées utilisées dans la partie complémentaire.
 - `data/` : données post-traitées, notamment pour theta_max(alpha) et rho(xi)/rho_bulk.
+- `PROJECT_INDEX.md` : index général du dépôt par sections scientifiques.
+- `sections/section-I-modele-reference/` : copie organisée du modèle de référence, des figures historiques/corrigées et des versions principales du code.
+- `sections/section-II-confinement/` : code, figures et interprétation de l'étude du rapport de confinement D/L_B.
+- `sections/section-III-restitution/` : code, figures et interprétation de l'étude des coefficients de restitution.
+- `references/README.md` : rôle scientifique des références utilisées dans l'interprétation.
 
 ## 3. Décisions scientifiques déjà prises
 
@@ -78,3 +83,13 @@ Le dépôt contient actuellement un fichier PDF du livre de Balakrishnan. Pour u
 ## 10. État actuel
 
 Dernière organisation confirmée : le dépôt conserve l'ancien travail, ajoute les résultats corrigés avec alpha = 0, ajoute les figures P(xi) brutes et binnées, ajoute les courbes theta_max(alpha), et contient deux fichiers d'interprétation scientifique complémentaires.
+
+## 11. Organisation actuelle par sections
+
+Le dépôt est maintenant structuré comme un cahier de recherche :
+
+1. Section I : modèle de référence et résultats historiques conservés.
+2. Section II : effet du confinement D/L_B.
+3. Section III : effet des coefficients de restitution.
+
+Cette organisation n'annule pas l'ancien README cumulatif. Elle ajoute des dossiers lisibles pour retrouver rapidement les codes, figures et interprétations associés à chaque tâche scientifique.

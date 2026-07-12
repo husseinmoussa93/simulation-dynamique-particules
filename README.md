@@ -10,6 +10,15 @@ Pour une lecture figure par figure des résultats à la lumière des référence
 
 Pour la continuité scientifique et technique du projet, voir : [Notes de continuité du projet](PROJECT_CONTEXT.md).
 
+Pour une navigation structurée par étapes de recherche, voir : [Index scientifique du dépôt](PROJECT_INDEX.md).
+
+## Organisation par sections
+
+- [Section I - Modèle de référence](sections/section-I-modele-reference/README.md) : modèle \(D=L_B\), distributions \(P(\theta)\), \(P(\xi)\), volume, couche de déplétion et courbes \(\theta_{\max}(\alpha)\).
+- [Section II - Influence du confinement](sections/section-II-confinement/README.md) : étude du rapport \(D/L_B\), angle limite géométrique, distributions angulaires et spatiales pour différents confinements.
+- [Section III - Effet de la restitution](sections/section-III-restitution/README.md) : étude des coefficients de restitution aux parois et de leur effet sur \(P(\theta)\), \(P(\xi)\) et la fraction proche surface.
+- [Références scientifiques](references/README.md) : rôle des références de Balakrishnan, Hijazi, Khater, Tannous et Atwi dans l'interprétation.
+
 ## Organisation et paramètres numériques
 
 - `main.cpp` : simulation séquentielle des deux profils d'écoulement pour $\alpha=0$, $0.5$, $1$, $2$, $5$, $10$ et $100$.
