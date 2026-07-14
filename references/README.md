@@ -52,3 +52,13 @@ Le projet combine trois niveaux d'interprétation :
 3. une sélection géométrique et dynamique imposée par les surfaces du mésopore.
 
 Les résultats numériques doivent donc toujours être lus comme la conséquence conjointe du bruit brownien, du cisaillement, de la géométrie et des conditions de bord.
+
+## Lien avec les sections du dépôt
+
+La Section I établit le modèle de référence : elle met en évidence la compétition entre diffusion rotationnelle brownienne et entraînement hydrodynamique par le cisaillement. Cette partie s'appuie principalement sur le cadre stochastique de Balakrishnan et sur les travaux consacrés aux distributions angulaires de macromolécules sous écoulement laminaire.
+
+La Section II prolonge cette lecture en introduisant explicitement le rapport de confinement \(D/L_B\). Les résultats doivent être interprétés avec les références sur les mésopores et les surfaces : lorsque le diamètre accessible diminue, la paroi ne se contente plus de limiter la position du centre de masse ; elle sélectionne aussi les orientations permises du bâtonnet.
+
+La Section III étudie les coefficients de restitution comme une condition de bord effective. Cette partie relie la dynamique de contact ou quasi-contact avec la surface aux distributions \(P(\theta)\), \(P(\xi)\), à \(\theta_{\max}\) et à la fraction statistique proche surface.
+
+Dans tout le dépôt, les histogrammes \(P(\theta)\) et \(P(\xi)\) sont des résultats directement accumulés par simulation. Les grandeurs comme \(\theta_{\max}\), les fractions de surface ou les courbes regroupées par binning sont des résultats dérivés par post-traitement. Les relations géométriques, comme l'angle limite de la Section II, servent de repères analytiques pour interpréter les résultats numériques.

@@ -6,6 +6,8 @@ Cette section étudie l'effet des coefficients de restitution associés aux inte
 
 Dans le modèle numérique, la restitution modifie la manière dont le bâtonnet réagit lorsqu'il rencontre une frontière. Elle agit donc comme une condition de bord effective.
 
+Pour une lecture physique complète des figures de cette section, voir : [Interprétation détaillée de la Section III](INTERPRETATION_DETAILLEE.md).
+
 ## Idée physique
 
 Un coefficient de restitution élevé correspond à une interaction plus élastique avec la paroi. Le bâtonnet conserve davantage sa dynamique après l'interaction.

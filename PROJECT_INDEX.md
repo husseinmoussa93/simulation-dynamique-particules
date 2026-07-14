@@ -16,6 +16,9 @@ Ce dépôt est organisé comme un cahier de recherche numérique. Les anciens r�
 - [Références scientifiques](references/README.md)  
   Rôle des références de Balakrishnan, Hijazi, Khater, Tannous et Atwi dans l'interprétation physique du modèle.
 
+- [Méthodologie et validation](METHODOLOGIE_VALIDATION.md)
+  Distinction entre résultats directement simulés, grandeurs dérivées par post-traitement et relations analytiques utilisées comme repères physiques.
+
 ## Principe de conservation
 
 Les figures historiques situées à la racine du dépôt ne sont pas supprimées. Les dossiers de sections contiennent des copies organisées des codes et figures nécessaires à la lecture scientifique.
@@ -31,3 +34,8 @@ Les histogrammes \(P(\theta)\) et \(P(\xi)\) proviennent des simulations numéri
 Les grandeurs comme \(\theta_{\max}\), la fraction de surface ou les distributions regroupées par binning sont des quantités dérivées par post-traitement statistique.
 
 La courbe de l'angle limite géométrique en Section II est une relation analytique de confinement, utilisée comme repère physique pour interpréter les distributions simulées.
+
+Les interprétations détaillées des nouvelles extensions sont disponibles ici :
+
+- [Interprétation détaillée de la Section II](sections/section-II-confinement/INTERPRETATION_DETAILLEE.md)
+- [Interprétation détaillée de la Section III](sections/section-III-restitution/INTERPRETATION_DETAILLEE.md)

@@ -8,6 +8,8 @@ Pour une lecture synthétique et approfondie des mécanismes physiques et cinét
 
 Pour une lecture figure par figure des résultats à la lumière des références, voir : [Lecture des résultats selon les références](lecture_resultats_selon_references.md).
 
+Pour distinguer les résultats directement simulés, les grandeurs dérivées et les relations analytiques utilisées comme repères physiques, voir : [Méthodologie, validation et lecture scientifique](METHODOLOGIE_VALIDATION.md).
+
 Pour la continuité scientifique et technique du projet, voir : [Notes de continuité du projet](PROJECT_CONTEXT.md).
 
 Pour une navigation structurée par étapes de recherche, voir : [Index scientifique du dépôt](PROJECT_INDEX.md).
@@ -15,8 +17,8 @@ Pour une navigation structurée par étapes de recherche, voir : [Index scientif
 ## Organisation par sections
 
 - [Section I - Modèle de référence](sections/section-I-modele-reference/README.md) : modèle \(D=L_B\), distributions \(P(\theta)\), \(P(\xi)\), volume, couche de déplétion et courbes \(\theta_{\max}(\alpha)\).
-- [Section II - Influence du confinement](sections/section-II-confinement/README.md) : étude du rapport \(D/L_B\), angle limite géométrique, distributions angulaires et spatiales pour différents confinements.
-- [Section III - Effet de la restitution](sections/section-III-restitution/README.md) : étude des coefficients de restitution aux parois et de leur effet sur \(P(\theta)\), \(P(\xi)\) et la fraction proche surface.
+- [Section II - Influence du confinement](sections/section-II-confinement/README.md) : étude du rapport \(D/L_B\), angle limite géométrique, distributions angulaires et spatiales pour différents confinements. Une lecture détaillée est disponible dans [l'interprétation de la Section II](sections/section-II-confinement/INTERPRETATION_DETAILLEE.md).
+- [Section III - Effet de la restitution](sections/section-III-restitution/README.md) : étude des coefficients de restitution aux parois et de leur effet sur \(P(\theta)\), \(P(\xi)\) et la fraction proche surface. Une lecture détaillée est disponible dans [l'interprétation de la Section III](sections/section-III-restitution/INTERPRETATION_DETAILLEE.md).
 - [Références scientifiques](references/README.md) : rôle des références de Balakrishnan, Hijazi, Khater, Tannous et Atwi dans l'interprétation.
 
 ## Organisation et paramètres numériques

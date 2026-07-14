@@ -6,6 +6,8 @@ Cette section étudie l'effet du rapport de confinement \(D/L_B\), c'est-à-dire
 
 La question physique centrale est la suivante : que devient la dynamique d'orientation lorsque le diamètre du pore devient inférieur ou comparable à la longueur du bâtonnet ?
 
+Pour une lecture physique complète des figures de cette section, voir : [Interprétation détaillée de la Section II](INTERPRETATION_DETAILLEE.md).
+
 ## Paramètres étudiés
 
 - \(D/L_B=1\)
